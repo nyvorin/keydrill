@@ -132,7 +132,15 @@ function prerequisiteSkills(stageId: number, layout: Layout): string[] {
   return stageSkills(stageId - 1, layout);
 }
 
-export function stageGate(stageId: number, layout: Layout, stats: SkillStat[]): GateResult {
+export function stageGate(
+  stageId: number,
+  layout: Layout,
+  stats: SkillStat[],
+  opts: { minAccuracy?: number; maxMedianLatencyMs?: number } = {},
+): GateResult {
+  const minAccuracy = opts.minAccuracy ?? GATE_ACCURACY;
+  const maxLatency = opts.maxMedianLatencyMs ?? GATE_LATENCY_MS;
+
   if (stageId <= 1) return { unlocked: true, accuracy: 1, medianLatencyMs: 0 };
 
   const prereq = prerequisiteSkills(stageId, layout);
@@ -158,8 +166,7 @@ export function stageGate(stageId: number, layout: Layout, stats: SkillStat[]): 
 
   const accuracy = 1 - errors.reduce((a, b) => a + b, 0) / errors.length;
   const medianLatencyMs = median(latencies);
-  const unlocked =
-    unsampled === 0 && accuracy >= GATE_ACCURACY && medianLatencyMs <= GATE_LATENCY_MS;
+  const unlocked = unsampled === 0 && accuracy >= minAccuracy && medianLatencyMs <= maxLatency;
 
   return { unlocked, accuracy, medianLatencyMs };
 }

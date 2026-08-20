@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import MiniMap from "../lib/components/MiniMap.svelte";
   import TypingPane from "../lib/components/TypingPane.svelte";
   import { getBackend } from "../lib/backend";
@@ -17,6 +18,13 @@
   let summary = $state<DrillSummary | null>(null);
   let nextChar = $state<string | null>(null);
   let session: SessionMeta | null = null;
+  let strictWhitespace = $state(false);
+
+  onMount(() => {
+    void backend.getSetting("typing.strictWhitespace").then((v) => {
+      strictWhitespace = v === "true";
+    });
+  });
 
   const matches: CorpusEntry[] = $derived(corpus.snippets(lang, difficulty));
   const entry: CorpusEntry | null = $derived(
@@ -92,6 +100,7 @@
     <TypingPane
       text={entry.text}
       lang={SHIKI_LANG[lang]}
+      {strictWhitespace}
       oncomplete={handleComplete}
       onprogress={(n) => (nextChar = n)}
     />

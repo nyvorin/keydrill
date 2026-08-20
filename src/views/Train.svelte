@@ -14,12 +14,27 @@
   import { navigate } from "../lib/router";
 
   let stats = $state<SkillStat[]>([]);
+  const backend = getBackend();
+
+  let gateOpts = $state<{ minAccuracy?: number; maxMedianLatencyMs?: number }>({});
+
+  const effectiveAccuracyPct = $derived(Math.round((gateOpts.minAccuracy ?? GATE_ACCURACY) * 100));
+  const effectiveLatencyMs = $derived(gateOpts.maxMedianLatencyMs ?? GATE_LATENCY_MS);
+
   const gates = $derived(
-    new Map<number, GateResult>(STAGES.map((s) => [s.id, stageGate(s.id, LAYOUT, stats)])),
+    new Map<number, GateResult>(
+      STAGES.map((s) => [s.id, stageGate(s.id, LAYOUT, stats, gateOpts)]),
+    ),
   );
 
   onMount(async () => {
-    stats = await getBackend().getSkillStats();
+    stats = await backend.getSkillStats();
+    const acc = await backend.getSetting("gates.accuracy");
+    const lat = await backend.getSetting("gates.latencyMs");
+    gateOpts = {
+      minAccuracy: acc !== null ? Number(acc) / 100 : undefined,
+      maxMedianLatencyMs: lat !== null ? Number(lat) : undefined,
+    };
   });
 
   function open(stage: Stage, gate: GateResult): void {
@@ -33,9 +48,9 @@
 </script>
 
 <h1>Train</h1>
-<p class="gate-note">
-  A stage unlocks at ≥{Math.round(GATE_ACCURACY * 100)}% accuracy and ≤{GATE_LATENCY_MS} ms median
-  latency on the stage before it.
+<p class="gate-note" data-testid="gate-note">
+  A stage unlocks at ≥{effectiveAccuracyPct}% accuracy and ≤{effectiveLatencyMs} ms median latency
+  on the stage before it.
 </p>
 
 <ul class="stages">

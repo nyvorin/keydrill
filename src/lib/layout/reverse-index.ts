@@ -45,9 +45,13 @@ function compareRecipes(a: Recipe, b: Recipe): number {
   return FINGER_ORDER.indexOf(a.finger) - FINGER_ORDER.indexOf(b.finger);
 }
 
-export function preferredRecipe(recipes: Recipe[]): Recipe {
+export function preferredRecipe(recipes: Recipe[], overrideRoute?: string | null): Recipe {
   const first = recipes[0];
   if (first === undefined) throw new Error("preferredRecipe: no recipes");
+  if (overrideRoute) {
+    const hit = recipes.find((r) => `${r.layer}:${r.keyId}` === overrideRoute);
+    if (hit !== undefined) return hit;
+  }
   let best = first;
   for (let i = 1; i < recipes.length; i += 1) {
     const candidate = recipes[i] as Recipe;

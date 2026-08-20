@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { currentRoute, onRouteChange, type Route } from "./lib/router";
+  import { onMount } from "svelte";
+  import { currentRoute, navigate, onRouteChange, type Route } from "./lib/router";
+  import { loadRouteOverrides } from "./lib/route-overrides.svelte";
   import CodeCopy from "./views/CodeCopy.svelte";
   import Drill from "./views/Drill.svelte";
   import Home from "./views/Home.svelte";
@@ -25,6 +27,15 @@
       route = next;
     })
   );
+
+  onMount(() => {
+    void loadRouteOverrides();
+    if ("__TAURI_INTERNALS__" in window) {
+      void import("@tauri-apps/api/event").then(({ listen }) =>
+        listen<string>("keydrill://navigate", (e) => navigate(e.payload))
+      );
+    }
+  });
 </script>
 
 <header class="shell-header">

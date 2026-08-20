@@ -9,6 +9,7 @@
   } from "../lib/layout/reverse-index";
   import type { Recipe } from "../lib/layout/reverse-index";
   import type { LayerId } from "../lib/layout/types";
+  import { routeOverrides } from "../lib/route-overrides.svelte";
 
   const TABS: ReadonlyArray<{ id: LayerId; label: string }> = [
     { id: "base", label: "Base" },
@@ -22,7 +23,9 @@
   let query = $state("");
 
   let recipes: Recipe[] = $derived(query === "" ? [] : (INDEX.get(query) ?? []));
-  let best: Recipe | null = $derived(recipes.length > 0 ? preferredRecipe(recipes) : null);
+  let best: Recipe | null = $derived(
+    recipes.length > 0 ? preferredRecipe(recipes, routeOverrides.map[query] ?? null) : null
+  );
   /** Preferred route first, then the rest in board order. */
   let routes: Recipe[] = $derived(best === null ? [] : [best, ...recipes.filter((r) => r !== best)]);
   /** Only keys on the layer currently drawn — a keyId from another layer would glow wrongly. */
@@ -42,7 +45,7 @@
   function setQuery(next: string) {
     query = next;
     const found = next === "" ? [] : (INDEX.get(next) ?? []);
-    if (found.length > 0) layer = preferredRecipe(found).layer;
+    if (found.length > 0) layer = preferredRecipe(found, routeOverrides.map[next] ?? null).layer;
   }
 
   function handleInput(ev: Event) {

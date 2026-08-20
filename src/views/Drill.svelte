@@ -54,6 +54,7 @@
   let summary = $state<DrillSummary | null>(null);
   let nextChar = $state<string | null>(null);
   let codeLang = $state<Lang>("rust");
+  let strictWhitespace = $state(false);
 
   const isNavStage = STAGES[stage - 1]?.drillKind === "nav";
 
@@ -112,6 +113,7 @@
   }
 
   onMount(async () => {
+    strictWhitespace = (await backend.getSetting("typing.strictWhitespace")) === "true";
     session = await backend.startSession(
       stage >= 6 ? "code" : "drill",
       stage >= 6 ? codeLang : null,
@@ -147,7 +149,7 @@
     <TypingPane
       text={line}
       lang={stage >= 6 ? SHIKI_LANG[codeLang] : "plain"}
-      strictWhitespace={false}
+      {strictWhitespace}
       {navKeys}
       oncomplete={handleComplete}
       onprogress={(c) => (nextChar = c)}

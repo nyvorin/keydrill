@@ -39,6 +39,7 @@
   let streak = $state(0);
   let nextChar = $state<string | null>(null);
   let lang = $state<LangId>("rust");
+  let strictWhitespace = $state(false);
 
   const ready = $derived(items[0].length > 0);
   const currentLine = $derived(items[phaseIndex]?.[lineIndex] ?? "");
@@ -90,6 +91,7 @@
   }
 
   onMount(async () => {
+    strictWhitespace = (await backend.getSetting("typing.strictWhitespace")) === "true";
     const saved = await backend.getSetting("session.lang");
     lang =
       saved && (LANGS as string[]).includes(saved)
@@ -141,7 +143,7 @@
     <TypingPane
       text={currentLine}
       lang={phaseIndex === 2 ? SHIKI_LANG[lang] : "plain"}
-      strictWhitespace={false}
+      {strictWhitespace}
       oncomplete={handleComplete}
       onprogress={(c) => (nextChar = c)}
     />

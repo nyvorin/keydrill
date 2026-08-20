@@ -1,6 +1,7 @@
 <script module lang="ts">
   import { LAYOUT } from "../layout/layout-data";
   import { buildReverseIndex, preferredRecipe, type Recipe } from "../layout/reverse-index";
+  import { routeOverrides } from "../route-overrides.svelte";
 
   const INDEX = buildReverseIndex(LAYOUT);
 
@@ -8,7 +9,9 @@
   export function recipeFor(expected: string | null): Recipe | null {
     if (!expected) return null;
     const recipes = INDEX.get(expected);
-    return recipes && recipes.length > 0 ? preferredRecipe(recipes) : null;
+    return recipes && recipes.length > 0
+      ? preferredRecipe(recipes, routeOverrides.map[expected] ?? null)
+      : null;
   }
 
   function labelFor(expected: string | null): string {

@@ -2,6 +2,7 @@
   import { LAYOUT } from "../layout/layout-data";
   import { buildReverseIndex, preferredRecipe, skillId } from "../layout/reverse-index";
   import { PLAIN_COLOR } from "../highlight";
+  import { routeOverrides } from "../route-overrides.svelte";
 
   const INDEX = buildReverseIndex(LAYOUT);
 
@@ -9,7 +10,7 @@
   export function skillOfKey(expected: string): string | null {
     const recipes = INDEX.get(expected);
     if (!recipes || recipes.length === 0) return null;
-    return skillId(preferredRecipe(recipes));
+    return skillId(preferredRecipe(recipes, routeOverrides.map[expected] ?? null));
   }
 
   /** Flattens highlighter rows to one color per target index; falls back to plain on any mismatch. */
