@@ -9,6 +9,66 @@ import { SESSION_COUNT_KEY } from "./api";
 
 export const MOCK_STORAGE_KEY = "keydrill.mock.v1";
 
+declare global {
+  interface Window {
+    __keydrillSeed?: (days: number) => void;
+  }
+}
+
+/** Key ids used by the dev seeder. All exist in layout.json. */
+const SEED_BASE_KEYS = [
+  "L11",
+  "L12",
+  "L13",
+  "L14",
+  "L15",
+  "L21",
+  "L22",
+  "L23",
+  "L24",
+  "R10",
+  "R11",
+  "R12",
+  "R13",
+  "R14",
+  "R20",
+  "R21",
+  "R22",
+  "R23",
+  "RT4",
+];
+const SEED_LOWER_KEYS = [
+  "L25",
+  "L35",
+  "LT3",
+  "R11",
+  "R12",
+  "R13",
+  "R14",
+  "R20",
+  "R24",
+  "R25",
+  "R30",
+  "RT4",
+];
+const SEED_RAISE_KEYS = ["L00", "L01", "L02", "L03", "R00", "R01", "R20"];
+
+/** Local midnight, in ms, for a 'YYYY-MM-DD' key produced by dateKey(). */
+function dayStartMs(key: string): number {
+  const parts = key.split("-");
+  return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])).getTime();
+}
+
+/** Stable per-skill noise in [0,1) so seeded data looks varied but is deterministic. */
+function seedNoise(id: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return ((h >>> 0) % 1000) / 1000;
+}
+
 export interface MockStorage {
   getItem(key: string): string | null;
   setItem(key: string, value: string): void;
@@ -76,6 +136,92 @@ export class MockBackend implements Backend {
     this.now = opts.now ?? ((): Date => new Date());
     this.storage = opts.storage === undefined ? defaultStorage() : opts.storage;
     this.state = this.load();
+    if (typeof window !== "undefined" && import.meta.env.DEV) {
+      window.__keydrillSeed = (days: number): void => this.seed(days);
+    }
+  }
+
+  /** Find-or-replace a session row by id, so seeding twice never duplicates rows. */
+  private putSession(row: StoredSession): void {
+    const i = this.state.sessions.findIndex((s) => s.id === row.id);
+    if (i >= 0) this.state.sessions[i] = row;
+    else this.state.sessions.push(row);
+  }
+
+  /** Find-or-replace a skill row by skillId. */
+  private putSkill(stat: SkillStat): void {
+    const i = this.state.skills.findIndex((s) => s.skillId === stat.skillId);
+    if (i >= 0) this.state.skills[i] = stat;
+    else this.state.skills.push(stat);
+  }
+
+  /** Dev-only: inject `days` days of plausible history so the stats dashboard has something to draw. */
+  seed(days: number): void {
+    const today = dateKey(this.now());
+
+    for (let i = days - 1; i >= 0; i--) {
+      const date = shiftDate(today, -i);
+      const progress = days > 1 ? (days - 1 - i) / (days - 1) : 1;
+      const startedAt = dayStartMs(date) + 10 * 3_600_000;
+      const wpm = 22 + progress * 18 + (i % 3) * 0.9;
+      const accuracy = 0.9 + progress * 0.07;
+
+      this.putSession({
+        id: `seed-${date}-drill`,
+        mode: "drill",
+        language: null,
+        startedAt,
+        endedAt: startedAt + 9 * 60_000,
+        date,
+        wpm,
+        accuracy,
+        completed: true,
+      });
+      this.putSession({
+        id: `seed-${date}-code`,
+        mode: "code",
+        language: "ts",
+        startedAt: startedAt + 20 * 60_000,
+        endedAt: startedAt + 29 * 60_000,
+        date,
+        wpm: wpm - 8, // code copy always trails free drilling
+        accuracy,
+        completed: true,
+      });
+
+      // The same streak logic real completions walk — consecutive seeded days go 1, 2, 3, …
+      this.completeDay(date);
+    }
+
+    const seedSkills = (
+      layer: LayerId,
+      keys: string[],
+      errBase: number,
+      errSpread: number,
+      latBase: number,
+      latSpread: number,
+      sampleBase: number,
+    ): void => {
+      for (const keyId of keys) {
+        const skillId = `${layer}:${keyId}`;
+        const noise = seedNoise(skillId);
+        this.putSkill({
+          skillId,
+          ewmaError: errBase + noise * errSpread,
+          ewmaLatencyMs: latBase + noise * latSpread,
+          samples: sampleBase + Math.floor(noise * 40),
+        });
+      }
+    };
+    seedSkills("base", SEED_BASE_KEYS, 0.02, 0.06, 160, 120, 40);
+    seedSkills("lower", SEED_LOWER_KEYS, 0.09, 0.18, 380, 260, 25);
+    seedSkills("raise", SEED_RAISE_KEYS, 0.11, 0.2, 420, 280, 18);
+
+    // The one and only sessions counter — same settings key endSession increments.
+    this.state.settings[SESSION_COUNT_KEY] = String(
+      this.state.sessions.filter((s) => s.completed).length,
+    );
+    this.persist();
   }
 
   async startSession(mode: SessionMode, language: LangId | null): Promise<SessionMeta> {
@@ -133,19 +279,19 @@ export class MockBackend implements Backend {
   }
 
   async getTrends(days: number): Promise<TrendPoint[]> {
+    const cutoff = shiftDate(dateKey(this.now()), -(days - 1));
     const byDate = new Map<string, { wpm: number; accuracy: number; n: number }>();
     for (const s of this.state.sessions) {
-      if (!s.completed) continue;
-      const acc = byDate.get(s.date) ?? { wpm: 0, accuracy: 0, n: 0 };
-      acc.wpm += s.wpm;
-      acc.accuracy += s.accuracy;
-      acc.n += 1;
-      byDate.set(s.date, acc);
+      if (!s.completed || s.date < cutoff) continue;
+      const agg = byDate.get(s.date) ?? { wpm: 0, accuracy: 0, n: 0 };
+      agg.wpm += s.wpm;
+      agg.accuracy += s.accuracy;
+      agg.n += 1;
+      byDate.set(s.date, agg);
     }
-    const points = [...byDate.entries()]
-      .sort((a, b) => (a[0] < b[0] ? -1 : 1))
-      .map(([date, a]) => ({ date, wpm: a.wpm / a.n, accuracy: a.accuracy / a.n }));
-    return points.slice(Math.max(0, points.length - days));
+    return [...byDate.entries()]
+      .sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
+      .map(([date, agg]) => ({ date, wpm: agg.wpm / agg.n, accuracy: agg.accuracy / agg.n }));
   }
 
   async getHeatmap(layer: LayerId): Promise<HeatCell[]> {
