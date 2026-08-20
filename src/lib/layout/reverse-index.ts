@@ -67,3 +67,28 @@ export function recipeHint(r: Recipe): string {
   if (r.holds.length === 0) return where;
   return `${r.holds.map((h) => HOLD_LABEL[h]).join(" + ")} + ${where}`;
 }
+
+/**
+ * Physical modifier keys, per the board's key table:
+ * LT2 = left inner thumb (Lower / Fn 1), RT2 = right inner thumb (Raise / Fn 2),
+ * L30 = left Shift (row 3 pinky), R35 = right Shift (row 3 pinky).
+ */
+export const LOWER_KEY_ID = "LT2";
+export const RAISE_KEY_ID = "RT2";
+export const SHIFT_KEY_ID_LEFT = "L30";
+export const SHIFT_KEY_ID_RIGHT = "R35";
+
+/**
+ * The physical keys that must be held down to execute `r`.
+ * Shift resolves to the Shift key on the hand OPPOSITE the tapped key, which is
+ * how the chord is actually played (left-hand letter → right Shift, and vice versa).
+ */
+export function holdKeyIds(r: Recipe): string[] {
+  const ids: string[] = [];
+  for (const hold of r.holds) {
+    if (hold === "lower") ids.push(LOWER_KEY_ID);
+    else if (hold === "raise") ids.push(RAISE_KEY_ID);
+    else ids.push(r.hand === "left" ? SHIFT_KEY_ID_RIGHT : SHIFT_KEY_ID_LEFT);
+  }
+  return ids;
+}
