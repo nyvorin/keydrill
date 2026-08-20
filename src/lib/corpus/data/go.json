@@ -1,1 +1,332 @@
-[]
+[
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["error-handling"],
+    "text": "if err != nil { return fmt.Errorf(\"load config: %w\", err) }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["slices", "structs"],
+    "text": "users := append([]User{}, cache.Users[:min(n, len(cache.Users))]...)"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["error-handling", "defer"],
+    "text": "defer func() { if err := f.Close(); err != nil { log.Print(err) } }()"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["context"],
+    "text": "ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["structs", "tags"],
+    "text": "type User struct { ID string `json:\"user_id,omitempty\"` }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["channels"],
+    "text": "ch := make(chan Result, len(jobs)); defer close(ch)"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["goroutines", "channels"],
+    "text": "go func(job Job) { ch <- run(ctx, job) }(jobs[i])"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["channels", "context"],
+    "text": "select { case v := <-ch: use(v); case <-ctx.Done(): return ctx.Err() }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["goroutines", "sync"],
+    "text": "var wg sync.WaitGroup; wg.Add(len(urls)); defer wg.Wait()"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["error-handling"],
+    "text": "if errors.Is(err, os.ErrNotExist) { return defaultConfig(), nil }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["error-handling"],
+    "text": "var perr *net.OpError; if errors.As(err, &perr) { return retry(ctx) }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["slices", "structs"],
+    "text": "sort.Slice(rows, func(i, j int) bool { return rows[i].WPM > rows[j].WPM })"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["structs", "methods"],
+    "text": "func (s *Store) Get(id string) (User, bool) { u, ok := s.m[id]; return u, ok }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["interfaces", "type-switch"],
+    "text": "switch v := any(x).(type) { case string: return v; default: return \"\" }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["slices"],
+    "text": "out := make([]string, 0, len(rows)); copy(dst, src[2:len(src)])"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["maps", "slices"],
+    "text": "m := map[string][]int{\"lower\": {1, 2, 3}, \"raise\": {4, 5, 6}}"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["json", "error-handling"],
+    "text": "data, err := json.MarshalIndent(stats, \"\", \"  \")"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics", "slices"],
+    "text": "func Map[T, U any](xs []T, f func(T) U) []U { return out }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["sync", "maps"],
+    "text": "mu.Lock(); defer mu.Unlock(); counts[key] += 1"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["testing", "goroutines"],
+    "text": "t.Run(tc.name, func(t *testing.T) { t.Parallel(); check(t, tc) })"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["error-handling"],
+    "text": "return nil, fmt.Errorf(\"parse %q at line %d: %w\", path, n, err)"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["slices", "structs"],
+    "text": "rows = slices.DeleteFunc(rows, func(r Row) bool { return r.WPM == 0 })"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["slices", "structs"],
+    "text": "total := 0; for _, r := range rows { total += r.Count }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["files", "error-handling"],
+    "text": "f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["interfaces", "error-handling"],
+    "text": "type Store interface { Get(id string) (User, error); Close() error }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["time", "goroutines"],
+    "text": "ticker := time.NewTicker(250 * time.Millisecond); defer ticker.Stop()"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["slices", "buffers"],
+    "text": "buf := bytes.NewBuffer(make([]byte, 0, 4096)); defer buf.Reset()"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["error-handling", "slices"],
+    "text": "if n := len(args); n < 2 { return errors.New(\"usage: keydrill run\") }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["channels", "goroutines"],
+    "text": "results := make(chan Stat, runtime.NumCPU()*2); go collect(results)"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["error-handling", "structs"],
+    "text": "var cfg Config; if err := yaml.Unmarshal(raw, &cfg); err != nil { return err }"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["http", "structs"],
+    "text": "w.Header().Set(\"Content-Type\", \"application/json; charset=utf-8\")"
+  },
+  {
+    "lang": "go",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["structs"],
+    "text": "stats := struct{ WPM, Accuracy float64 }{WPM: 62.4, Accuracy: 0.97}"
+  },
+
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["structs", "slices"],
+    "text": "type User struct {\n\tID    string `json:\"user_id\"`\n\tEmail string `json:\"email\"`\n\tWPM   float64 `json:\"wpm\"`\n}\n\nfunc Emails(users []User) []string {\n\tout := make([]string, 0, len(users))\n\tfor _, u := range users {\n\t\tout = append(out, u.Email)\n\t}\n\treturn out\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["error-handling"],
+    "text": "func LoadConfig(path string) (*Config, error) {\n\traw, err := os.ReadFile(path)\n\tif err != nil {\n\t\treturn nil, fmt.Errorf(\"read %s: %w\", path, err)\n\t}\n\n\tvar cfg Config\n\tif err := json.Unmarshal(raw, &cfg); err != nil {\n\t\treturn nil, fmt.Errorf(\"decode %s: %w\", path, err)\n\t}\n\treturn &cfg, nil\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["goroutines", "channels"],
+    "text": "func main() {\n\tdone := make(chan struct{})\n\n\tgo func() {\n\t\tdefer close(done)\n\t\tfmt.Println(\"warming up\")\n\t}()\n\n\t<-done\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["slices", "maps"],
+    "text": "func Tally(words []string) map[string]int {\n\tcounts := make(map[string]int, len(words))\n\tfor _, w := range words {\n\t\tcounts[strings.ToLower(w)]++\n\t}\n\treturn counts\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["structs", "methods"],
+    "text": "type Counter struct {\n\tmu     sync.Mutex\n\tcounts map[string]int\n}\n\nfunc (c *Counter) Add(key string) {\n\tc.mu.Lock()\n\tdefer c.mu.Unlock()\n\tc.counts[key]++\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["goroutines", "channels", "context"],
+    "text": "func worker(ctx context.Context, jobs <-chan Job, out chan<- Result) {\n\tfor {\n\t\tselect {\n\t\tcase job, ok := <-jobs:\n\t\t\tif !ok {\n\t\t\t\treturn\n\t\t\t}\n\t\t\tout <- Result{ID: job.ID, Err: job.Run(ctx)}\n\t\tcase <-ctx.Done():\n\t\t\treturn\n\t\t}\n\t}\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["error-handling", "structs"],
+    "text": "type ParseError struct {\n\tLine int\n\tErr  error\n}\n\nfunc (e *ParseError) Error() string {\n\treturn fmt.Sprintf(\"line %d: %v\", e.Line, e.Err)\n}\n\nfunc (e *ParseError) Unwrap() error { return e.Err }"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["interfaces", "error-handling"],
+    "text": "type Store interface {\n\tGet(ctx context.Context, id string) (User, error)\n\tClose() error\n}\n\nfunc withStore(s Store, fn func(Store) error) (err error) {\n\tdefer func() {\n\t\tif cerr := s.Close(); err == nil {\n\t\t\terr = cerr\n\t\t}\n\t}()\n\treturn fn(s)\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["testing", "slices"],
+    "text": "func TestNormalize(t *testing.T) {\n\ttests := []struct {\n\t\tname string\n\t\tin   string\n\t\twant string\n\t}{\n\t\t{\"trims\", \"  go \", \"go\"},\n\t\t{\"lowers\", \"GO\", \"go\"},\n\t}\n\n\tfor _, tc := range tests {\n\t\tt.Run(tc.name, func(t *testing.T) {\n\t\t\tt.Parallel()\n\t\t\tif got := Normalize(tc.in); got != tc.want {\n\t\t\t\tt.Errorf(\"got %q, want %q\", got, tc.want)\n\t\t\t}\n\t\t})\n\t}\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["http", "structs", "error-handling"],
+    "text": "func statsHandler(store Store) http.HandlerFunc {\n\treturn func(w http.ResponseWriter, r *http.Request) {\n\t\tstats, err := store.Stats(r.Context())\n\t\tif err != nil {\n\t\t\thttp.Error(w, err.Error(), http.StatusInternalServerError)\n\t\t\treturn\n\t\t}\n\n\t\tw.Header().Set(\"Content-Type\", \"application/json\")\n\t\tif err := json.NewEncoder(w).Encode(stats); err != nil {\n\t\t\tlog.Printf(\"encode stats: %v\", err)\n\t\t}\n\t}\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["goroutines", "channels", "error-handling"],
+    "text": "func fanIn(ctx context.Context, srcs ...<-chan int) <-chan int {\n\tout := make(chan int)\n\tvar wg sync.WaitGroup\n\tfor _, src := range srcs {\n\t\twg.Add(1)\n\t\tgo func(c <-chan int) {\n\t\t\tdefer wg.Done()\n\t\t\tfor v := range c {\n\t\t\t\tselect {\n\t\t\t\tcase out <- v:\n\t\t\t\tcase <-ctx.Done():\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t}\n\t\t}(src)\n\t}\n\tgo func() {\n\t\twg.Wait()\n\t\tclose(out)\n\t}()\n\treturn out\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["generics", "slices"],
+    "text": "func GroupBy[T any, K comparable](items []T, key func(T) K) map[K][]T {\n\tout := make(map[K][]T)\n\tfor _, item := range items {\n\t\tk := key(item)\n\t\tout[k] = append(out[k], item)\n\t}\n\treturn out\n}\n\nfunc Keys[K comparable, V any](m map[K]V) []K {\n\tout := make([]K, 0, len(m))\n\tfor k := range m {\n\t\tout = append(out, k)\n\t}\n\treturn out\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["goroutines", "context", "error-handling"],
+    "text": "func fetchAll(ctx context.Context, urls []string) ([]*http.Response, error) {\n\tg, ctx := errgroup.WithContext(ctx)\n\tg.SetLimit(runtime.NumCPU())\n\tout := make([]*http.Response, len(urls))\n\n\tfor i, url := range urls {\n\t\tg.Go(func() error {\n\t\t\treq, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)\n\t\t\tif err != nil {\n\t\t\t\treturn fmt.Errorf(\"build %s: %w\", url, err)\n\t\t\t}\n\t\t\tres, err := http.DefaultClient.Do(req)\n\t\t\tif err != nil {\n\t\t\t\treturn fmt.Errorf(\"get %s: %w\", url, err)\n\t\t\t}\n\t\t\tout[i] = res\n\t\t\treturn nil\n\t\t})\n\t}\n\n\treturn out, g.Wait()\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["channels", "time", "goroutines"],
+    "text": "func rateLimit(ctx context.Context, in <-chan Job, every time.Duration) <-chan Job {\n\tout := make(chan Job)\n\tticker := time.NewTicker(every)\n\n\tgo func() {\n\t\tdefer close(out)\n\t\tdefer ticker.Stop()\n\t\tfor job := range in {\n\t\t\tselect {\n\t\t\tcase <-ticker.C:\n\t\t\t\tout <- job\n\t\t\tcase <-ctx.Done():\n\t\t\t\treturn\n\t\t\t}\n\t\t}\n\t}()\n\n\treturn out\n}"
+  },
+  {
+    "lang": "go",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["interfaces", "structs", "error-handling"],
+    "text": "type Shape interface {\n\tArea() float64\n}\n\ntype Rect struct{ W, H float64 }\ntype Circle struct{ R float64 }\n\nfunc (r Rect) Area() float64   { return r.W * r.H }\nfunc (c Circle) Area() float64 { return math.Pi * c.R * c.R }\n\nfunc Describe(s Shape) (string, error) {\n\tswitch v := s.(type) {\n\tcase Rect:\n\t\treturn fmt.Sprintf(\"rect %.1fx%.1f\", v.W, v.H), nil\n\tcase Circle:\n\t\treturn fmt.Sprintf(\"circle r=%.1f\", v.R), nil\n\tdefault:\n\t\treturn \"\", fmt.Errorf(\"unsupported shape %T\", s)\n\t}\n}"
+  }
+]

@@ -1,1 +1,332 @@
-[]
+[
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["data-classes"],
+    "text": "data class User(val id: String, val name: String = \"anon\")"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["null-safety", "extension-functions"],
+    "text": "fun String?.orDash(): String = this?.takeIf { it.isNotBlank() } ?: \"-\""
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["collections", "lambdas"],
+    "text": "val names = users.map { it.name }.filter { it.isNotEmpty() }.sorted()"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["collections", "lambdas"],
+    "text": "val total = orders.sumOf { it.total * 1.08 }.coerceAtLeast(0.0)"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["collections", "data-classes"],
+    "text": "val byId = users.associateBy { it.id }.toSortedMap()"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["collections", "lambdas"],
+    "text": "val grouped = rows.groupBy { it.lang }.mapValues { (_, v) -> v.size }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["when", "null-safety"],
+    "text": "when (val res = api.fetch(id)) { is Ok -> res.value; else -> null }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["when"],
+    "text": "val label = when { n > 90 -> \"A\"; n > 80 -> \"B\"; else -> \"C\" }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["null-safety", "scope-functions"],
+    "text": "user?.let { render(it) } ?: showEmptyState(\"no user yet\")"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["null-safety"],
+    "text": "val port = System.getenv(\"PORT\")?.toIntOrNull() ?: 8080"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["contracts", "strings"],
+    "text": "require(minutes in 1..60) { \"minutes out of range: $minutes\" }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["delegates", "lambdas"],
+    "text": "val config by lazy { loadConfig(path).getOrThrow() }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["coroutines"],
+    "text": "suspend fun load(id: String): User = withContext(Dispatchers.IO) { fetch(id) }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["coroutines", "collections"],
+    "text": "val users = ids.map { async { fetch(it) } }.awaitAll().filterNotNull()"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["coroutines"],
+    "text": "scope.launch { delay(250); repository.sync(force = true) }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["coroutines", "flow"],
+    "text": "flow { emit(tick()) }.debounce(200).collect { render(it) }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["extension-functions", "collections"],
+    "text": "fun List<Int>.median(): Double = sorted()[size / 2].toDouble()"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["data-classes", "destructuring"],
+    "text": "val (head, tail) = pair.copy(second = pair.second.trim())"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["sealed", "data-classes"],
+    "text": "sealed interface Shape { data class Circle(val r: Double) : Shape }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["strings"],
+    "text": "val line = \"user ${user.name} scored ${\"%.1f\".format(wpm)} wpm\""
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["objects", "collections"],
+    "text": "object Registry { val langs = setOf(\"rust\", \"go\", \"ts\", \"sql\") }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["error-handling", "lambdas"],
+    "text": "val stats = runCatching { parse(raw) }.getOrElse { Stats.EMPTY }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["collections", "lambdas"],
+    "text": "items.forEachIndexed { index, item -> println(\"$index: $item\") }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["collections", "strings"],
+    "text": "val lines = raw.lines().map(String::trim).filterNot(String::isEmpty)"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["extension-functions", "strings"],
+    "text": "fun Drill.summary() = \"$lang/$difficulty (${entries.size} entries)\""
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["collections", "null-safety"],
+    "text": "val counts = mutableMapOf<String, Int>().withDefault { 0 }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["null-safety", "contracts"],
+    "text": "checkNotNull(cache[key]) { \"missing cache entry for $key\" }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["collections", "lambdas"],
+    "text": "val out = buildList { add(head); addAll(tail.take(5)) }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["data-classes"],
+    "text": "data class Stat(val lang: String, val wpm: Double = 0.0)"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["when", "smart-casts"],
+    "text": "val size = if (entry is Snippet) entry.text.lines().size else 1"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["coroutines"],
+    "text": "val tally = coroutineScope { async(Dispatchers.Default) { tally(rows) } }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["extension-functions", "generics"],
+    "text": "fun <T : Comparable<T>> List<T>.top(n: Int) = sortedDescending().take(n)"
+  },
+
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["data-classes", "collections"],
+    "text": "data class Drill(\n    val lang: String,\n    val difficulty: String = \"medium\",\n    val tags: List<String> = emptyList(),\n)\n\nfun byLang(drills: List<Drill>, lang: String): List<Drill> =\n    drills.filter { it.lang == lang }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["when"],
+    "text": "fun color(status: String): String = when (status) {\n    \"paid\" -> \"green\"\n    \"due\" -> \"amber\"\n    \"void\" -> \"slate\"\n    else -> \"gray\"\n}"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["null-safety", "scope-functions"],
+    "text": "fun render(user: User?) {\n    user?.let { u ->\n        println(\"${u.name} <${u.email ?: \"no-email\"}>\")\n    } ?: run {\n        println(\"no user selected\")\n    }\n}"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["extension-functions", "strings"],
+    "text": "fun String.slugify(): String = trim()\n    .lowercase()\n    .replace(Regex(\"[^a-z0-9]+\"), \"-\")\n    .trim('-')"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["collections", "lambdas"],
+    "text": "fun tally(lines: List<String>): Map<String, Int> =\n    lines\n        .flatMap { it.split(Regex(\"\\\\s+\")) }\n        .filter { it.isNotBlank() }\n        .groupingBy { it.lowercase() }\n        .eachCount()"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["when", "coroutines", "null-safety"],
+    "text": "suspend fun load(id: String): Result<User> = withContext(Dispatchers.IO) {\n    when (val res = api.fetch(id)) {\n        is Ok -> Result.success(res.value)\n        is Err -> Result.failure(IllegalStateException(res.message ?: \"unknown\"))\n    }\n}"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["data-classes", "when", "sealed"],
+    "text": "sealed interface Shape {\n    data class Circle(val radius: Double) : Shape\n    data class Rect(val w: Double, val h: Double) : Shape\n}\n\nfun area(shape: Shape): Double = when (shape) {\n    is Shape.Circle -> Math.PI * shape.radius * shape.radius\n    is Shape.Rect -> shape.w * shape.h\n}"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["extension-functions", "null-safety"],
+    "text": "fun <T> List<T>.secondOrNull(): T? = getOrNull(1)\n\nfun Map<String, String>.requireKey(key: String): String =\n    this[key] ?: error(\"missing config key: $key\")\n\nfun String?.orDefault(fallback: String): String =\n    this?.takeIf { it.isNotBlank() } ?: fallback"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["coroutines", "flow"],
+    "text": "fun ticks(period: Long): Flow<Int> = flow {\n    var n = 0\n    while (true) {\n        emit(n++)\n        delay(period)\n    }\n}.flowOn(Dispatchers.Default)\n\nsuspend fun collectTicks(scope: CoroutineScope) = scope.launch {\n    ticks(250).take(10).collect { println(\"tick $it\") }\n}"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["data-classes", "scope-functions"],
+    "text": "data class Settings(\n    var reminderHour: Int = 9,\n    var strictWhitespace: Boolean = false,\n)\n\nfun defaults(): Settings = Settings().apply {\n    reminderHour = 8\n    strictWhitespace = true\n}.also { println(\"settings ready: $it\") }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["coroutines", "error-handling"],
+    "text": "suspend fun <T> retry(\n    attempts: Int = 3,\n    initialDelay: Long = 250,\n    block: suspend () -> T,\n): T {\n    var delayMs = initialDelay\n    repeat(attempts - 1) {\n        try {\n            return block()\n        } catch (e: IOException) {\n            delay(delayMs)\n            delayMs *= 2\n        }\n    }\n    return block()\n}"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["coroutines", "flow", "when"],
+    "text": "class DrillViewModel(private val repo: DrillRepo) {\n\n    private val _state = MutableStateFlow<UiState>(UiState.Loading)\n    val state: StateFlow<UiState> = _state.asStateFlow()\n\n    fun refresh(scope: CoroutineScope) = scope.launch {\n        _state.value = when (val result = repo.load()) {\n            is Ok -> UiState.Ready(result.value)\n            is Err -> UiState.Failed(result.message ?: \"unknown error\")\n        }\n    }\n}"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["extension-functions", "generics", "collections"],
+    "text": "inline fun <T, K> Iterable<T>.groupByTo(\n    destination: MutableMap<K, MutableList<T>>,\n    keySelector: (T) -> K,\n): MutableMap<K, MutableList<T>> {\n    for (element in this) {\n        destination.getOrPut(keySelector(element)) { mutableListOf() }.add(element)\n    }\n    return destination\n}\n\nfun <T> List<T>.chunkedPairs(): List<Pair<T, T?>> =\n    chunked(2).map { it.first() to it.getOrNull(1) }"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["coroutines", "null-safety", "data-classes"],
+    "text": "data class Page<T>(val items: List<T>, val cursor: String? = null)\n\nsuspend fun <T> fetchAll(\n    fetch: suspend (String?) -> Page<T>,\n): List<T> = buildList {\n    var cursor: String? = null\n    do {\n        val page = fetch(cursor)\n        addAll(page.items)\n        cursor = page.cursor\n    } while (cursor != null)\n}"
+  },
+  {
+    "lang": "kotlin",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["when", "sealed", "error-handling"],
+    "text": "sealed class Cmd {\n    data class Run(val lang: String, val minutes: Int) : Cmd()\n    data object Help : Cmd()\n    data class Unknown(val raw: String) : Cmd()\n}\n\nfun parse(args: List<String>): Cmd = when {\n    args.isEmpty() -> Cmd.Help\n    args.first() == \"run\" -> Cmd.Run(\n        lang = args.getOrNull(1) ?: \"rust\",\n        minutes = args.getOrNull(2)?.toIntOrNull() ?: 10,\n    )\n    else -> Cmd.Unknown(args.joinToString(\" \"))\n}"
+  }
+]

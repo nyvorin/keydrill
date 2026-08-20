@@ -1,1 +1,332 @@
-[]
+[
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["records"],
+    "text": "public record Point(double x, double y, String label) {}"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["streams", "lambdas"],
+    "text": "var names = users.stream().map(User::name).sorted().toList();"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["streams", "generics"],
+    "text": "List<String> ids = rows.stream().map(Row::id).distinct().toList();"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["optional", "lambdas"],
+    "text": "Optional.ofNullable(cache.get(key)).map(Entry::value).orElse(\"none\");"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["streams", "lambdas"],
+    "text": "var total = orders.stream().mapToDouble(Order::total).sum();"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["streams", "generics"],
+    "text": "Map<String, List<User>> byTeam = users.stream().collect(groupingBy(User::team));"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["streams", "lambdas"],
+    "text": "var evens = IntStream.rangeClosed(1, 20).filter(n -> n % 2 == 0).boxed().toList();"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["sealed", "records"],
+    "text": "public sealed interface Shape permits Circle, Rect, Triangle {}"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["records", "sealed"],
+    "text": "public record Circle(double radius) implements Shape {}"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["switch", "lambdas"],
+    "text": "String label = switch (status) { case PAID -> \"paid\"; default -> \"?\"; };"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["pattern-matching"],
+    "text": "if (obj instanceof User u && u.age() >= 18) { register(u); }"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["streams", "resources"],
+    "text": "try (var in = Files.newBufferedReader(path)) { return in.lines().toList(); }"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["concurrency", "lambdas"],
+    "text": "CompletableFuture.supplyAsync(() -> load(id)).thenApply(User::name);"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["strings"],
+    "text": "String msg = \"user %s has %d drills\".formatted(name, count);"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics"],
+    "text": "public static <T extends Comparable<T>> T max(List<T> xs) { return top; }"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["collections", "generics"],
+    "text": "var levels = Map.of(\"js\", 30, \"ts\", 30, \"rust\", 34, \"sql\", 32);"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["lambdas", "generics"],
+    "text": "Comparator<User> byWpm = Comparator.comparingDouble(User::wpm).reversed();"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["lambdas", "streams"],
+    "text": "users.forEach(u -> System.out.printf(\"%s: %.1f%n\", u.name(), u.wpm()));"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["streams", "lambdas"],
+    "text": "var flat = groups.stream().flatMap(g -> g.items().stream()).toList();"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["annotations", "strings"],
+    "text": "@Override public String toString() { return \"Row[\" + id + \"]\"; }"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["annotations", "generics", "lambdas"],
+    "text": "@FunctionalInterface interface Parser<T> { T parse(String raw); }"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["streams", "strings"],
+    "text": "var joined = String.join(\", \", langs.stream().sorted().toList());"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["exceptions"],
+    "text": "throw new IllegalStateException(\"no drill for lang: \" + lang);"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["streams", "lambdas", "generics"],
+    "text": "var counts = words.stream().collect(toMap(w -> w, w -> 1, Integer::sum));"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["collections", "generics"],
+    "text": "List<Integer> nums = new ArrayList<>(List.of(3, 1, 4, 1, 5, 9));"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["records", "generics"],
+    "text": "public record Pair<A, B>(A first, B second) implements Serializable {}"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["optional", "lambdas"],
+    "text": "var user = repo.findById(id).orElseThrow(() -> new NotFound(id));"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["collections", "lambdas"],
+    "text": "stats.entrySet().removeIf(e -> e.getValue().samples() < 5);"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["streams", "optional"],
+    "text": "var avg = rows.stream().mapToInt(Row::wpm).average().orElse(0.0);"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics", "concurrency", "lambdas"],
+    "text": "public <T> CompletableFuture<T> async(Supplier<T> task) { return future; }"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["streams", "collections"],
+    "text": "var arr = langs.toArray(String[]::new); Arrays.sort(arr);"
+  },
+  {
+    "lang": "java",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics", "interfaces"],
+    "text": "interface Repo<T extends Entity> extends AutoCloseable { T get(String id); }"
+  },
+
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["records", "streams"],
+    "text": "public record User(String id, String name, double wpm) {\n\n    public String initials() {\n        return Arrays.stream(name.split(\" \"))\n                .map(part -> part.substring(0, 1).toUpperCase())\n                .collect(Collectors.joining());\n    }\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["streams", "lambdas"],
+    "text": "public static List<String> topLangs(List<Drill> drills, int limit) {\n    return drills.stream()\n            .filter(d -> d.accuracy() > 0.9)\n            .sorted(Comparator.comparingDouble(Drill::wpm).reversed())\n            .limit(limit)\n            .map(Drill::lang)\n            .toList();\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["optional", "lambdas"],
+    "text": "public Optional<User> findByEmail(String email) {\n    return users.stream()\n            .filter(u -> u.email().equalsIgnoreCase(email))\n            .findFirst();\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["collections", "generics"],
+    "text": "public static <K, V> Map<V, K> invert(Map<K, V> source) {\n    var out = new LinkedHashMap<V, K>(source.size());\n    for (Map.Entry<K, V> entry : source.entrySet()) {\n        out.put(entry.getValue(), entry.getKey());\n    }\n    return out;\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["records", "annotations"],
+    "text": "public record Money(long cents, String currency) {\n\n    public Money {\n        if (cents < 0) {\n            throw new IllegalArgumentException(\"cents must be positive\");\n        }\n    }\n\n    @Override\n    public String toString() {\n        return \"%d.%02d %s\".formatted(cents / 100, cents % 100, currency);\n    }\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["streams", "generics", "lambdas"],
+    "text": "public static <T> Map<String, List<T>> groupBy(\n        List<T> items, Function<T, String> key) {\n    return items.stream()\n            .collect(Collectors.groupingBy(key, TreeMap::new, Collectors.toList()));\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["sealed", "records", "switch"],
+    "text": "public sealed interface Shape permits Circle, Rect {}\n\npublic record Circle(double radius) implements Shape {}\n\npublic record Rect(double w, double h) implements Shape {}\n\npublic static double area(Shape shape) {\n    return switch (shape) {\n        case Circle c -> Math.PI * c.radius() * c.radius();\n        case Rect r -> r.w() * r.h();\n    };\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["resources", "streams"],
+    "text": "public static List<String> readNonBlank(Path path) throws IOException {\n    try (var lines = Files.lines(path, StandardCharsets.UTF_8)) {\n        return lines.map(String::strip)\n                .filter(Predicate.not(String::isEmpty))\n                .toList();\n    }\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["generics", "collections"],
+    "text": "public final class Cache<K, V> {\n\n    private final Map<K, V> store = new ConcurrentHashMap<>();\n\n    public V get(K key, Function<? super K, ? extends V> loader) {\n        return store.computeIfAbsent(key, loader);\n    }\n\n    public void evictIf(BiPredicate<K, V> stale) {\n        store.entrySet().removeIf(e -> stale.test(e.getKey(), e.getValue()));\n    }\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["streams", "records"],
+    "text": "public record Stat(String lang, double wpm, double accuracy) {}\n\npublic static Map<String, Double> medianWpm(List<Stat> stats) {\n    return stats.stream()\n            .collect(Collectors.groupingBy(\n                    Stat::lang,\n                    Collectors.averagingDouble(Stat::wpm)));\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["generics", "lambdas", "concurrency"],
+    "text": "public static <T> CompletableFuture<List<T>> allOf(List<CompletableFuture<T>> futures) {\n    return CompletableFuture\n            .allOf(futures.toArray(CompletableFuture[]::new))\n            .thenApply(ignored -> futures.stream()\n                    .map(CompletableFuture::join)\n                    .toList())\n            .exceptionally(throwable -> {\n                throw new CompletionException(throwable);\n            });\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["generics", "records"],
+    "text": "public sealed interface Result<T> permits Result.Ok, Result.Err {\n\n    record Ok<T>(T value) implements Result<T> {}\n\n    record Err<T>(Exception cause) implements Result<T> {}\n\n    static <T> Result<T> of(Callable<T> work) {\n        try {\n            return new Ok<>(work.call());\n        } catch (Exception e) {\n            return new Err<>(e);\n        }\n    }\n\n    default T orElse(T fallback) {\n        return this instanceof Ok<T> ok ? ok.value() : fallback;\n    }\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["streams", "lambdas", "collections"],
+    "text": "public static Map<String, Long> wordFrequency(Path path) throws IOException {\n    try (var lines = Files.lines(path)) {\n        return lines\n                .flatMap(line -> Arrays.stream(line.split(\"\\\\W+\")))\n                .map(String::toLowerCase)\n                .filter(word -> word.length() > 2)\n                .collect(Collectors.groupingBy(\n                        Function.identity(),\n                        TreeMap::new,\n                        Collectors.counting()));\n    }\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["generics", "lambdas"],
+    "text": "public final class DrillBuilder {\n\n    private String lang = \"rust\";\n    private int minutes = 10;\n    private final List<String> tags = new ArrayList<>();\n\n    public DrillBuilder lang(String value) {\n        this.lang = Objects.requireNonNull(value, \"lang\");\n        return this;\n    }\n\n    public DrillBuilder tag(String... values) {\n        Collections.addAll(tags, values);\n        return this;\n    }\n\n    public Drill build() {\n        return new Drill(lang, minutes, List.copyOf(tags));\n    }\n}"
+  },
+  {
+    "lang": "java",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["streams", "generics", "optional"],
+    "text": "public static <T, K extends Comparable<K>> Optional<T> argMax(\n        Collection<? extends T> items, Function<? super T, K> score) {\n    return items.stream()\n            .max(Comparator.comparing(score))\n            .map(Function.identity());\n}\n\npublic static IntSummaryStatistics summarize(List<Drill> drills) {\n    return drills.stream()\n            .mapToInt(Drill::keystrokes)\n            .summaryStatistics();\n}"
+  }
+]

@@ -125,5 +125,294 @@
     "difficulty": "hard",
     "tags": ["jsonb"],
     "text": "select\n    e.id,\n    e.payload ->> 'skill_id' as skill_id,\n    (e.payload -> 'latency' ->> 'ms')::int as latency_ms\nfrom events e\nwhere e.payload @> '{\"kind\": \"keystroke\"}'::jsonb\n  and (e.payload ->> 'correct')::boolean is false\norder by latency_ms desc\nlimit 50;"
+  },
+
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["window-functions"],
+    "text": "select id, lag(wpm) over (order by day) as prev_wpm from daily_stats;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["cte", "intervals"],
+    "text": "with d as (select generate_series(0, 6) g) select current_date - g from d;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["distinct-on", "ordering"],
+    "text": "select distinct on (user_id) user_id, wpm from sessions order by user_id;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["aggregates", "arrays"],
+    "text": "select array_agg(distinct lang order by lang) from corpus_entries;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["aggregates", "strings"],
+    "text": "select string_agg(tag, ', ' order by tag) as tags from entry_tags;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["jsonb", "aggregates"],
+    "text": "select jsonb_agg(jsonb_build_object('id', id, 'wpm', wpm)) from sessions;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["jsonb", "upsert"],
+    "text": "update events set payload = jsonb_set(payload, '{seen}', 'true') where id = $1;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["aggregates", "intervals"],
+    "text": "select date_trunc('week', created_at) as wk, count(*) from sessions group by wk;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["joins", "lateral"],
+    "text": "select * from sessions s, lateral top_skills(s.id) t where t.rank <= 3;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["upsert"],
+    "text": "insert into days (date) values (current_date) on conflict (date) do nothing;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["case"],
+    "text": "select case when wpm > 60 then 'fast' else 'slow' end as tier from stats;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["indexes", "jsonb"],
+    "text": "create index idx_events_payload on events using gin (payload jsonb_path_ops);"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["explain"],
+    "text": "explain analyze select * from keystroke_events where session_id = $1;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["aggregates"],
+    "text": "select sum(latency_ms) filter (where not correct) as lost_ms from events;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["aggregates", "window-functions"],
+    "text": "select percentile_cont(0.5) within group (order by latency_ms) from events;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["window-functions"],
+    "text": "select id, row_number() over (partition by lang order by wpm desc) from runs;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["aggregates", "intervals"],
+    "text": "select coalesce(sum(minutes), 0) from days where date > current_date - 30;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["intervals", "returning"],
+    "text": "delete from keystroke_events where ts < now() - interval '90 days' returning id;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["joins"],
+    "text": "select u.email from users u left join orders o on o.user_id = u.id limit 25;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["jsonb"],
+    "text": "select payload -> 'latency' ->> 'ms' as ms from events limit 100;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["ddl"],
+    "text": "alter table sessions add column completed boolean not null default false;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["aggregates"],
+    "text": "select lang, count(*) from corpus_entries group by lang having count(*) >= 45;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["intervals", "functions"],
+    "text": "select generate_series(current_date - interval '6 days', current_date, '1 day');"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["indexes"],
+    "text": "create unique index on days (date) where session_completed is true;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["window-functions"],
+    "text": "select nth_value(wpm, 2) over (order by day desc) from daily_stats;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["ordering"],
+    "text": "select id from skills order by ewma_latency_ms desc nulls last limit 12;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["arrays", "upsert"],
+    "text": "update skills set samples = samples + 1 where id = any($1::text[]);"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["functions", "ordering"],
+    "text": "select to_char(day, 'YYYY-MM-DD') as day, wpm from daily_stats limit 30;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["window-functions"],
+    "text": "select count(*) over () as total, id from sessions order by started_at;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["upsert", "arrays"],
+    "text": "insert into tags (name) select unnest($1::text[]) on conflict do nothing;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["aggregates", "casts"],
+    "text": "select avg(wpm)::numeric(5, 1) from sessions where mode = 'code';"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["jsonb"],
+    "text": "select jsonb_path_query(payload, '$.keys[*].layer') from events limit 5;"
+  },
+
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["ddl", "indexes"],
+    "text": "create table if not exists daily_stats (\n    day date primary key,\n    minutes int not null default 0,\n    wpm numeric(5, 1) not null default 0,\n    accuracy numeric(4, 3) not null default 0\n);\n\ncreate index idx_daily_stats_wpm on daily_stats (wpm desc);"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["upsert", "returning"],
+    "text": "insert into sessions (id, mode, language, started_at)\nvalues (gen_random_uuid(), 'code', 'rust', now())\nreturning id, started_at;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["intervals", "aggregates"],
+    "text": "select\n    date_trunc('day', started_at)::date as day,\n    count(*) as runs,\n    round(avg(accuracy) * 100, 1) as accuracy_pct\nfrom sessions\nwhere started_at >= now() - interval '30 days'\ngroup by day\norder by day;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["joins", "aggregates", "intervals"],
+    "text": "select\n    s.mode,\n    count(*) as runs,\n    round(avg(s.wpm)::numeric, 1) as avg_wpm\nfrom sessions s\nwhere s.ended_at >= now() - interval '14 days'\ngroup by s.mode\norder by runs desc;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["cte", "intervals", "joins"],
+    "text": "with spine as (\n    select generate_series(\n        current_date - interval '13 days',\n        current_date,\n        interval '1 day'\n    )::date as day\n)\nselect\n    spine.day,\n    coalesce(d.minutes, 0) as minutes,\n    coalesce(d.session_completed, false) as done\nfrom spine\nleft join days d on d.date = spine.day\norder by spine.day;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["upsert", "returning", "jsonb"],
+    "text": "insert into skills (id, layer, key_id, ewma_error, ewma_latency_ms, samples)\nvalues ($1, $2, $3, $4, $5, 1)\non conflict (id) do update\nset ewma_error = 0.8 * skills.ewma_error + 0.2 * excluded.ewma_error,\n    ewma_latency_ms = 0.7 * skills.ewma_latency_ms + 0.3 * excluded.ewma_latency_ms,\n    samples = skills.samples + 1,\n    updated_at = now()\nreturning id, samples, ewma_latency_ms;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["cte", "window-functions", "joins"],
+    "text": "with ranked as (\n    select\n        skill_id,\n        latency_ms,\n        row_number() over (partition by skill_id order by ts desc) as recency,\n        percent_rank() over (order by latency_ms) as pct\n    from keystroke_events\n    where correct is true\n)\nselect r.skill_id, s.layer, round(avg(r.latency_ms), 0) as recent_ms\nfrom ranked r\njoin skills s on s.id = r.skill_id\nwhere r.recency <= 20\ngroup by r.skill_id, s.layer\norder by recent_ms desc\nlimit 15;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["cte", "joins", "lateral"],
+    "text": "with recursive tree as (\n    select id, parent_id, name, 1 as depth\n    from stages\n    where parent_id is null\n    union all\n    select s.id, s.parent_id, s.name, t.depth + 1\n    from stages s\n    join tree t on t.id = s.parent_id\n)\nselect t.depth, t.name, gate.threshold\nfrom tree t\nleft join lateral (\n    select threshold\n    from mastery_gates g\n    where g.stage_id = t.id\n    order by g.created_at desc\n    limit 1\n) gate on true\norder by t.depth, t.name;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["jsonb", "aggregates", "distinct-on"],
+    "text": "select distinct on (e.session_id)\n    e.session_id,\n    e.payload ->> 'layer' as layer,\n    jsonb_agg(e.payload -> 'key' order by e.ts) filter (\n        where (e.payload ->> 'correct')::boolean is false\n    ) over (partition by e.session_id) as misses\nfrom keystroke_events e\nwhere e.ts >= now() - interval '7 days'\n  and e.payload @> '{\"kind\": \"chord\"}'::jsonb\norder by e.session_id, e.ts desc;"
   }
 ]

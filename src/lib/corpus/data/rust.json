@@ -132,5 +132,217 @@
     "difficulty": "hard",
     "tags": ["error-handling", "match", "lifetimes"],
     "text": "use std::fmt;\n\n#[derive(Debug)]\npub enum ConfigError {\n    Missing(&'static str),\n    Parse(std::num::ParseIntError),\n}\n\nimpl fmt::Display for ConfigError {\n    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {\n        match self {\n            ConfigError::Missing(k) => write!(f, \"missing key: {k}\"),\n            ConfigError::Parse(e) => write!(f, \"bad number: {e}\"),\n        }\n    }\n}\n\nimpl From<std::num::ParseIntError> for ConfigError {\n    fn from(e: std::num::ParseIntError) -> Self {\n        ConfigError::Parse(e)\n    }\n}"
+  },
+
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["iterators", "closures"],
+    "text": "let words: Vec<&str> = line.split_whitespace().take(8).collect();"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics", "lifetimes"],
+    "text": "fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { if x > y { x } else { y } }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["error-handling", "closures"],
+    "text": "let cfg: Config = toml::from_str(&raw).map_err(|e| Error::Parse(e))?;"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["error-handling", "generics"],
+    "text": "fn parse(s: &str) -> Result<u32, Box<dyn std::error::Error>> { Ok(s.parse()?) }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["closures", "option"],
+    "text": "let port = std::env::var(\"PORT\").ok().and_then(|p| p.parse().ok());"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["error-handling", "option"],
+    "text": "let id = row.get(\"id\").ok_or(Error::Missing(\"id\"))?;"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["match", "collections"],
+    "text": "while let Some(node) = stack.pop() { visit(&node, depth + 1); }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["match", "slices"],
+    "text": "let [head, second, rest @ ..] = slice else { return None; };"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["concurrency", "generics"],
+    "text": "let shared = Arc::new(Mutex::new(HashMap::<String, u64>::new()));"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["iterators", "closures"],
+    "text": "let sum: u64 = pairs.iter().zip(&weights).map(|(a, b)| a * b).sum();"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["iterators", "closures", "match"],
+    "text": "for (i, ch) in text.chars().enumerate().filter(|(_, c)| c.is_ascii()) {}"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["iterators", "closures"],
+    "text": "let joined = xs.iter().fold(String::new(), |acc, s| acc + s + \", \");"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics", "lifetimes", "iterators"],
+    "text": "pub fn ids(&self) -> impl Iterator<Item = &str> + '_ { self.map.keys() }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["structs", "derive"],
+    "text": "#[derive(Serialize, Deserialize)] pub struct Row { pub id: u32 }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["structs", "generics"],
+    "text": "impl Default for Cfg { fn default() -> Self { Self { retries: 3 } } }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics", "lifetimes"],
+    "text": "trait Store { fn get(&self, key: &str) -> Option<&str> { None } }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["collections", "strings"],
+    "text": "let mut out = String::with_capacity(text.len() * 2);"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["closures", "collections"],
+    "text": "let opt = map.get(&key).cloned().unwrap_or_else(|| fallback.clone());"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["concurrency", "generics", "error-handling"],
+    "text": "let (tx, rx) = std::sync::mpsc::channel::<Result<Msg, Error>>();"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["match"],
+    "text": "matches!(e.kind, Kind::Idiom | Kind::Snippet if e.difficulty == Hard)"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["error-handling", "strings"],
+    "text": "let text = std::fs::read_to_string(path)?.trim().to_owned();"
+  },
+
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["closures", "option"],
+    "text": "pub fn port_from_env() -> u16 {\n    std::env::var(\"PORT\")\n        .ok()\n        .and_then(|raw| raw.parse::<u16>().ok())\n        .unwrap_or(8080)\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["generics", "lifetimes"],
+    "text": "pub trait Drill {\n    fn name(&self) -> &str;\n\n    fn label(&self) -> String {\n        format!(\"drill: {}\", self.name())\n    }\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["match", "collections"],
+    "text": "pub fn depth(root: Node) -> usize {\n    let mut stack = vec![(root, 1usize)];\n    let mut best = 0;\n    while let Some((node, d)) = stack.pop() {\n        best = best.max(d);\n        for child in node.children {\n            stack.push((child, d + 1));\n        }\n    }\n    best\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["iterators", "generics", "collections"],
+    "text": "use std::collections::HashMap;\n\npub fn tally(lines: &[String]) -> HashMap<String, usize> {\n    let mut out = HashMap::new();\n    for line in lines {\n        for word in line.split_whitespace() {\n            *out.entry(word.to_lowercase()).or_insert(0) += 1;\n        }\n    }\n    out\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["iterators", "closures"],
+    "text": "pub fn weighted_score(hits: &[u32], weights: &[u32]) -> f64 {\n    let total: u32 = hits\n        .iter()\n        .zip(weights.iter())\n        .map(|(hit, weight)| hit * weight)\n        .sum();\n    let count: u32 = weights.iter().sum();\n    f64::from(total) / f64::from(count.max(1))\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["concurrency", "closures", "iterators"],
+    "text": "use std::sync::{Arc, Mutex};\nuse std::thread;\n\npub fn parallel_tally(chunks: Vec<Vec<u32>>) -> u32 {\n    let total = Arc::new(Mutex::new(0u32));\n    let mut handles = Vec::new();\n\n    for chunk in chunks {\n        let total = Arc::clone(&total);\n        handles.push(thread::spawn(move || {\n            *total.lock().unwrap() += chunk.iter().sum::<u32>();\n        }));\n    }\n\n    for handle in handles {\n        handle.join().unwrap();\n    }\n\n    let sum = *total.lock().unwrap();\n    sum\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["generics", "closures", "iterators"],
+    "text": "use std::collections::HashSet;\nuse std::hash::Hash;\n\npub fn dedup_by<T, K, F>(items: Vec<T>, key: F) -> impl Iterator<Item = T>\nwhere\n    K: Hash + Eq,\n    F: Fn(&T) -> K,\n{\n    let mut seen = HashSet::new();\n    items.into_iter().filter(move |item| seen.insert(key(item)))\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["error-handling", "iterators", "closures"],
+    "text": "use std::error::Error;\nuse std::fs;\n\npub fn load_port(path: &str) -> Result<u16, Box<dyn Error>> {\n    let raw = fs::read_to_string(path)?;\n    let line = raw\n        .lines()\n        .find(|l| l.starts_with(\"port=\"))\n        .ok_or(\"missing port key\")?;\n    let port = line.trim_start_matches(\"port=\").trim().parse::<u16>()?;\n    Ok(port)\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["match", "lifetimes", "closures"],
+    "text": "#[derive(Debug, PartialEq)]\npub enum Cmd<'a> {\n    Help,\n    Run { lang: &'a str, minutes: u32 },\n    Unknown(&'a str),\n}\n\npub fn parse(args: &[String]) -> Cmd<'_> {\n    match args {\n        [] | [_] => Cmd::Help,\n        [_, cmd, lang, rest @ ..] if cmd == \"run\" => Cmd::Run {\n            lang: lang.as_str(),\n            minutes: rest.first().and_then(|m| m.parse().ok()).unwrap_or(10),\n        },\n        [_, other, ..] => Cmd::Unknown(other.as_str()),\n    }\n}"
   }
 ]
