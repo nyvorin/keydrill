@@ -10,7 +10,6 @@
   } from "../lib/layout/reverse-index";
   import { LAYOUT } from "../lib/layout/layout-data";
   import { routeOverrides, saveRouteOverride } from "../lib/route-overrides.svelte";
-  import { navigate } from "../lib/router";
 
   const backend = getBackend();
   const LANGS = ["rotate", "js", "ts", "html", "css", "php", "rust", "go", "java", "kotlin", "sql"];
@@ -178,7 +177,10 @@
 
 <section>
   <h2>Layout</h2>
-  <button onclick={() => navigate("/wizard")}>Run the layout verification wizard</button>
+  <p>
+    Verify <code>layout.json</code> against the firmware key by key — run this after any remap.
+  </p>
+  <a data-testid="wizard-link" href="#/wizard">Open the layout verification wizard →</a>
 </section>
 
 <style>
