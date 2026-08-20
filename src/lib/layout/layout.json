@@ -1,0 +1,765 @@
+{
+  "board": "iris-class split 4x6+4",
+  "keys": [
+    {
+      "id": "L00",
+      "hand": "left",
+      "row": 0,
+      "col": 0,
+      "x": 0,
+      "y": 0.6,
+      "finger": "pinky",
+      "legends": { "base": "Esc", "lower": "~", "raise": "F12" },
+      "output": { "base": { "key": "Escape" }, "lower": { "char": "~" }, "raise": { "key": "F12" } }
+    },
+    {
+      "id": "L01",
+      "hand": "left",
+      "row": 0,
+      "col": 1,
+      "x": 1,
+      "y": 0.6,
+      "finger": "pinky",
+      "legends": { "base": "1", "lower": "!", "raise": "F1" },
+      "output": {
+        "base": { "char": "1", "shift": "!" },
+        "lower": { "char": "!" },
+        "raise": { "key": "F1" }
+      }
+    },
+    {
+      "id": "L02",
+      "hand": "left",
+      "row": 0,
+      "col": 2,
+      "x": 2,
+      "y": 0.35,
+      "finger": "ring",
+      "legends": { "base": "2", "lower": "@", "raise": "F2" },
+      "output": {
+        "base": { "char": "2", "shift": "@" },
+        "lower": { "char": "@" },
+        "raise": { "key": "F2" }
+      }
+    },
+    {
+      "id": "L03",
+      "hand": "left",
+      "row": 0,
+      "col": 3,
+      "x": 3,
+      "y": 0.1,
+      "finger": "middle",
+      "legends": { "base": "3", "lower": "#", "raise": "F3" },
+      "output": {
+        "base": { "char": "3", "shift": "#" },
+        "lower": { "char": "#" },
+        "raise": { "key": "F3" }
+      }
+    },
+    {
+      "id": "L04",
+      "hand": "left",
+      "row": 0,
+      "col": 4,
+      "x": 4,
+      "y": 0.35,
+      "finger": "index",
+      "legends": { "base": "4", "lower": "$", "raise": "F4" },
+      "output": {
+        "base": { "char": "4", "shift": "$" },
+        "lower": { "char": "$" },
+        "raise": { "key": "F4" }
+      }
+    },
+    {
+      "id": "L05",
+      "hand": "left",
+      "row": 0,
+      "col": 5,
+      "x": 5,
+      "y": 0.5,
+      "finger": "index",
+      "legends": { "base": "5", "lower": "%", "raise": "F5" },
+      "output": {
+        "base": { "char": "5", "shift": "%" },
+        "lower": { "char": "%" },
+        "raise": { "key": "F5" }
+      }
+    },
+    {
+      "id": "L10",
+      "hand": "left",
+      "row": 1,
+      "col": 0,
+      "x": 0,
+      "y": 1.6,
+      "finger": "pinky",
+      "legends": { "base": "Tab", "lower": "`", "raise": "RGB Tog" },
+      "output": {
+        "base": { "key": "Tab" },
+        "lower": { "char": "`" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "L11",
+      "hand": "left",
+      "row": 1,
+      "col": 1,
+      "x": 1,
+      "y": 1.6,
+      "finger": "pinky",
+      "legends": { "base": "Q", "raise": "!" },
+      "output": { "base": { "char": "q", "shift": "Q" }, "raise": { "char": "!" } }
+    },
+    {
+      "id": "L12",
+      "hand": "left",
+      "row": 1,
+      "col": 2,
+      "x": 2,
+      "y": 1.35,
+      "finger": "ring",
+      "legends": { "base": "W", "lower": "↑", "raise": "@" },
+      "output": {
+        "base": { "char": "w", "shift": "W" },
+        "lower": { "key": "ArrowUp" },
+        "raise": { "char": "@" }
+      }
+    },
+    {
+      "id": "L13",
+      "hand": "left",
+      "row": 1,
+      "col": 3,
+      "x": 3,
+      "y": 1.1,
+      "finger": "middle",
+      "legends": { "base": "E", "raise": "#" },
+      "output": { "base": { "char": "e", "shift": "E" }, "raise": { "char": "#" } }
+    },
+    {
+      "id": "L14",
+      "hand": "left",
+      "row": 1,
+      "col": 4,
+      "x": 4,
+      "y": 1.35,
+      "finger": "index",
+      "legends": { "base": "R", "lower": "Boot", "raise": "$" },
+      "output": {
+        "base": { "char": "r", "shift": "R" },
+        "lower": { "role": "system" },
+        "raise": { "char": "$" }
+      }
+    },
+    {
+      "id": "L15",
+      "hand": "left",
+      "row": 1,
+      "col": 5,
+      "x": 5,
+      "y": 1.5,
+      "finger": "index",
+      "legends": { "base": "T", "raise": "%" },
+      "output": { "base": { "char": "t", "shift": "T" }, "raise": { "char": "%" } }
+    },
+    {
+      "id": "L20",
+      "hand": "left",
+      "row": 2,
+      "col": 0,
+      "x": 0,
+      "y": 2.6,
+      "finger": "pinky",
+      "legends": { "base": "Ctrl", "lower": "Del", "raise": "RGB Mode" },
+      "output": {
+        "base": { "role": "modifier" },
+        "lower": { "key": "Delete" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "L21",
+      "hand": "left",
+      "row": 2,
+      "col": 1,
+      "x": 1,
+      "y": 2.6,
+      "finger": "pinky",
+      "legends": { "base": "A", "lower": "←", "raise": "Prev" },
+      "output": {
+        "base": { "char": "a", "shift": "A" },
+        "lower": { "key": "ArrowLeft" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "L22",
+      "hand": "left",
+      "row": 2,
+      "col": 2,
+      "x": 2,
+      "y": 2.35,
+      "finger": "ring",
+      "legends": { "base": "S", "lower": "↓", "raise": "Next" },
+      "output": {
+        "base": { "char": "s", "shift": "S" },
+        "lower": { "key": "ArrowDown" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "L23",
+      "hand": "left",
+      "row": 2,
+      "col": 3,
+      "x": 3,
+      "y": 2.1,
+      "finger": "middle",
+      "legends": { "base": "D", "lower": "→", "raise": "Vol+" },
+      "output": {
+        "base": { "char": "d", "shift": "D" },
+        "lower": { "key": "ArrowRight" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "L24",
+      "hand": "left",
+      "row": 2,
+      "col": 4,
+      "x": 4,
+      "y": 2.35,
+      "finger": "index",
+      "legends": { "base": "F", "raise": "PgUp" },
+      "output": { "base": { "char": "f", "shift": "F" }, "raise": { "key": "PageUp" } }
+    },
+    {
+      "id": "L25",
+      "hand": "left",
+      "row": 2,
+      "col": 5,
+      "x": 5,
+      "y": 2.5,
+      "finger": "index",
+      "legends": { "base": "G", "lower": "[" },
+      "output": { "base": { "char": "g", "shift": "G" }, "lower": { "char": "[" } }
+    },
+    {
+      "id": "L30",
+      "hand": "left",
+      "row": 3,
+      "col": 0,
+      "x": 0,
+      "y": 3.6,
+      "finger": "pinky",
+      "legends": { "base": "Shift", "lower": "RGB Mode 2", "raise": "Mute" },
+      "output": {
+        "base": { "role": "modifier" },
+        "lower": { "role": "system" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "L31",
+      "hand": "left",
+      "row": 3,
+      "col": 1,
+      "x": 1,
+      "y": 3.6,
+      "finger": "pinky",
+      "legends": { "base": "Z", "raise": "Stop" },
+      "output": { "base": { "char": "z", "shift": "Z" }, "raise": { "role": "system" } }
+    },
+    {
+      "id": "L32",
+      "hand": "left",
+      "row": 3,
+      "col": 2,
+      "x": 2,
+      "y": 3.35,
+      "finger": "ring",
+      "legends": { "base": "X", "raise": "Play" },
+      "output": { "base": { "char": "x", "shift": "X" }, "raise": { "role": "system" } }
+    },
+    {
+      "id": "L33",
+      "hand": "left",
+      "row": 3,
+      "col": 3,
+      "x": 3,
+      "y": 3.1,
+      "finger": "middle",
+      "legends": { "base": "C", "raise": "Vol-" },
+      "output": { "base": { "char": "c", "shift": "C" }, "raise": { "role": "system" } }
+    },
+    {
+      "id": "L34",
+      "hand": "left",
+      "row": 3,
+      "col": 4,
+      "x": 4,
+      "y": 3.35,
+      "finger": "index",
+      "legends": { "base": "V", "raise": "PgDn" },
+      "output": { "base": { "char": "v", "shift": "V" }, "raise": { "key": "PageDown" } }
+    },
+    {
+      "id": "L35",
+      "hand": "left",
+      "row": 3,
+      "col": 5,
+      "x": 5,
+      "y": 3.5,
+      "finger": "index",
+      "legends": { "base": "B", "lower": "{", "raise": "-" },
+      "output": {
+        "base": { "char": "b", "shift": "B" },
+        "lower": { "char": "{" },
+        "raise": { "char": "-" }
+      }
+    },
+    {
+      "id": "LT1",
+      "hand": "left",
+      "row": 4,
+      "col": 0,
+      "x": 3.5,
+      "y": 4.7,
+      "finger": "thumb",
+      "legends": { "base": "Cmd" },
+      "output": { "base": { "role": "modifier" } }
+    },
+    {
+      "id": "LT2",
+      "hand": "left",
+      "row": 4,
+      "col": 1,
+      "x": 4.5,
+      "y": 4.75,
+      "finger": "thumb",
+      "legends": { "base": "Lower" },
+      "output": { "base": { "role": "modifier" } }
+    },
+    {
+      "id": "LT3",
+      "hand": "left",
+      "row": 4,
+      "col": 2,
+      "x": 5.55,
+      "y": 4.9,
+      "rot": 15,
+      "finger": "thumb",
+      "legends": { "base": "Home", "lower": "(" },
+      "output": { "base": { "key": "Home" }, "lower": { "char": "(" } }
+    },
+    {
+      "id": "LT4",
+      "hand": "left",
+      "row": 4,
+      "col": 3,
+      "x": 6.55,
+      "y": 5.25,
+      "rot": 30,
+      "finger": "thumb",
+      "legends": { "base": "Enter", "lower": "Del" },
+      "output": { "base": { "key": "Enter" }, "lower": { "key": "Delete" } }
+    },
+    {
+      "id": "R00",
+      "hand": "right",
+      "row": 0,
+      "col": 0,
+      "x": 9,
+      "y": 0.5,
+      "finger": "index",
+      "legends": { "base": "6", "lower": "^", "raise": "F6" },
+      "output": {
+        "base": { "char": "6", "shift": "^" },
+        "lower": { "char": "^" },
+        "raise": { "key": "F6" }
+      }
+    },
+    {
+      "id": "R01",
+      "hand": "right",
+      "row": 0,
+      "col": 1,
+      "x": 10,
+      "y": 0.35,
+      "finger": "index",
+      "legends": { "base": "7", "lower": "&", "raise": "F7" },
+      "output": {
+        "base": { "char": "7", "shift": "&" },
+        "lower": { "char": "&" },
+        "raise": { "key": "F7" }
+      }
+    },
+    {
+      "id": "R02",
+      "hand": "right",
+      "row": 0,
+      "col": 2,
+      "x": 11,
+      "y": 0.1,
+      "finger": "middle",
+      "legends": { "base": "8", "lower": "*", "raise": "F8" },
+      "output": {
+        "base": { "char": "8", "shift": "*" },
+        "lower": { "char": "*" },
+        "raise": { "key": "F8" }
+      }
+    },
+    {
+      "id": "R03",
+      "hand": "right",
+      "row": 0,
+      "col": 3,
+      "x": 12,
+      "y": 0.35,
+      "finger": "ring",
+      "legends": { "base": "9", "lower": "(", "raise": "F9" },
+      "output": {
+        "base": { "char": "9", "shift": "(" },
+        "lower": { "char": "(" },
+        "raise": { "key": "F9" }
+      }
+    },
+    {
+      "id": "R04",
+      "hand": "right",
+      "row": 0,
+      "col": 4,
+      "x": 13,
+      "y": 0.6,
+      "finger": "pinky",
+      "legends": { "base": "0", "lower": ")", "raise": "F10" },
+      "output": {
+        "base": { "char": "0", "shift": ")" },
+        "lower": { "char": ")" },
+        "raise": { "key": "F10" }
+      }
+    },
+    {
+      "id": "R05",
+      "hand": "right",
+      "row": 0,
+      "col": 5,
+      "x": 14,
+      "y": 0.6,
+      "finger": "pinky",
+      "legends": { "base": "Bksp", "lower": "PgUp", "raise": "F11" },
+      "output": {
+        "base": { "key": "Backspace" },
+        "lower": { "key": "PageUp" },
+        "raise": { "key": "F11" }
+      }
+    },
+    {
+      "id": "R10",
+      "hand": "right",
+      "row": 1,
+      "col": 0,
+      "x": 9,
+      "y": 1.5,
+      "finger": "index",
+      "legends": { "base": "Y", "raise": "^" },
+      "output": { "base": { "char": "y", "shift": "Y" }, "raise": { "char": "^" } }
+    },
+    {
+      "id": "R11",
+      "hand": "right",
+      "row": 1,
+      "col": 1,
+      "x": 10,
+      "y": 1.35,
+      "finger": "index",
+      "legends": { "base": "U", "lower": "P7", "raise": "&" },
+      "output": {
+        "base": { "char": "u", "shift": "U" },
+        "lower": { "char": "7" },
+        "raise": { "char": "&" }
+      }
+    },
+    {
+      "id": "R12",
+      "hand": "right",
+      "row": 1,
+      "col": 2,
+      "x": 11,
+      "y": 1.1,
+      "finger": "middle",
+      "legends": { "base": "I", "lower": "P8", "raise": "*" },
+      "output": {
+        "base": { "char": "i", "shift": "I" },
+        "lower": { "char": "8" },
+        "raise": { "char": "*" }
+      }
+    },
+    {
+      "id": "R13",
+      "hand": "right",
+      "row": 1,
+      "col": 3,
+      "x": 12,
+      "y": 1.35,
+      "finger": "ring",
+      "legends": { "base": "O", "lower": "P9", "raise": "(" },
+      "output": {
+        "base": { "char": "o", "shift": "O" },
+        "lower": { "char": "9" },
+        "raise": { "char": "(" }
+      }
+    },
+    {
+      "id": "R14",
+      "hand": "right",
+      "row": 1,
+      "col": 4,
+      "x": 13,
+      "y": 1.6,
+      "finger": "pinky",
+      "legends": { "base": "P", "lower": "P0", "raise": ")" },
+      "output": {
+        "base": { "char": "p", "shift": "P" },
+        "lower": { "char": "0" },
+        "raise": { "char": ")" }
+      }
+    },
+    {
+      "id": "R15",
+      "hand": "right",
+      "row": 1,
+      "col": 5,
+      "x": 14,
+      "y": 1.6,
+      "finger": "pinky",
+      "legends": { "base": "Del", "lower": "PgDn", "raise": "Boot" },
+      "output": {
+        "base": { "key": "Delete" },
+        "lower": { "key": "PageDown" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "R20",
+      "hand": "right",
+      "row": 2,
+      "col": 0,
+      "x": 9,
+      "y": 2.5,
+      "finger": "index",
+      "legends": { "base": "H", "lower": "]", "raise": "=" },
+      "output": {
+        "base": { "char": "h", "shift": "H" },
+        "lower": { "char": "]" },
+        "raise": { "char": "=" }
+      }
+    },
+    {
+      "id": "R21",
+      "hand": "right",
+      "row": 2,
+      "col": 1,
+      "x": 10,
+      "y": 2.35,
+      "finger": "index",
+      "legends": { "base": "J", "lower": "P4", "raise": "Home" },
+      "output": {
+        "base": { "char": "j", "shift": "J" },
+        "lower": { "char": "4" },
+        "raise": { "key": "Home" }
+      }
+    },
+    {
+      "id": "R22",
+      "hand": "right",
+      "row": 2,
+      "col": 2,
+      "x": 11,
+      "y": 2.1,
+      "finger": "middle",
+      "legends": { "base": "K", "lower": "P5", "raise": "Hue+" },
+      "output": {
+        "base": { "char": "k", "shift": "K" },
+        "lower": { "char": "5" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "R23",
+      "hand": "right",
+      "row": 2,
+      "col": 3,
+      "x": 12,
+      "y": 2.35,
+      "finger": "ring",
+      "legends": { "base": "L", "lower": "P6", "raise": "Sat+" },
+      "output": {
+        "base": { "char": "l", "shift": "L" },
+        "lower": { "char": "6" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "R24",
+      "hand": "right",
+      "row": 2,
+      "col": 4,
+      "x": 13,
+      "y": 2.6,
+      "finger": "pinky",
+      "legends": { "base": ";", "lower": "+", "raise": "Val+" },
+      "output": {
+        "base": { "char": ";", "shift": ":" },
+        "lower": { "char": "+" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "R25",
+      "hand": "right",
+      "row": 2,
+      "col": 5,
+      "x": 14,
+      "y": 2.6,
+      "finger": "pinky",
+      "legends": { "base": "'", "lower": "|", "raise": "\\" },
+      "output": {
+        "base": { "char": "'", "shift": "\"" },
+        "lower": { "char": "|" },
+        "raise": { "char": "\\" }
+      }
+    },
+    {
+      "id": "R30",
+      "hand": "right",
+      "row": 3,
+      "col": 0,
+      "x": 9,
+      "y": 3.5,
+      "finger": "index",
+      "legends": { "base": "N", "lower": "}", "raise": "+" },
+      "output": {
+        "base": { "char": "n", "shift": "N" },
+        "lower": { "char": "}" },
+        "raise": { "char": "+" }
+      }
+    },
+    {
+      "id": "R31",
+      "hand": "right",
+      "row": 3,
+      "col": 1,
+      "x": 10,
+      "y": 3.35,
+      "finger": "index",
+      "legends": { "base": "M", "lower": "P1", "raise": "End" },
+      "output": {
+        "base": { "char": "m", "shift": "M" },
+        "lower": { "char": "1" },
+        "raise": { "key": "End" }
+      }
+    },
+    {
+      "id": "R32",
+      "hand": "right",
+      "row": 3,
+      "col": 2,
+      "x": 11,
+      "y": 3.1,
+      "finger": "middle",
+      "legends": { "base": ",", "lower": "P2", "raise": "Hue-" },
+      "output": {
+        "base": { "char": ",", "shift": "<" },
+        "lower": { "char": "2" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "R33",
+      "hand": "right",
+      "row": 3,
+      "col": 3,
+      "x": 12,
+      "y": 3.35,
+      "finger": "ring",
+      "legends": { "base": ".", "lower": "P3", "raise": "Sat-" },
+      "output": {
+        "base": { "char": ".", "shift": ">" },
+        "lower": { "char": "3" },
+        "raise": { "role": "system" }
+      }
+    },
+    {
+      "id": "R34",
+      "hand": "right",
+      "row": 3,
+      "col": 4,
+      "x": 13,
+      "y": 3.6,
+      "finger": "pinky",
+      "legends": { "base": "/", "raise": "Val-" },
+      "output": { "base": { "char": "/", "shift": "?" }, "raise": { "role": "system" } }
+    },
+    {
+      "id": "R35",
+      "hand": "right",
+      "row": 3,
+      "col": 5,
+      "x": 14,
+      "y": 3.6,
+      "finger": "pinky",
+      "legends": { "base": "Shift", "lower": "-" },
+      "output": { "base": { "role": "modifier" }, "lower": { "char": "-" } }
+    },
+    {
+      "id": "RT4",
+      "hand": "right",
+      "row": 4,
+      "col": 0,
+      "x": 8.45,
+      "y": 5.25,
+      "rot": -30,
+      "finger": "thumb",
+      "legends": { "base": "Space", "lower": ")" },
+      "output": { "base": { "char": " " }, "lower": { "char": ")" } }
+    },
+    {
+      "id": "RT3",
+      "hand": "right",
+      "row": 4,
+      "col": 1,
+      "x": 9.45,
+      "y": 4.9,
+      "rot": -15,
+      "finger": "thumb",
+      "legends": { "base": "End", "lower": "Del" },
+      "output": { "base": { "key": "End" }, "lower": { "key": "Delete" } }
+    },
+    {
+      "id": "RT2",
+      "hand": "right",
+      "row": 4,
+      "col": 2,
+      "x": 10.5,
+      "y": 4.75,
+      "finger": "thumb",
+      "legends": { "base": "Raise" },
+      "output": { "base": { "role": "modifier" } }
+    },
+    {
+      "id": "RT1",
+      "hand": "right",
+      "row": 4,
+      "col": 3,
+      "x": 11.5,
+      "y": 4.7,
+      "finger": "thumb",
+      "legends": { "base": "Alt", "lower": "P0" },
+      "output": { "base": { "role": "modifier" }, "lower": { "char": "0" } }
+    }
+  ]
+}
