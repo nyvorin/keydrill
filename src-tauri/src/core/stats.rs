@@ -152,6 +152,52 @@ pub fn aggregate_trends(rows: &[SessionRow], offset: &FixedOffset) -> Vec<TrendP
         .collect()
 }
 
+/// One timestamped keystroke, reduced to just what the latency trend needs.
+#[derive(Debug, Clone, PartialEq)]
+pub struct TimedSkillEvent {
+    pub ts_ms: i64,
+    pub skill_id: String,
+    pub latency_ms: Option<f64>,
+}
+
+/// Mirrors the TS `LatencyTrendPoint`.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LatencyTrendPoint {
+    pub date: String,
+    pub base_ms: Option<f64>,
+    pub layer_ms: Option<f64>,
+}
+
+/// Per-local-day median keystroke latency, split base vs layer (lower/raise) skills.
+pub fn aggregate_latency_trend(
+    events: &[TimedSkillEvent],
+    offset: &FixedOffset,
+) -> Vec<LatencyTrendPoint> {
+    let mut buckets: BTreeMap<String, (Vec<f64>, Vec<f64>)> = BTreeMap::new();
+    for ev in events {
+        let Some(lat) = ev.latency_ms else { continue };
+        let Some((layer, _)) = split_skill_id(&ev.skill_id) else {
+            continue;
+        };
+        let day = local_date(ev.ts_ms, offset);
+        let entry = buckets.entry(day).or_default();
+        if layer == "lower" || layer == "raise" {
+            entry.1.push(lat);
+        } else {
+            entry.0.push(lat);
+        }
+    }
+    buckets
+        .into_iter()
+        .map(|(date, (base, layer))| LatencyTrendPoint {
+            date,
+            base_ms: median(&base),
+            layer_ms: median(&layer),
+        })
+        .collect()
+}
+
 /// `"lower:R11"` -> `("lower", "R11")`. `None` for anything without a colon.
 pub fn split_skill_id(skill_id: &str) -> Option<(&str, &str)> {
     skill_id.split_once(':')
@@ -369,6 +415,43 @@ mod tests {
         let cells = aggregate_heatmap(&events, "lower");
         assert_eq!(cells.len(), 1);
         assert_eq!(cells[0].key_id, "L35");
+    }
+
+    #[test]
+    fn latency_trend_splits_and_medians_by_day() {
+        let off = chrono::FixedOffset::east_opt(0).unwrap();
+        let day1 = 1_787_000_000_000i64; // any fixed epoch ms
+        let ev = |ts: i64, skill: &str, lat: f64| TimedSkillEvent {
+            ts_ms: ts,
+            skill_id: skill.into(),
+            latency_ms: Some(lat),
+        };
+        let events = vec![
+            ev(day1, "base:L11", 100.0),
+            ev(day1, "base:L12", 200.0),
+            ev(day1, "lower:L35", 500.0),
+            ev(day1 + 86_400_000, "raise:R00", 450.0),
+        ];
+        let out = aggregate_latency_trend(&events, &off);
+        assert_eq!(out.len(), 2);
+        assert_eq!(out[0].base_ms, Some(150.0));
+        assert_eq!(out[0].layer_ms, Some(500.0));
+        assert_eq!(out[1].base_ms, None);
+        assert_eq!(out[1].layer_ms, Some(450.0));
+    }
+
+    #[test]
+    fn latency_trend_skips_events_without_a_latency_or_a_layer() {
+        let off = chrono::FixedOffset::east_opt(0).unwrap();
+        let events = vec![
+            TimedSkillEvent { ts_ms: 0, skill_id: "base:L11".into(), latency_ms: None },
+            TimedSkillEvent { ts_ms: 0, skill_id: "garbage".into(), latency_ms: Some(999.0) },
+            TimedSkillEvent { ts_ms: 0, skill_id: "base:L11".into(), latency_ms: Some(120.0) },
+        ];
+        let out = aggregate_latency_trend(&events, &off);
+        assert_eq!(out.len(), 1);
+        assert_eq!(out[0].base_ms, Some(120.0));
+        assert_eq!(out[0].layer_ms, None);
     }
 
     #[test]

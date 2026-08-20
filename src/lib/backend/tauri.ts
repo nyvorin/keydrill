@@ -4,7 +4,15 @@ import type { LangId } from "../curriculum/stages";
 import type { DrillSummary } from "../engine/metrics";
 import type { KeystrokeLog } from "../engine/typing-reducer";
 import type { LayerId } from "../layout/types";
-import type { Backend, DayState, HeatCell, SessionMeta, SessionMode, TrendPoint } from "./api";
+import type {
+  Backend,
+  DayState,
+  HeatCell,
+  LatencyTrendPoint,
+  SessionMeta,
+  SessionMode,
+  TrendPoint,
+} from "./api";
 
 export type InvokeFn = <T>(cmd: string, args?: Record<string, unknown>) => Promise<T>;
 
@@ -34,8 +42,8 @@ export function createTauriBackend(invokeFn: InvokeFn): Backend {
     getSkillStats(): Promise<SkillStat[]> {
       return invokeFn<SkillStat[]>("get_skill_stats");
     },
-    getTrends(days: number): Promise<TrendPoint[]> {
-      return invokeFn<TrendPoint[]>("get_trends", { days });
+    getTrends(days: number, mode?: SessionMode): Promise<TrendPoint[]> {
+      return invokeFn<TrendPoint[]>("get_trends", { days, mode: mode ?? null });
     },
     getHeatmap(layer: LayerId): Promise<HeatCell[]> {
       return invokeFn<HeatCell[]>("get_heatmap", { layer });
@@ -48,6 +56,12 @@ export function createTauriBackend(invokeFn: InvokeFn): Backend {
     },
     setSetting(key: string, value: string): Promise<void> {
       return invokeFn<void>("set_setting", { key, value });
+    },
+    getRecentDays(limit: number): Promise<DayState[]> {
+      return invokeFn<DayState[]>("get_recent_days", { limit });
+    },
+    getLatencyTrend(days: number): Promise<LatencyTrendPoint[]> {
+      return invokeFn<LatencyTrendPoint[]>("get_latency_trend", { days });
     },
   };
 }

@@ -104,6 +104,8 @@ pub fn run() {
             commands::end_session,
             commands::get_skill_stats,
             commands::get_trends,
+            commands::get_recent_days,
+            commands::get_latency_trend,
             commands::get_heatmap,
             commands::get_day_state,
             commands::get_setting,

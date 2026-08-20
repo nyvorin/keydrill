@@ -4,7 +4,15 @@ import type { LangId } from "../curriculum/stages";
 import type { DrillSummary } from "../engine/metrics";
 import type { KeystrokeLog } from "../engine/typing-reducer";
 import type { LayerId } from "../layout/types";
-import type { Backend, DayState, HeatCell, SessionMeta, SessionMode, TrendPoint } from "./api";
+import type {
+  Backend,
+  DayState,
+  HeatCell,
+  LatencyTrendPoint,
+  SessionMeta,
+  SessionMode,
+  TrendPoint,
+} from "./api";
 import { SESSION_COUNT_KEY } from "./api";
 
 export const MOCK_STORAGE_KEY = "keydrill.mock.v1";
@@ -97,6 +105,8 @@ interface MockState {
   days: DayState[];
   sessions: StoredSession[];
   settings: Record<string, string>;
+  /** Raw per-day keystroke latencies, split base vs layer — feeds getLatencyTrend(). */
+  latencyDaily?: Record<string, { base: number[]; layer: number[] }>;
 }
 
 function emptyState(): MockState {
@@ -124,6 +134,14 @@ function dateKey(d: Date): string {
 function shiftDate(key: string, deltaDays: number): string {
   const parts = key.split("-");
   return dateKey(new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]) + deltaDays));
+}
+
+/** Median of a sample set. `src/lib/engine/metrics.ts` keeps its own private, so this is the copy. */
+function median(values: number[]): number | null {
+  if (values.length === 0) return null;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = sorted.length >> 1;
+  return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
 }
 
 /** Browser-only Backend: aggregates in memory, mirrored into localStorage. */
@@ -164,7 +182,16 @@ export class MockBackend implements Backend {
       const progress = days > 1 ? (days - 1 - i) / (days - 1) : 1;
       const startedAt = dayStartMs(date) + 10 * 3_600_000;
       const wpm = 22 + progress * 18 + (i % 3) * 0.9;
+      // Code copy trails free drilling AND has its own rhythm — a plain constant
+      // offset would normalize to the exact same trend line, making the mode
+      // toggle invisible on the chart.
+      const codeWpm = wpm - 8 + (i % 2) * 2.5;
       const accuracy = 0.9 + progress * 0.07;
+
+      // Synthetic keystroke latencies: base fast, layer chords slow, both improving.
+      const bucket = ((this.state.latencyDaily ??= {})[date] ??= { base: [], layer: [] });
+      bucket.base = [180 + i * 2, 200 + i * 2, 190 + i * 2];
+      bucket.layer = [420 + i * 6, 460 + i * 6, 440 + i * 6];
 
       this.putSession({
         id: `seed-${date}-drill`,
@@ -184,7 +211,7 @@ export class MockBackend implements Backend {
         startedAt: startedAt + 20 * 60_000,
         endedAt: startedAt + 29 * 60_000,
         date,
-        wpm: wpm - 8, // code copy always trails free drilling
+        wpm: codeWpm,
         accuracy,
         completed: true,
       });
@@ -251,6 +278,19 @@ export class MockBackend implements Backend {
       if (prev === null) this.state.skills.push(next);
       else this.state.skills[this.state.skills.indexOf(prev)] = next;
     }
+
+    // Latency history, keyed by the same day key the session rows use.
+    const date = dateKey(this.now());
+    const daily = (this.state.latencyDaily ??= {});
+    const bucket = (daily[date] ??= { base: [], layer: [] });
+    for (const log of logs) {
+      if (log.latencyMs === null || log.skillId === null) continue;
+      if (log.skillId.startsWith("lower:") || log.skillId.startsWith("raise:")) {
+        bucket.layer.push(log.latencyMs);
+      } else {
+        bucket.base.push(log.latencyMs);
+      }
+    }
     this.persist();
   }
 
@@ -278,10 +318,11 @@ export class MockBackend implements Backend {
     return this.state.skills.map((s) => ({ ...s }));
   }
 
-  async getTrends(days: number): Promise<TrendPoint[]> {
+  async getTrends(days: number, mode?: SessionMode): Promise<TrendPoint[]> {
     const cutoff = shiftDate(dateKey(this.now()), -(days - 1));
     const byDate = new Map<string, { wpm: number; accuracy: number; n: number }>();
     for (const s of this.state.sessions) {
+      if (mode !== undefined && s.mode !== mode) continue;
       if (!s.completed || s.date < cutoff) continue;
       const agg = byDate.get(s.date) ?? { wpm: 0, accuracy: 0, n: 0 };
       agg.wpm += s.wpm;
@@ -319,6 +360,24 @@ export class MockBackend implements Backend {
     };
   }
 
+  /** The newest `limit` day rows, newest-first — what the calendar renders. */
+  async getRecentDays(limit: number): Promise<DayState[]> {
+    return [...this.state.days].sort((a, b) => b.date.localeCompare(a.date)).slice(0, limit);
+  }
+
+  /** Per-day median keystroke latency, base vs layer, ascending, most recent `days`. */
+  async getLatencyTrend(days: number): Promise<LatencyTrendPoint[]> {
+    const daily = this.state.latencyDaily ?? {};
+    return Object.keys(daily)
+      .sort()
+      .slice(-days)
+      .map((date) => ({
+        date,
+        baseMs: median(daily[date].base),
+        layerMs: median(daily[date].layer),
+      }));
+  }
+
   async getSetting(key: string): Promise<string | null> {
     return this.state.settings[key] ?? null;
   }
@@ -352,6 +411,7 @@ export class MockBackend implements Backend {
         days: parsed.days ?? [],
         sessions: parsed.sessions ?? [],
         settings: parsed.settings ?? {},
+        latencyDaily: parsed.latencyDaily ?? {},
       };
     } catch {
       return emptyState();

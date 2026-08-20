@@ -1,9 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import type { SkillStat } from "../lib/adaptive/ewma";
+  import { MIN_SAMPLES } from "../lib/adaptive/scheduler";
   import { getBackend } from "../lib/backend";
-  import type { HeatCell, TrendPoint } from "../lib/backend/api";
+  import type { DayState, HeatCell, LatencyTrendPoint, TrendPoint } from "../lib/backend/api";
   import { SESSION_COUNT_KEY } from "../lib/backend/api";
+  import Calendar from "../lib/components/Calendar.svelte";
   import {
     CHART_GEOM,
     latencySplit,
@@ -15,6 +17,9 @@
   } from "../lib/components/chart";
   import KeyboardMap from "../lib/components/KeyboardMap.svelte";
   import StatCard from "../lib/components/StatCard.svelte";
+  import { GATE_ACCURACY, GATE_LATENCY_MS } from "../lib/curriculum/stages";
+  import { LAYOUT } from "../lib/layout/layout-data";
+  import { skillVocabulary } from "../lib/layout/skills";
   import type { LayerId } from "../lib/layout/types";
 
   const backend = getBackend();
@@ -26,6 +31,32 @@
   let streak = $state(0);
   let sessionCount = $state(0);
   let loaded = $state(false);
+  let recentDays = $state<DayState[]>([]);
+  let latencyTrend = $state<LatencyTrendPoint[]>([]);
+  let trendMode = $state<"all" | "code">("all");
+
+  const MASTERY_LAYERS: LayerId[] = ["base", "lower", "raise"];
+
+  /** A day with no samples on one side carries the previous value forward so the two
+   *  series stay index-aligned; leading gaps take the first real value. */
+  function fillGaps(values: Array<number | null>): number[] {
+    const firstReal = values.find((v) => v !== null);
+    if (firstReal === undefined || firstReal === null) return [];
+    let last: number = firstReal;
+    return values.map((v) => {
+      if (v !== null) last = v;
+      return last;
+    });
+  }
+
+  const latencyBaseValues = $derived(fillGaps(latencyTrend.map((p) => p.baseMs)));
+  const latencyLayerValues = $derived(fillGaps(latencyTrend.map((p) => p.layerMs)));
+  const latencyBounds = $derived(niceBounds([...latencyBaseValues, ...latencyLayerValues], false));
+  const latencyBaseLine = $derived(toPolyline(latencyBaseValues, latencyBounds, CHART_GEOM));
+  const latencyLayerLine = $derived(toPolyline(latencyLayerValues, latencyBounds, CHART_GEOM));
+  const latencyBasePoints = $derived(toPoints(latencyBaseValues, latencyBounds, CHART_GEOM));
+  const latencyLayerPoints = $derived(toPoints(latencyLayerValues, latencyBounds, CHART_GEOM));
+  const hasLatencyCurve = $derived(latencyBaseValues.length > 0 && latencyLayerValues.length > 0);
 
   const wpmValues = $derived(trends.map((t) => t.wpm));
   const accValues = $derived(trends.map((t) => t.accuracy * 100));
@@ -53,6 +84,31 @@
     return `${(n * 100).toFixed(1)}%`;
   }
 
+  /** Mastery per layer, using exactly the rule the stage gates use. */
+  function layerProgress(layer: LayerId): { mastered: number; total: number; pct: number } {
+    const byId = new Map(skills.map((s) => [s.skillId, s]));
+    const vocab = skillVocabulary(LAYOUT).filter((s) => s.layer === layer);
+    let mastered = 0;
+    for (const skill of vocab) {
+      const stat = byId.get(skill.id);
+      if (stat === undefined) continue;
+      if (
+        stat.samples >= MIN_SAMPLES &&
+        1 - stat.ewmaError >= GATE_ACCURACY &&
+        stat.ewmaLatencyMs <= GATE_LATENCY_MS
+      ) {
+        mastered += 1;
+      }
+    }
+    const total = vocab.length;
+    return { mastered, total, pct: total === 0 ? 0 : Math.round((mastered / total) * 100) };
+  }
+
+  async function toggleTrendMode(): Promise<void> {
+    trendMode = trendMode === "code" ? "all" : "code";
+    trends = await backend.getTrends(30, trendMode === "code" ? "code" : undefined);
+  }
+
   /** Ride the end label just above the last point, clamped inside the plot frame. */
   function labelY(lastY: number): number {
     const top = CHART_GEOM.padTop + 10;
@@ -62,16 +118,20 @@
 
   onMount(() => {
     void (async () => {
-      const [t, s, day, total] = await Promise.all([
+      const [t, s, day, total, days, latency] = await Promise.all([
         backend.getTrends(30),
         backend.getSkillStats(),
         backend.getDayState(),
         backend.getSetting(SESSION_COUNT_KEY),
+        backend.getRecentDays(35),
+        backend.getLatencyTrend(30),
       ]);
       trends = t;
       skills = s;
       streak = day.streak;
       sessionCount = total === null ? 0 : Number(total);
+      recentDays = days;
+      latencyTrend = latency;
       await showLayer("base");
       loaded = true;
     })();
@@ -100,6 +160,12 @@
     />
   </div>
 
+  <section class="panel">
+    <h2>This month</h2>
+    <Calendar days={recentDays} />
+    <p class="caption">Cyan days are completed sessions; the orange outline is today.</p>
+  </section>
+
   {#if trends.length === 0}
     <p data-testid="stats-empty">
       No finished sessions yet — complete a drill to start your history.
@@ -107,6 +173,14 @@
   {:else}
     <section class="panel">
       <h2>Words per minute · last {trends.length} days</h2>
+      <button
+        class="mode-toggle"
+        class:active={trendMode === "code"}
+        data-testid="trend-mode-code"
+        onclick={() => void toggleTrendMode()}
+      >
+        {trendMode === "code" ? "Showing code sessions" : "Code sessions only"}
+      </button>
       <svg
         data-testid="wpm-trend"
         viewBox="0 0 {CHART_GEOM.width} {CHART_GEOM.height}"
@@ -222,6 +296,68 @@
       Layer chords cost {Math.round(split.layerMs - split.baseMs)} ms more per keystroke ({split.layerSamples}
       chord samples vs {split.baseSamples} base samples).
     </p>
+  </section>
+
+  <section class="panel">
+    <h2>Layer progress</h2>
+    {#each MASTERY_LAYERS as layer (layer)}
+      {@const info = layerProgress(layer)}
+      <div data-testid={`layer-progress-${layer}`} class="progress-row">
+        <span class="progress-label">{layer}</span>
+        <span class="bar-track"><span class="bar fill" style="width: {info.pct}%"></span></span>
+        <span class="bar-value">{info.mastered}/{info.total} mastered</span>
+      </div>
+    {/each}
+    <p class="caption">
+      Mastered = ≥{MIN_SAMPLES} samples, ≥{Math.round(GATE_ACCURACY * 100)}% accuracy and ≤{GATE_LATENCY_MS}
+      ms median latency — the same rule the stage gates use.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>Latency trajectory · base vs layer chords</h2>
+    {#if hasLatencyCurve}
+      <svg
+        data-testid="latency-trend"
+        viewBox="0 0 {CHART_GEOM.width} {CHART_GEOM.height}"
+        role="img"
+        aria-label="Median keystroke latency per day, base keys versus layer chords"
+      >
+        {#each yTicks(latencyBounds, 3) as tick}
+          <line
+            class="grid"
+            x1={CHART_GEOM.padLeft}
+            x2={CHART_GEOM.width - CHART_GEOM.padRight}
+            y1={yFor(tick, latencyBounds, CHART_GEOM)}
+            y2={yFor(tick, latencyBounds, CHART_GEOM)}
+          />
+          <text class="tick" x="4" y={yFor(tick, latencyBounds, CHART_GEOM) + 4}
+            >{Math.round(tick)}</text
+          >
+        {/each}
+        <polyline class="line lat-base" data-testid="latency-trend-base" points={latencyBaseLine} />
+        <polyline
+          class="line lat-layer"
+          data-testid="latency-trend-layer"
+          points={latencyLayerLine}
+        />
+        <text
+          class="value lat-base"
+          x={latencyBasePoints[latencyBasePoints.length - 1].x - 4}
+          y={latencyBasePoints[latencyBasePoints.length - 1].y - 6}
+          text-anchor="end">base</text
+        >
+        <text
+          class="value lat-layer"
+          x={latencyLayerPoints[latencyLayerPoints.length - 1].x - 4}
+          y={latencyLayerPoints[latencyLayerPoints.length - 1].y - 6}
+          text-anchor="end">layer chords</text
+        >
+      </svg>
+      <p class="caption">{latencyTrend[0].date} → {latencyTrend[latencyTrend.length - 1].date}</p>
+    {:else}
+      <p data-testid="latency-trend-empty">Not enough keystrokes yet to plot a trajectory.</p>
+    {/if}
   </section>
 
   <section class="panel">
@@ -348,6 +484,54 @@
     width: 5rem;
     text-align: right;
     font-variant-numeric: tabular-nums;
+  }
+  .mode-toggle {
+    margin-bottom: 0.6rem;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    background: #0d1117;
+    color: #8b949e;
+    cursor: pointer;
+  }
+  .mode-toggle.active {
+    border-color: #22d3ee;
+    color: #c9d1d9;
+  }
+  .progress-row {
+    display: grid;
+    grid-template-columns: 5rem 1fr 9rem;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.4rem;
+  }
+  .progress-label {
+    color: #8b949e;
+    text-transform: capitalize;
+  }
+  /* The grid column already sizes this cell — drop the flex-row's fixed width. */
+  .progress-row .bar-value {
+    width: auto;
+    text-align: left;
+    font-size: 0.8rem;
+  }
+  .bar.fill {
+    background: #22d3ee;
+  }
+  .line.lat-base,
+  .value.lat-base {
+    stroke: #22d3ee;
+    fill: #22d3ee;
+  }
+  .line.lat-layer,
+  .value.lat-layer {
+    stroke: #f59e0b;
+    fill: #f59e0b;
+  }
+  .value.lat-base,
+  .value.lat-layer {
+    stroke: none;
+    font-size: 10px;
   }
   .tabs {
     display: flex;

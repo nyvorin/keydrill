@@ -68,6 +68,8 @@ describe("createTauriBackend", () => {
       get_heatmap: [],
       get_day_state: { date: "2026-08-20", sessionCompleted: false, streak: 0 },
       get_setting: null,
+      get_recent_days: [],
+      get_latency_trend: [],
     });
     const b = createTauriBackend(invoke);
     await b.getSkillStats();
@@ -76,6 +78,9 @@ describe("createTauriBackend", () => {
     await b.getDayState();
     await b.getSetting("reminder.hour");
     await b.setSetting("reminder.hour", "9");
+    await b.getTrends(14, "code");
+    await b.getRecentDays(35);
+    await b.getLatencyTrend(30);
     expect(calls.map((c) => c.cmd)).toEqual([
       "get_skill_stats",
       "get_trends",
@@ -83,10 +88,17 @@ describe("createTauriBackend", () => {
       "get_day_state",
       "get_setting",
       "set_setting",
+      "get_trends",
+      "get_recent_days",
+      "get_latency_trend",
     ]);
-    expect(calls[1].args).toEqual({ days: 14 });
+    // An omitted mode travels as an explicit null so the Rust `Option<String>` binds.
+    expect(calls[1].args).toEqual({ days: 14, mode: null });
     expect(calls[2].args).toEqual({ layer: "lower" });
     expect(calls[4].args).toEqual({ key: "reminder.hour" });
     expect(calls[5].args).toEqual({ key: "reminder.hour", value: "9" });
+    expect(calls[6].args).toEqual({ days: 14, mode: "code" });
+    expect(calls[7].args).toEqual({ limit: 35 });
+    expect(calls[8].args).toEqual({ days: 30 });
   });
 });

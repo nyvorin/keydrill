@@ -4,7 +4,9 @@ use serde::{Deserialize, Serialize};
 use tauri::{Manager, State};
 
 use crate::core::clock::SystemClock;
-use crate::core::stats::{DrillSummary, HeatCell, KeystrokeLog, SkillStat, TrendPoint};
+use crate::core::stats::{
+    DrillSummary, HeatCell, KeystrokeLog, LatencyTrendPoint, SkillStat, TrendPoint,
+};
 use crate::store::{DayState, SessionMeta, Store, StoreError};
 
 pub type AppState = Mutex<Store>;
@@ -168,6 +170,24 @@ impl From<DayState> for DayStateDto {
     }
 }
 
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LatencyTrendPointDto {
+    pub date: String,
+    pub base_ms: Option<f64>,
+    pub layer_ms: Option<f64>,
+}
+
+impl From<LatencyTrendPoint> for LatencyTrendPointDto {
+    fn from(p: LatencyTrendPoint) -> Self {
+        LatencyTrendPointDto {
+            date: p.date,
+            base_ms: p.base_ms,
+            layer_ms: p.layer_ms,
+        }
+    }
+}
+
 // ---------- commands ----------
 
 #[tauri::command]
@@ -224,11 +244,36 @@ pub fn get_skill_stats(state: State<'_, AppState>) -> Result<Vec<SkillStatDto>, 
 }
 
 #[tauri::command]
-pub fn get_trends(state: State<'_, AppState>, days: i64) -> Result<Vec<TrendPointDto>, String> {
+pub fn get_trends(
+    state: State<'_, AppState>,
+    days: i64,
+    mode: Option<String>,
+) -> Result<Vec<TrendPointDto>, String> {
     let store = state.lock().map_err(|e| e.to_string())?;
     store
-        .get_trends(days, &SystemClock)
+        .get_trends(days, mode.as_deref(), &SystemClock)
         .map(|v| v.into_iter().map(TrendPointDto::from).collect())
+        .map_err(err_str)
+}
+
+#[tauri::command]
+pub fn get_recent_days(state: State<'_, AppState>, limit: i64) -> Result<Vec<DayStateDto>, String> {
+    let store = state.lock().map_err(|e| e.to_string())?;
+    store
+        .get_recent_days(limit)
+        .map(|v| v.into_iter().map(DayStateDto::from).collect())
+        .map_err(err_str)
+}
+
+#[tauri::command]
+pub fn get_latency_trend(
+    state: State<'_, AppState>,
+    days: i64,
+) -> Result<Vec<LatencyTrendPointDto>, String> {
+    let store = state.lock().map_err(|e| e.to_string())?;
+    store
+        .get_latency_trend(days, &SystemClock)
+        .map(|v| v.into_iter().map(LatencyTrendPointDto::from).collect())
         .map_err(err_str)
 }
 

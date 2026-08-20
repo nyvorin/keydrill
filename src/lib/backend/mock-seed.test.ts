@@ -44,3 +44,40 @@ describe("MockBackend.seed", () => {
     expect(await backend.getSetting(SESSION_COUNT_KEY)).toBe("14");
   });
 });
+
+/** Pinned clock + `storage: null` keep these cases off localStorage and off the wall clock. */
+function seeded(days: number): MockBackend {
+  const b = new MockBackend({ storage: null, now: () => new Date("2026-03-15T12:00:00") });
+  b.seed(days);
+  return b;
+}
+
+describe("seeded backend — dashboard completion", () => {
+  it("getRecentDays returns the seeded days newest-first with completion flags", async () => {
+    const b = seeded(14);
+    const days = await b.getRecentDays(14);
+    expect(days.length).toBe(14);
+    expect(days[0].date > days[13].date).toBe(true);
+    expect(days.filter((d) => d.sessionCompleted).length).toBeGreaterThanOrEqual(10);
+  });
+
+  it("getTrends filters by mode", async () => {
+    const b = seeded(14);
+    const all = await b.getTrends(30);
+    const code = await b.getTrends(30, "code");
+    expect(code.length).toBeGreaterThan(0);
+    expect(code.length).toBeLessThan(all.length + 1);
+    const allByDate = new Map(all.map((t) => [t.date, t.wpm]));
+    const differs = code.some((t) => allByDate.get(t.date) !== t.wpm);
+    expect(differs).toBe(true); // code sessions are seeded slower than drills
+  });
+
+  it("getLatencyTrend returns per-day base/layer medians with layer slower", async () => {
+    const b = seeded(14);
+    const pts = await b.getLatencyTrend(30);
+    expect(pts.length).toBeGreaterThanOrEqual(7);
+    for (const p of pts) {
+      if (p.baseMs !== null && p.layerMs !== null) expect(p.layerMs).toBeGreaterThan(p.baseMs);
+    }
+  });
+});

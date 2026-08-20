@@ -33,6 +33,13 @@ export interface DayState {
   streak: number;
 }
 
+/** Per-local-day median keystroke latency, split base vs layer (lower/raise) chords. */
+export interface LatencyTrendPoint {
+  date: string;
+  baseMs: number | null;
+  layerMs: number | null;
+}
+
 export interface Backend {
   startSession(mode: SessionMode, language: LangId | null): Promise<SessionMeta>;
   ingestKeystrokes(sessionId: string, logs: KeystrokeLog[]): Promise<void>;
@@ -42,11 +49,13 @@ export interface Backend {
     completedDailySession: boolean,
   ): Promise<void>;
   getSkillStats(): Promise<SkillStat[]>;
-  getTrends(days: number): Promise<TrendPoint[]>;
+  getTrends(days: number, mode?: SessionMode): Promise<TrendPoint[]>;
   getHeatmap(layer: LayerId): Promise<HeatCell[]>;
   getDayState(): Promise<DayState>;
   getSetting(key: string): Promise<string | null>;
   setSetting(key: string, value: string): Promise<void>;
+  getRecentDays(limit: number): Promise<DayState[]>;
+  getLatencyTrend(days: number): Promise<LatencyTrendPoint[]>;
 }
 
 /**
