@@ -1,4 +1,5 @@
 <script lang="ts">
+  import MiniMap from "../lib/components/MiniMap.svelte";
   import TypingPane from "../lib/components/TypingPane.svelte";
   import type { DrillSummary } from "../lib/engine/metrics";
   import type { KeystrokeLog } from "../lib/engine/typing-reducer";
@@ -22,9 +23,14 @@
 
   let runId = $state(0);
   let summary = $state<DrillSummary | null>(null);
+  let nextExpected = $state<string | null>(null);
 
   function handleComplete(s: DrillSummary, _logs: KeystrokeLog[]) {
     summary = s;
+  }
+
+  function handleProgress(key: string | null) {
+    nextExpected = key;
   }
 
   function restart() {
@@ -40,8 +46,10 @@
   </header>
 
   {#key runId}
-    <TypingPane text={line} lang="plain" oncomplete={handleComplete} />
+    <TypingPane text={line} lang="plain" oncomplete={handleComplete} onprogress={handleProgress} />
   {/key}
+
+  <MiniMap {nextExpected} />
 
   {#if summary}
     <div class="summary" data-testid="drill-summary">
