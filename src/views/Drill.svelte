@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { getBackend } from "../lib/backend";
+  import type { SessionMeta } from "../lib/backend/api";
   import MiniMap from "../lib/components/MiniMap.svelte";
   import TypingPane from "../lib/components/TypingPane.svelte";
   import type { DrillSummary } from "../lib/engine/metrics";
@@ -21,12 +24,29 @@
   const stage = FIXED_LINES[requested] ? requested : 3;
   const line = FIXED_LINES[stage];
 
+  const backend = getBackend();
+  let session: SessionMeta | null = null;
+
   let runId = $state(0);
   let summary = $state<DrillSummary | null>(null);
   let nextExpected = $state<string | null>(null);
 
-  function handleComplete(s: DrillSummary, _logs: KeystrokeLog[]) {
+  function startNewSession(): void {
+    session = null;
+    void backend.startSession("drill", null).then((meta) => {
+      session = meta;
+    });
+  }
+
+  onMount(() => {
+    startNewSession();
+  });
+
+  async function handleComplete(s: DrillSummary, logs: KeystrokeLog[]): Promise<void> {
     summary = s;
+    if (session === null) return;
+    await backend.ingestKeystrokes(session.id, logs);
+    await backend.endSession(session.id, s, false);
   }
 
   function handleProgress(key: string | null) {
@@ -36,6 +56,8 @@
   function restart() {
     summary = null;
     runId += 1;
+    // The previous session is already ended; a re-run is a new session.
+    startNewSession();
   }
 </script>
 
