@@ -1,0 +1,129 @@
+[
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["intervals"],
+    "text": "select id, email from users where created_at >= now() - interval '7 days';"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["upsert"],
+    "text": "insert into tags (name) values ('rust') on conflict (name) do nothing;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["upsert", "returning"],
+    "text": "update carts set total = total + 4.50 where id = $1 returning total;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["jsonb"],
+    "text": "select payload ->> 'email' as email from events where kind = 'signup';"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["aggregates"],
+    "text": "select count(*) filter (where status = 'paid') as paid from orders;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["joins"],
+    "text": "select u.name, o.total from users u join orders o on o.user_id = u.id;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["window-functions"],
+    "text": "select rank() over (partition by team_id order by score desc) from picks;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["cte"],
+    "text": "with recent as (select * from logs limit 50) select count(*) from recent;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["indexes"],
+    "text": "create index concurrently idx_orders_user on orders (user_id, created_at);"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["functions"],
+    "text": "select coalesce(nullif(nickname, ''), name) as display from members;"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["intervals"],
+    "text": "delete from sessions where expires_at < now() - interval '30 days';"
+  },
+  {
+    "lang": "sql",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["jsonb"],
+    "text": "select jsonb_build_object('id', id, 'tags', tags) from posts limit 10;"
+  },
+
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["ordering"],
+    "text": "select\n    id,\n    email,\n    created_at\nfrom users\nwhere active = true\norder by created_at desc\nlimit 20;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["joins", "aggregates"],
+    "text": "select u.id, u.email, count(o.id) as orders\nfrom users u\nleft join orders o on o.user_id = u.id\ngroup by u.id, u.email\nhaving count(o.id) > 0\norder by orders desc;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["cte", "joins", "intervals"],
+    "text": "with recent_orders as (\n    select user_id, sum(total) as spend\n    from orders\n    where created_at >= now() - interval '30 days'\n    group by user_id\n)\nselect u.email, r.spend\nfrom recent_orders r\njoin users u on u.id = r.user_id\nwhere r.spend > 100\norder by r.spend desc;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["upsert", "returning"],
+    "text": "insert into daily_stats (day, user_id, minutes)\nvalues (current_date, $1, $2)\non conflict (day, user_id)\ndo update set minutes = daily_stats.minutes + excluded.minutes\nreturning day, minutes;"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["window-functions", "intervals"],
+    "text": "select\n    user_id,\n    day,\n    wpm,\n    avg(wpm) over (\n        partition by user_id order by day\n        rows between 6 preceding and current row\n    ) as wpm_7d,\n    rank() over (partition by day order by wpm desc) as day_rank\nfrom daily_stats\nwhere day >= current_date - interval '90 days';"
+  },
+  {
+    "lang": "sql",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["jsonb"],
+    "text": "select\n    e.id,\n    e.payload ->> 'skill_id' as skill_id,\n    (e.payload -> 'latency' ->> 'ms')::int as latency_ms\nfrom events e\nwhere e.payload @> '{\"kind\": \"keystroke\"}'::jsonb\n  and (e.payload ->> 'correct')::boolean is false\norder by latency_ms desc\nlimit 50;"
+  }
+]

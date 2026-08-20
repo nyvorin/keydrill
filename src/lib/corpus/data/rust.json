@@ -1,0 +1,136 @@
+[
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["closures", "option"],
+    "text": "let name = user.map(|u| u.name).unwrap_or_default();"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["iterators", "closures"],
+    "text": "let evens: Vec<i32> = (1..=20).filter(|n| n % 2 == 0).collect();"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["match"],
+    "text": "match cmd { Cmd::Up => y -= 1, Cmd::Down => y += 1, _ => {} }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["error-handling"],
+    "text": "let raw = std::fs::read_to_string(&path).map_err(Error::Io)?;"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["lifetimes", "generics"],
+    "text": "pub fn head<'a>(xs: &'a [&'a str]) -> Option<&'a str> { xs.first().copied() }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["iterators", "closures"],
+    "text": "let total: i64 = rows.iter().map(|r| r.amount).sum();"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["generics", "collections"],
+    "text": "let mut counts: HashMap<&str, usize> = HashMap::new();"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["collections"],
+    "text": "*counts.entry(word).or_insert(0) += 1;"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["match", "error-handling"],
+    "text": "let Some(user) = store.get(&id) else { return Err(Error::Missing) };"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["error-handling", "match"],
+    "text": "if let Err(e) = run(&args) { eprintln!(\"fatal: {e}\"); }"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["closures", "concurrency"],
+    "text": "let handle = std::thread::spawn(move || worker.run().unwrap());"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["iterators", "closures", "generics"],
+    "text": "let names: Vec<String> = users.iter().map(|u| u.name.clone()).collect();"
+  },
+  {
+    "lang": "rust",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["structs", "derive"],
+    "text": "#[derive(Debug, Clone, PartialEq)] pub struct Point { x: f64, y: f64 }"
+  },
+
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["iterators", "collections"],
+    "text": "fn main() {\n    let nums = vec![3, 1, 4, 1, 5];\n    let max = nums.iter().max().unwrap_or(&0);\n    println!(\"max = {max}\");\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["structs", "derive"],
+    "text": "#[derive(Debug, Clone)]\npub struct Point {\n    pub x: f64,\n    pub y: f64,\n}\n\nimpl Point {\n    pub fn dist(&self, other: &Point) -> f64 {\n        ((self.x - other.x).powi(2) + (self.y - other.y).powi(2)).sqrt()\n    }\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["match", "enums"],
+    "text": "#[derive(Debug)]\nenum Shape {\n    Circle { r: f64 },\n    Rect { w: f64, h: f64 },\n}\n\nfn area(s: &Shape) -> f64 {\n    match s {\n        Shape::Circle { r } => std::f64::consts::PI * r * r,\n        Shape::Rect { w, h } => w * h,\n    }\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["error-handling", "iterators", "closures"],
+    "text": "use std::fs;\nuse std::io;\n\nfn load_lines(path: &str) -> io::Result<Vec<String>> {\n    let raw = fs::read_to_string(path)?;\n    let lines = raw\n        .lines()\n        .map(|l| l.trim().to_owned())\n        .filter(|l| !l.is_empty())\n        .collect();\n    Ok(lines)\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["generics", "lifetimes", "closures"],
+    "text": "use std::collections::HashMap;\n\npub fn group_by<'a, T, K, F>(items: &'a [T], key: F) -> HashMap<K, Vec<&'a T>>\nwhere\n    K: std::hash::Hash + Eq,\n    F: Fn(&T) -> K,\n{\n    let mut out: HashMap<K, Vec<&'a T>> = HashMap::new();\n    for item in items {\n        out.entry(key(item)).or_default().push(item);\n    }\n    out\n}"
+  },
+  {
+    "lang": "rust",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["error-handling", "match", "lifetimes"],
+    "text": "use std::fmt;\n\n#[derive(Debug)]\npub enum ConfigError {\n    Missing(&'static str),\n    Parse(std::num::ParseIntError),\n}\n\nimpl fmt::Display for ConfigError {\n    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {\n        match self {\n            ConfigError::Missing(k) => write!(f, \"missing key: {k}\"),\n            ConfigError::Parse(e) => write!(f, \"bad number: {e}\"),\n        }\n    }\n}\n\nimpl From<std::num::ParseIntError> for ConfigError {\n    fn from(e: std::num::ParseIntError) -> Self {\n        ConfigError::Parse(e)\n    }\n}"
+  }
+]
