@@ -1,1 +1,332 @@
-[]
+[
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["attributes", "semantic"],
+    "text": "<button type=\"submit\" aria-label=\"Save\" class=\"btn\">Save</button>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["forms", "attributes"],
+    "text": "<input id=\"email\" name=\"email\" type=\"email\" required autocomplete=\"on\">"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["attributes", "links"],
+    "text": "<a href=\"/docs\" rel=\"noopener noreferrer\" target=\"_blank\">Docs</a>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["attributes", "media"],
+    "text": "<img src=\"/hero.avif\" alt=\"Split keyboard\" width=\"960\" height=\"540\">"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["attributes", "head"],
+    "text": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["forms", "attributes"],
+    "text": "<label for=\"wpm\" class=\"field-label\">Words per minute</label>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["tables", "attributes"],
+    "text": "<th scope=\"col\" abbr=\"WPM\" class=\"num\">Words per minute</th>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["tables", "attributes"],
+    "text": "<td colspan=\"2\" rowspan=\"1\" class=\"num\">1,204</td>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["forms", "attributes"],
+    "text": "<select id=\"lang\" name=\"lang\" required><option>rust</option></select>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["forms"],
+    "text": "<option value=\"sql\" selected>SQL (Postgres flavor)</option>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["forms", "attributes"],
+    "text": "<textarea name=\"notes\" rows=\"4\" cols=\"40\" maxlength=\"500\"></textarea>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["forms", "attributes"],
+    "text": "<input type=\"checkbox\" name=\"strict\" checked aria-describedby=\"hint\">"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["semantic", "attributes"],
+    "text": "<details open><summary>Layer map</summary><p>Lower</p></details>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["semantic", "media"],
+    "text": "<figure><img src=\"/map.svg\" alt=\"Board\"><figcaption>Base</figcaption></figure>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["semantic", "attributes"],
+    "text": "<section id=\"stats\" aria-labelledby=\"stats-title\" class=\"panel\">"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["semantic", "attributes"],
+    "text": "<nav aria-label=\"Primary\"><ul><li><a href=\"/\">Home</a></li></ul></nav>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["attributes", "data-attributes"],
+    "text": "<div data-testid=\"typing-pane\" data-lang=\"rust\" data-difficulty=\"hard\">"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["head", "attributes"],
+    "text": "<link rel=\"preload\" href=\"/fonts/mono.woff2\" as=\"font\" crossorigin>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["head", "attributes"],
+    "text": "<script type=\"module\" src=\"/src/main.ts\" defer></script>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["forms", "attributes"],
+    "text": "<progress id=\"drill\" value=\"72\" max=\"100\">72%</progress>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["semantic", "attributes"],
+    "text": "<time datetime=\"2026-08-17T09:30:00Z\">17 Aug 2026</time>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["forms", "attributes"],
+    "text": "<input type=\"range\" min=\"0\" max=\"120\" step=\"5\" value=\"60\" name=\"wpm\">"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["forms", "semantic"],
+    "text": "<fieldset><legend>Difficulty</legend><input type=\"radio\"></fieldset>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["tables", "semantic"],
+    "text": "<table><caption>Daily WPM</caption><tbody><tr><td>62</td></tr></tbody></table>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["media", "attributes"],
+    "text": "<picture><source srcset=\"/k.avif\" type=\"image/avif\"><img src=\"/k.png\"></picture>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["forms", "semantic"],
+    "text": "<dialog id=\"snooze\" aria-modal=\"true\"><form method=\"dialog\"></form></dialog>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["tables", "templates"],
+    "text": "<template id=\"row\"><tr><td class=\"cell\"></td></tr></template>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["semantic", "attributes"],
+    "text": "<ol reversed start=\"3\"><li value=\"9\">Lower layer chords</li></ol>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["semantic", "attributes"],
+    "text": "<main id=\"content\" tabindex=\"-1\"><h1 class=\"title\">keydrill</h1></main>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["attributes", "forms"],
+    "text": "<button popovertarget=\"menu\" aria-expanded=\"false\">Menu</button>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["forms", "attributes"],
+    "text": "<input list=\"langs\" name=\"lang\"><datalist id=\"langs\"></datalist>"
+  },
+  {
+    "lang": "html",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["media", "attributes"],
+    "text": "<video controls muted playsinline poster=\"/thumb.jpg\" preload=\"none\"></video>"
+  },
+
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["forms", "semantic", "attributes"],
+    "text": "<form action=\"/signup\" method=\"post\">\n  <label for=\"email\">Email</label>\n  <input id=\"email\" name=\"email\" type=\"email\" required />\n  <button type=\"submit\">Sign up</button>\n</form>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["semantic", "attributes"],
+    "text": "<nav aria-label=\"Primary\">\n  <ul class=\"nav-list\">\n    <li><a href=\"/\" aria-current=\"page\">Drills</a></li>\n    <li><a href=\"/reference\">Reference</a></li>\n    <li><a href=\"/stats\">Stats</a></li>\n  </ul>\n</nav>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["tables", "attributes"],
+    "text": "<table class=\"stats\">\n  <thead>\n    <tr>\n      <th scope=\"col\">Day</th>\n      <th scope=\"col\">WPM</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Mon</td>\n      <td class=\"num\">62</td>\n    </tr>\n  </tbody>\n</table>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["semantic", "media"],
+    "text": "<figure class=\"board\">\n  <img src=\"/img/iris.avif\" alt=\"Iris split keyboard\" width=\"800\" height=\"300\" />\n  <figcaption>Base layer, 4&times;6 columns per hand</figcaption>\n</figure>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["semantic", "attributes"],
+    "text": "<details class=\"layer\" open>\n  <summary>Lower layer legends</summary>\n  <p>Brackets, braces and the numpad live here.</p>\n</details>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["forms", "attributes"],
+    "text": "<form id=\"settings\" method=\"post\" autocomplete=\"off\">\n  <fieldset>\n    <legend>Difficulty</legend>\n    <label><input type=\"radio\" name=\"level\" value=\"easy\" checked /> Easy</label>\n    <label><input type=\"radio\" name=\"level\" value=\"medium\" /> Medium</label>\n    <label><input type=\"radio\" name=\"level\" value=\"hard\" /> Hard</label>\n  </fieldset>\n  <button type=\"submit\" class=\"btn btn--primary\">Save</button>\n</form>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["forms", "semantic"],
+    "text": "<label for=\"lang\">Language</label>\n<select id=\"lang\" name=\"lang\" required>\n  <optgroup label=\"Web\">\n    <option value=\"js\">JavaScript</option>\n    <option value=\"ts\" selected>TypeScript</option>\n  </optgroup>\n  <optgroup label=\"Systems\">\n    <option value=\"rust\">Rust</option>\n    <option value=\"go\">Go</option>\n  </optgroup>\n</select>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["semantic", "attributes"],
+    "text": "<article class=\"card\" aria-labelledby=\"drill-title\">\n  <header>\n    <h2 id=\"drill-title\">Lower-layer symbols</h2>\n    <time datetime=\"2026-08-17\">17 Aug 2026</time>\n  </header>\n  <p>Hold <kbd>Lower</kbd> then tap <kbd>[</kbd> to emit a bracket.</p>\n  <footer><a href=\"/drills/lower\">Start drill &rarr;</a></footer>\n</article>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["head", "attributes"],
+    "text": "<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n  <title>keydrill &mdash; layer trainer</title>\n  <link rel=\"icon\" href=\"/favicon.ico\" sizes=\"any\" />\n  <link rel=\"stylesheet\" href=\"/src/app.css\" />\n  <script type=\"module\" src=\"/src/main.ts\"></script>\n</head>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["media", "attributes"],
+    "text": "<picture>\n  <source srcset=\"/img/board.avif\" type=\"image/avif\" media=\"(min-width: 40rem)\" />\n  <source srcset=\"/img/board.webp\" type=\"image/webp\" />\n  <img src=\"/img/board.png\" alt=\"Layer map\" loading=\"lazy\" decoding=\"async\" />\n</picture>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["tables", "semantic", "attributes"],
+    "text": "<table class=\"stats\">\n  <caption>Layer-chord latency, last 7 days</caption>\n  <colgroup><col class=\"col-day\" /></colgroup>\n  <thead>\n    <tr>\n      <th scope=\"col\">Day</th>\n      <th scope=\"col\" abbr=\"Base\">Base ms</th>\n      <th scope=\"col\" abbr=\"Lower\">Lower ms</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th scope=\"row\">Mon</th>\n      <td>184</td>\n      <td>412</td>\n    </tr>\n  </tbody>\n  <tfoot>\n    <tr>\n      <th scope=\"row\">Median</th>\n      <td colspan=\"2\">298</td>\n    </tr>\n  </tfoot>\n</table>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["forms", "attributes", "semantic"],
+    "text": "<dialog id=\"snooze\" aria-labelledby=\"snooze-title\">\n  <form method=\"dialog\" class=\"snooze-form\">\n    <h2 id=\"snooze-title\">Remind me later</h2>\n    <menu>\n      <button value=\"30m\" autofocus>30 min</button>\n      <button value=\"1h\">1 hour</button>\n      <button value=\"6h\">6 hours</button>\n    </menu>\n  </form>\n</dialog>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["templates", "tables", "data-attributes"],
+    "text": "<template id=\"row-template\">\n  <tr data-role=\"stat-row\">\n    <th scope=\"row\" data-field=\"day\"></th>\n    <td data-field=\"wpm\" class=\"num\"></td>\n    <td data-field=\"accuracy\" class=\"num\"></td>\n  </tr>\n</template>\n\n<table id=\"stats\" data-source=\"/api/stats\">\n  <tbody data-testid=\"stat-body\"></tbody>\n</table>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["forms", "attributes"],
+    "text": "<form novalidate>\n  <label for=\"target\">Target WPM</label>\n  <input\n    id=\"target\"\n    name=\"target\"\n    type=\"number\"\n    min=\"20\"\n    max=\"140\"\n    step=\"5\"\n    value=\"60\"\n    inputmode=\"numeric\"\n    aria-describedby=\"target-hint\"\n  />\n  <p id=\"target-hint\">Between 20 and 140 words per minute.</p>\n  <output name=\"result\" for=\"target\">60</output>\n</form>"
+  },
+  {
+    "lang": "html",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["semantic", "attributes"],
+    "text": "<body class=\"app\">\n  <a class=\"skip-link\" href=\"#content\">Skip to content</a>\n  <header role=\"banner\">\n    <h1>keydrill</h1>\n  </header>\n  <main id=\"content\" tabindex=\"-1\">\n    <section aria-live=\"polite\" data-testid=\"typing-pane\"></section>\n  </main>\n  <aside aria-label=\"Mini map\" hidden></aside>\n  <footer role=\"contentinfo\">\n    <small>&copy; 2026 keydrill</small>\n  </footer>\n</body>"
+  }
+]

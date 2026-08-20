@@ -1,1 +1,332 @@
-[]
+[
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["variables"],
+    "text": ":root { --bg: #0d1117; --fg: #c9d1d9; --accent: #22d3ee; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["grid"],
+    "text": ".grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["flexbox"],
+    "text": ".row { display: flex; align-items: center; justify-content: space-between; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["functions", "typography"],
+    "text": ".title { font-size: clamp(1.25rem, 2vw + 1rem, 2.5rem); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["media-queries"],
+    "text": "@media (prefers-color-scheme: dark) { body { background: #0d1117; } }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["pseudo-selectors", "variables"],
+    "text": ".btn:hover, .btn:focus-visible { outline: 2px solid var(--accent); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["pseudo-selectors", "functions"],
+    "text": "li:nth-child(2n + 1) { background: color-mix(in srgb, var(--fg) 8%, #0000); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["pseudo-selectors", "layout"],
+    "text": ".card::after { content: \"\"; inset: 0; position: absolute; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["layout"],
+    "text": ".sidebar { position: sticky; top: 0; max-block-size: 100dvh; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["variables", "functions"],
+    "text": ".main { inline-size: calc(100% - var(--gutter, 1.5rem) * 2); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["media-queries", "container-queries"],
+    "text": "@supports (container-type: inline-size) { .pane { container-type: inline-size; } }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["container-queries", "flexbox"],
+    "text": "@container (min-width: 30rem) { .card { flex-direction: row; } }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["transitions"],
+    "text": ".fade { transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["grid"],
+    "text": ".grid { grid-template-areas: \"head head\" \"side main\"; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["pseudo-selectors", "attribute-selectors"],
+    "text": "input[type=\"checkbox\"]:checked + label { text-decoration: line-through; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["variables", "layout"],
+    "text": ".stack > * + * { margin-block-start: var(--space, 0.75rem); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["media-queries"],
+    "text": "@media (max-width: 40rem) { .nav-list { display: none; } }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["grid"],
+    "text": ".pane { display: grid; place-items: center; gap: 0.5rem 1rem; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["pseudo-selectors"],
+    "text": ":is(h1, h2, h3):not(:first-child) { margin-block-start: 1.5em; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["pseudo-selectors", "variables"],
+    "text": ".badge::before { content: \"\\2022\"; color: var(--accent); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["flexbox", "functions"],
+    "text": ".col { flex: 1 1 clamp(12rem, 25%, 20rem); min-inline-size: 0; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["theming"],
+    "text": "html { color-scheme: light dark; scrollbar-gutter: stable both-edges; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["attribute-selectors", "variables"],
+    "text": ".key[data-layer=\"lower\"] { fill: var(--accent); opacity: 0.85; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["animations"],
+    "text": "@keyframes pulse { from { opacity: 1; } to { opacity: 0.35; } }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["media"],
+    "text": ".map { aspect-ratio: 16 / 9; object-fit: contain; inline-size: 100%; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["media-queries", "grid"],
+    "text": "@media (min-width: 64rem) and (orientation: landscape) { .grid { gap: 2rem; } }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["pseudo-selectors"],
+    "text": ".btn:disabled { cursor: not-allowed; filter: grayscale(1); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["pseudo-selectors"],
+    "text": ".list:empty::after { content: \"no drills yet\"; opacity: 0.6; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["pseudo-selectors", "typography"],
+    "text": ":where(.prose) a:hover { text-decoration-thickness: 0.125em; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["grid"],
+    "text": ".grid { grid-template-rows: auto 1fr auto; grid-auto-flow: dense; }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["variables", "shadows"],
+    "text": ".tip { --shadow: 0 1px 2px rgb(0 0 0 / 0.4); box-shadow: var(--shadow); }"
+  },
+  {
+    "lang": "css",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["pseudo-selectors", "functions"],
+    "text": ".pane:focus-within { border-color: color-mix(in oklab, var(--accent) 60%, white); }"
+  },
+
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["variables", "theming"],
+    "text": ":root {\n  --bg: #0d1117;\n  --fg: #c9d1d9;\n  --accent: #22d3ee;\n  --radius: 0.5rem;\n  --space: 0.75rem;\n}\n\nbody {\n  background: var(--bg);\n  color: var(--fg);\n  font-family: ui-monospace, SFMono-Regular, monospace;\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["flexbox"],
+    "text": ".toolbar {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: var(--space);\n  padding-inline: 1rem;\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["grid"],
+    "text": ".cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));\n  gap: 1rem;\n  align-items: start;\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["pseudo-selectors"],
+    "text": ".btn {\n  border: 1px solid transparent;\n  border-radius: var(--radius);\n  padding: 0.5rem 0.9rem;\n}\n\n.btn:focus-visible {\n  outline: 2px solid var(--accent);\n  outline-offset: 2px;\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["media-queries"],
+    "text": "@media (prefers-reduced-motion: reduce) {\n  *,\n  *::before,\n  *::after {\n    animation-duration: 0.01ms !important;\n    transition-duration: 0.01ms !important;\n  }\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["media-queries", "flexbox", "pseudo-selectors"],
+    "text": ".card {\n  display: flex;\n  gap: 0.75rem;\n  padding: 1rem 1.25rem;\n}\n\n.card:hover > .title::after {\n  content: \" →\";\n}\n\n@media (max-width: 40rem) {\n  .card {\n    flex-direction: column;\n  }\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["grid"],
+    "text": ".layout {\n  display: grid;\n  grid-template-areas:\n    \"head head\"\n    \"side main\"\n    \"foot foot\";\n  grid-template-columns: minmax(12rem, 20rem) 1fr;\n  grid-template-rows: auto 1fr auto;\n  min-block-size: 100dvh;\n}\n\n.layout > header {\n  grid-area: head;\n}\n\n.layout > aside {\n  grid-area: side;\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["variables", "media-queries", "theming"],
+    "text": ":root {\n  --bg: #ffffff;\n  --fg: #1f2328;\n}\n\n@media (prefers-color-scheme: dark) {\n  :root {\n    --bg: #0d1117;\n    --fg: #c9d1d9;\n  }\n}\n\n.pane {\n  background: var(--bg);\n  color: var(--fg);\n  transition: background 150ms ease-in-out;\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["pseudo-selectors", "attribute-selectors"],
+    "text": ".key {\n  fill: #21262d;\n  stroke: #30363d;\n}\n\n.key[data-layer=\"lower\"]:not([data-role=\"modifier\"]) {\n  fill: color-mix(in srgb, var(--accent) 25%, #21262d);\n}\n\n.key[data-next=\"true\"]::after {\n  content: \"\";\n  animation: pulse 900ms ease-in-out infinite alternate;\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["animations", "transitions"],
+    "text": "@keyframes pulse {\n  from {\n    opacity: 1;\n    transform: scale(1);\n  }\n  to {\n    opacity: 0.35;\n    transform: scale(1.04);\n  }\n}\n\n.hint {\n  animation: pulse 800ms cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["container-queries", "grid", "flexbox"],
+    "text": ".pane {\n  container: pane / inline-size;\n}\n\n.drill {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: var(--space);\n}\n\n@container pane (min-width: 48rem) {\n  .drill {\n    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);\n  }\n\n  .drill > .meta {\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n  }\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["pseudo-selectors", "variables"],
+    "text": ".char {\n  --state: var(--fg);\n  color: var(--state);\n}\n\n.char[data-state=\"correct\"] {\n  --state: #3fb950;\n}\n\n.char[data-state=\"wrong\"] {\n  --state: #f85149;\n  text-decoration: underline wavy currentColor;\n}\n\n.char:nth-child(2n + 1):hover::before {\n  content: attr(data-key);\n  position: absolute;\n  translate: 0 -1.4em;\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["media-queries", "grid", "functions"],
+    "text": ".sheet {\n  --gutter: clamp(1rem, 4vw, 3rem);\n  display: grid;\n  grid-template-columns:\n    [full-start] var(--gutter)\n    [content-start] minmax(0, 64rem)\n    [content-end] var(--gutter)\n    [full-end];\n}\n\n.sheet > * {\n  grid-column: content;\n}\n\n@media print {\n  .sheet {\n    --gutter: 0;\n    color: #000;\n  }\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["flexbox", "pseudo-selectors", "transitions"],
+    "text": ".tabs {\n  display: flex;\n  gap: 0.25rem;\n  border-block-end: 1px solid #30363d;\n}\n\n.tabs > button {\n  position: relative;\n  padding: 0.5rem 1rem;\n  transition: color 150ms ease;\n}\n\n.tabs > button[aria-selected=\"true\"]::after {\n  content: \"\";\n  position: absolute;\n  inset-inline: 0;\n  inset-block-end: -1px;\n  block-size: 2px;\n  background: var(--accent);\n}"
+  },
+  {
+    "lang": "css",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["variables", "media-queries", "layout"],
+    "text": "@supports (position: sticky) {\n  .minimap {\n    position: sticky;\n    inset-block-start: var(--space);\n    max-block-size: calc(100dvh - var(--space) * 2);\n    overflow: auto;\n    scrollbar-width: thin;\n  }\n}\n\n@media (max-width: 60rem) {\n  .minimap {\n    position: static;\n    max-block-size: none;\n  }\n}"
+  }
+]

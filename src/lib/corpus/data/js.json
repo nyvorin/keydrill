@@ -1,1 +1,332 @@
-[]
+[
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["destructuring", "template-literals"],
+    "text": "const { id, name = 'anon' } = user; console.log(`user:${id}`);"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["async-await", "optional-chaining"],
+    "text": "const data = await res.json(); return data?.items?.[0] ?? null;"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["iterators", "closures"],
+    "text": "const total = items.map((i) => i.price * i.qty).reduce((a, b) => a + b, 0);"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["destructuring", "iterators"],
+    "text": "const [first, ...rest] = queue.filter(Boolean).sort();"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["spread", "objects"],
+    "text": "const merged = { ...defaults, ...opts, id: crypto.randomUUID() };"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["destructuring", "iterators"],
+    "text": "for (const [key, value] of Object.entries(config)) apply(key, value);"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["collections", "closures"],
+    "text": "const byId = new Map(users.map((u) => [u.id, u]));"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["regex", "closures"],
+    "text": "export const slugify = (s) => s.trim().toLowerCase().replace(/\\s+/g, '-');"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["async-await", "destructuring"],
+    "text": "const [me, orders] = await Promise.all([fetchUser(id), fetchOrders(id)]);"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["dom", "closures"],
+    "text": "el.addEventListener('click', (e) => e.preventDefault(), { once: true });"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["template-literals"],
+    "text": "const label = count === 1 ? '1 item' : `${count} items in cart`;"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["collections", "closures"],
+    "text": "const seen = new Set(); rows.forEach((r) => seen.add(r.email));"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["optional-chaining"],
+    "text": "const src = data?.user?.profile?.avatar ?? '/img/default.png';"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["operators", "optional-chaining"],
+    "text": "opts.retries ??= 3; opts.debug ||= false; opts.tag &&= tag.trim();"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["spread", "closures"],
+    "text": "const uniq = (xs) => [...new Set(xs)].sort((a, b) => a - b);"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["dom", "closures"],
+    "text": "document.querySelectorAll('[data-id]').forEach((el) => el.remove());"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["destructuring", "async-await"],
+    "text": "const { data: rows = [], error } = await db.from('users').select('*');"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["error-handling"],
+    "text": "try { JSON.parse(raw); } catch { return { ok: false, err: 'bad json' }; }"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["closures", "timers"],
+    "text": "const bounce = () => clearTimeout(t) || (t = setTimeout(run, 200));"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["iterators", "closures"],
+    "text": "console.table(rows.filter((r) => r.score > 90).slice(0, 10));"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["modules", "destructuring"],
+    "text": "export default function useTimer({ delay = 1000 } = {}) { return delay; }"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["template-literals"],
+    "text": "const line = `${user.name} <${user.email}> joined ${days} days ago`;"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["spread", "closures"],
+    "text": "const sorted = [...items].sort((a, b) => b.createdAt - a.createdAt);"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["error-handling"],
+    "text": "if (!Array.isArray(input)) throw new TypeError('expected an array');"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["closures"],
+    "text": "const counter = (() => { let n = 0; return () => (n += 1); })();"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["destructuring", "urls"],
+    "text": "const { pathname, searchParams } = new URL(req.url, 'http://x.dev');"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["async-await", "json"],
+    "text": "await fetch('/api/v1/stats', { method: 'POST', body: JSON.stringify(p) });"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["iterators", "optional-chaining"],
+    "text": "const flat = groups.flatMap((g) => g.items ?? []).filter((i) => i.ok);"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["classes"],
+    "text": "class Store { #state = new Map(); get size() { return this.#state.size; } }"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generators", "template-literals"],
+    "text": "function* ids() { let n = 0; while (true) yield `id-${(n += 1)}`; }"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["dates", "template-literals"],
+    "text": "const stamp = `${d.getFullYear()}-${`${d.getMonth() + 1}`.padStart(2, '0')}`;"
+  },
+  {
+    "lang": "js",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["objects", "iterators"],
+    "text": "const totals = Object.fromEntries(pairs.map(([k, v]) => [k, v * 2]));"
+  },
+
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["iterators", "closures"],
+    "text": "export function topScores(rows, limit = 5) {\n  return rows\n    .filter((r) => r.score > 0)\n    .sort((a, b) => b.score - a.score)\n    .slice(0, limit)\n    .map((r) => r.name);\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["destructuring", "template-literals"],
+    "text": "export function greet({ name = 'anon', locale = 'en-US' } = {}) {\n  const hour = new Date().getHours();\n  const part = hour < 12 ? 'morning' : 'evening';\n  return `Good ${part}, ${name} (${locale})`;\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["dom", "closures"],
+    "text": "const form = document.querySelector('#signup');\n\nform.addEventListener('submit', (event) => {\n  event.preventDefault();\n  const data = new FormData(form);\n  console.log(Object.fromEntries(data.entries()));\n});"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["async-await", "optional-chaining"],
+    "text": "export async function getUser(id) {\n  const res = await fetch(`/api/users/${id}`);\n  if (!res.ok) throw new Error(`http ${res.status}`);\n  const body = await res.json();\n  return body?.data ?? null;\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["classes", "collections"],
+    "text": "export class Counter {\n  #counts = new Map();\n\n  add(key) {\n    this.#counts.set(key, (this.#counts.get(key) ?? 0) + 1);\n    return this;\n  }\n\n  get top() {\n    return [...this.#counts].sort((a, b) => b[1] - a[1])[0];\n  }\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["closures", "async-await"],
+    "text": "export async function retry(fn, attempts = 3, delayMs = 250) {\n  for (let i = 0; i < attempts; i += 1) {\n    try {\n      return await fn();\n    } catch (err) {\n      if (i === attempts - 1) throw err;\n      await new Promise((resolve) => setTimeout(resolve, delayMs * 2 ** i));\n    }\n  }\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["closures", "timers"],
+    "text": "export function debounce(fn, wait = 200) {\n  let timer = null;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), wait);\n  };\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["iterators", "closures"],
+    "text": "export function groupBy(items, keyFn) {\n  return items.reduce((acc, item) => {\n    const key = keyFn(item);\n    (acc[key] ??= []).push(item);\n    return acc;\n  }, {});\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["async-await", "error-handling"],
+    "text": "export async function settleAll(urls) {\n  const results = await Promise.allSettled(urls.map((u) => fetch(u)));\n  return results.map((r, i) =>\n    r.status === 'fulfilled'\n      ? { url: urls[i], status: r.value.status }\n      : { url: urls[i], error: String(r.reason) },\n  );\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["classes", "closures"],
+    "text": "export class Emitter {\n  #handlers = new Map();\n\n  on(event, fn) {\n    const list = this.#handlers.get(event) ?? [];\n    this.#handlers.set(event, [...list, fn]);\n    return () => this.off(event, fn);\n  }\n\n  off(event, fn) {\n    const list = this.#handlers.get(event) ?? [];\n    this.#handlers.set(\n      event,\n      list.filter((h) => h !== fn),\n    );\n  }\n\n  emit(event, payload) {\n    for (const fn of this.#handlers.get(event) ?? []) fn(payload);\n  }\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["generators", "async-await"],
+    "text": "export async function* paginate(url, pageSize = 50) {\n  let cursor = null;\n  do {\n    const qs = new URLSearchParams({ limit: pageSize, ...(cursor && { cursor }) });\n    const res = await fetch(`${url}?${qs}`);\n    const { items, next } = await res.json();\n    yield* items;\n    cursor = next ?? null;\n  } while (cursor);\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["closures", "collections"],
+    "text": "export function memoize(fn, keyFn = (...args) => JSON.stringify(args)) {\n  const cache = new Map();\n  return (...args) => {\n    const key = keyFn(...args);\n    if (cache.has(key)) return cache.get(key);\n    const value = fn(...args);\n    cache.set(key, value);\n    return value;\n  };\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["classes", "collections"],
+    "text": "export class LruCache {\n  #map = new Map();\n\n  constructor(limit = 128) {\n    this.limit = limit;\n  }\n\n  get(key) {\n    if (!this.#map.has(key)) return undefined;\n    const value = this.#map.get(key);\n    this.#map.delete(key);\n    this.#map.set(key, value);\n    return value;\n  }\n\n  set(key, value) {\n    this.#map.delete(key);\n    this.#map.set(key, value);\n    if (this.#map.size > this.limit) {\n      this.#map.delete(this.#map.keys().next().value);\n    }\n  }\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["spread", "objects"],
+    "text": "const isPlain = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);\n\nexport function deepMerge(base, patch) {\n  return Object.entries(patch).reduce(\n    (acc, [key, value]) => ({\n      ...acc,\n      [key]: isPlain(value) && isPlain(acc[key]) ? deepMerge(acc[key], value) : value,\n    }),\n    { ...base },\n  );\n}"
+  },
+  {
+    "lang": "js",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["async-await", "closures"],
+    "text": "export async function mapLimit(items, limit, worker) {\n  const out = new Array(items.length);\n  let cursor = 0;\n\n  const runners = Array.from({ length: Math.min(limit, items.length) }, async () => {\n    while (cursor < items.length) {\n      const index = cursor;\n      cursor += 1;\n      out[index] = await worker(items[index], index);\n    }\n  });\n\n  await Promise.all(runners);\n  return out;\n}"
+  }
+]

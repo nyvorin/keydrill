@@ -1,1 +1,332 @@
-[]
+[
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["null-coalescing", "arrays"],
+    "text": "$name = $user['name'] ?? 'anonymous'; $count = count($user);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["closures", "arrays"],
+    "text": "$totals = array_map(fn($o) => $o->total * 1.08, $orders);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["closures", "arrays"],
+    "text": "$active = array_filter($users, fn(User $u) => $u->isActive());"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["closures", "arrays"],
+    "text": "$sum = array_reduce($lines, fn($carry, $l) => $carry + $l->qty, 0);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["arrays"],
+    "text": "$config = [...$defaults, ...$overrides, 'env' => 'production'];"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["match"],
+    "text": "$grade = match (true) { $n > 90 => 'A', $n > 80 => 'B', default => 'C' };"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["null-coalescing", "classes"],
+    "text": "$city = $order?->address?->city ?? 'unknown city';"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["null-coalescing", "arrays"],
+    "text": "$cache['ttl'] ??= 3600; $cache['tags'][] = 'users';"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["arrays", "strings"],
+    "text": "foreach ($rows as $key => $row) { echo \"{$key}: {$row['id']}\\n\"; }"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["classes"],
+    "text": "public function __construct(private readonly PDO $db) {}"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["classes", "traits"],
+    "text": "final class Repo implements RepositoryInterface { use Loggable; }"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["pdo", "classes"],
+    "text": "$stmt = $pdo->prepare('select * from users where id = :id limit 1');"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["arrays", "named-arguments"],
+    "text": "[$first, $second] = array_slice($queue, 0, 2, preserve_keys: false);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["arrays"],
+    "text": "$byId = array_column($users, null, 'id'); ksort($byId);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["closures", "arrays"],
+    "text": "usort($orders, fn($a, $b) => $b->total <=> $a->total);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["enums", "classes"],
+    "text": "enum Status: string { case Paid = 'paid'; case Due = 'due'; }"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["json", "error-handling"],
+    "text": "$json = json_encode($payload, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["error-handling", "strings"],
+    "text": "throw new InvalidArgumentException(\"unknown lang: {$lang}\");"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["arrays", "named-arguments"],
+    "text": "$keys = array_keys($map, search_value: 'rust', strict: true);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["arrays"],
+    "text": "$out = array_combine($ids, array_fill(0, count($ids), null));"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["classes", "static"],
+    "text": "public static function fromArray(array $row): static { return new static(); }"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["closures"],
+    "text": "$fn = function (int $n) use (&$total): int { return $total += $n; };"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["regex", "strings"],
+    "text": "$slug = preg_replace('/[^a-z0-9]+/i', '-', strtolower($title));"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["classes", "interfaces"],
+    "text": "interface Repository { public function find(string $id): ?Entity; }"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["arrays", "null-coalescing"],
+    "text": "$total = array_sum(array_column($lines, 'amount')) ?: 0.0;"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["error-handling", "pdo"],
+    "text": "try { $db->commit(); } catch (PDOException $e) { $db->rollBack(); }"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["dates", "classes"],
+    "text": "$cutoff = new DateTimeImmutable('-7 days', new DateTimeZone('UTC'));"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["match", "closures"],
+    "text": "echo match ($cmd) { 'up' => run(), 'down' => stop(), default => help() };"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["classes"],
+    "text": "abstract class Job { abstract public function handle(): void; }"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["arrays"],
+    "text": "$grouped[$row['lang']][] = trim($row['text']); sort($grouped);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["closures", "arrays"],
+    "text": "$names = array_map(static fn(array $r): string => $r['name'], $rows);"
+  },
+  {
+    "lang": "php",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["classes"],
+    "text": "readonly class Money { public function __construct(public int $cents) {} }"
+  },
+
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["arrays", "closures"],
+    "text": "<?php\n\nfunction activeEmails(array $users): array\n{\n    $active = array_filter($users, fn(array $u) => $u['active'] ?? false);\n\n    return array_values(array_column($active, 'email'));\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["classes", "null-coalescing"],
+    "text": "<?php\n\nfinal class Config\n{\n    public function __construct(private readonly array $values = []) {}\n\n    public function get(string $key, mixed $default = null): mixed\n    {\n        return $this->values[$key] ?? $default;\n    }\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["match", "enums"],
+    "text": "<?php\n\nenum Status: string\n{\n    case Paid = 'paid';\n    case Due = 'due';\n    case Void = 'void';\n\n    public function color(): string\n    {\n        return match ($this) {\n            self::Paid => 'green',\n            self::Due => 'amber',\n            self::Void => 'slate',\n        };\n    }\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["arrays"],
+    "text": "<?php\n\n$totals = [];\n\nforeach ($orders as $order) {\n    $key = $order['currency'] ?? 'USD';\n    $totals[$key] = ($totals[$key] ?? 0) + $order['amount'];\n}\n\narsort($totals);"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["error-handling", "json"],
+    "text": "<?php\n\nfunction decode(string $raw): array\n{\n    try {\n        return json_decode($raw, true, 512, JSON_THROW_ON_ERROR);\n    } catch (JsonException $e) {\n        throw new RuntimeException(\"bad payload: {$e->getMessage()}\", previous: $e);\n    }\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["classes", "match", "null-coalescing"],
+    "text": "<?php\n\nfinal class Invoice\n{\n    public function __construct(\n        private readonly string $id,\n        private readonly array $lines = [],\n    ) {}\n\n    public function label(string $status): string\n    {\n        return match ($status) {\n            'paid' => \"Invoice {$this->id}: paid\",\n            'due' => \"Invoice {$this->id}: due\",\n            default => \"Invoice {$this->id}: unknown\",\n        };\n    }\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["arrays", "closures"],
+    "text": "<?php\n\nfunction groupBy(array $rows, callable $key): array\n{\n    return array_reduce($rows, function (array $carry, array $row) use ($key): array {\n        $carry[$key($row)][] = $row;\n\n        return $carry;\n    }, []);\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["pdo", "classes"],
+    "text": "<?php\n\nfinal class UserRepo\n{\n    public function __construct(private readonly PDO $db) {}\n\n    public function find(string $id): ?array\n    {\n        $stmt = $this->db->prepare('select id, email from users where id = :id');\n        $stmt->execute(['id' => $id]);\n\n        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;\n    }\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["closures", "arrays"],
+    "text": "<?php\n\n$rate = 1.08;\n\n$withTax = array_map(\n    fn(array $line): array => [...$line, 'gross' => round($line['net'] * $rate, 2)],\n    $lines,\n);\n\nusort($withTax, fn(array $a, array $b) => $b['gross'] <=> $a['gross']);"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["classes", "interfaces"],
+    "text": "<?php\n\ninterface Handler\n{\n    public function handle(Request $request): Response;\n}\n\nfinal class JsonHandler implements Handler\n{\n    public function handle(Request $request): Response\n    {\n        $payload = $request->body() ?? [];\n\n        return new Response(200, json_encode($payload, JSON_THROW_ON_ERROR));\n    }\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["closures", "classes"],
+    "text": "<?php\n\nfinal class Pipeline\n{\n    /** @var list<callable(mixed): mixed> */\n    private array $stages = [];\n\n    public function pipe(callable $stage): static\n    {\n        $clone = clone $this;\n        $clone->stages[] = $stage;\n\n        return $clone;\n    }\n\n    public function process(mixed $payload): mixed\n    {\n        return array_reduce(\n            $this->stages,\n            static fn(mixed $carry, callable $stage): mixed => $stage($carry),\n            $payload,\n        );\n    }\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["match", "error-handling"],
+    "text": "<?php\n\nfunction route(string $method, string $path): Response\n{\n    return match (true) {\n        $method === 'GET' && $path === '/health' => Response::ok(['ok' => true]),\n        $method === 'POST' && str_starts_with($path, '/drills') => createDrill(),\n        $method === 'GET' && preg_match('#^/users/(\\\\d+)$#', $path, $m) === 1\n            => showUser((int) $m[1]),\n        default => throw new RouteNotFound(\"{$method} {$path}\"),\n    };\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["classes", "generators"],
+    "text": "<?php\n\nfinal class CsvReader implements IteratorAggregate\n{\n    public function __construct(private readonly string $path) {}\n\n    public function getIterator(): Generator\n    {\n        $handle = fopen($this->path, 'rb');\n        $header = fgetcsv($handle);\n\n        try {\n            while (($row = fgetcsv($handle)) !== false) {\n                yield array_combine($header, $row);\n            }\n        } finally {\n            fclose($handle);\n        }\n    }\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["classes", "null-coalescing", "arrays"],
+    "text": "<?php\n\nreadonly class Money\n{\n    public function __construct(\n        public int $cents,\n        public string $currency = 'USD',\n    ) {}\n\n    public static function fromArray(array $row): self\n    {\n        return new self(\n            cents: (int) ($row['cents'] ?? 0),\n            currency: $row['currency'] ?? 'USD',\n        );\n    }\n\n    public function plus(self $other): self\n    {\n        return $this->currency === $other->currency\n            ? new self($this->cents + $other->cents, $this->currency)\n            : throw new DomainException('currency mismatch');\n    }\n}"
+  },
+  {
+    "lang": "php",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["pdo", "error-handling", "closures"],
+    "text": "<?php\n\nfunction transact(PDO $db, callable $work): mixed\n{\n    $db->beginTransaction();\n\n    try {\n        $result = $work($db);\n        $db->commit();\n\n        return $result;\n    } catch (Throwable $e) {\n        $db->rollBack();\n\n        throw new RuntimeException('transaction failed', previous: $e);\n    }\n}"
+  }
+]

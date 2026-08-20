@@ -1,1 +1,332 @@
-[]
+[
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["interfaces", "generics"],
+    "text": "interface Repo<T> { get(id: string): Promise<T | null>; }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["type-guards", "unions"],
+    "text": "const isErr = (r: Res): r is Err => r.kind === 'err';"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["interfaces", "async"],
+    "text": "type Handler = (req: Request, res: Response) => Promise<void>;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["keyof", "typeof"],
+    "text": "export type LangKey = keyof typeof SHIKI_LANG;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["generics", "readonly"],
+    "text": "function head<T>(xs: readonly T[]): T | undefined { return xs[0]; }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["satisfies", "interfaces"],
+    "text": "const cfg = { port: 8080, host: 'localhost' } satisfies ServerConfig;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["mapped-types", "generics"],
+    "text": "type Optional<T> = { [K in keyof T]?: T[K] | undefined };"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["generics", "collections"],
+    "text": "let cache: Record<string, ReadonlyArray<Entry>> = Object.create(null);"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["unions", "generics"],
+    "text": "export type Result<T> = { ok: true; value: T } | { ok: false; err: Error };"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["type-guards", "generics"],
+    "text": "const present = <T,>(v: T | null | undefined): v is T => v != null;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["unions", "exhaustiveness"],
+    "text": "function assertNever(x: never): never { throw new Error(String(x)); }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["branded-types", "unions"],
+    "text": "type UserId = string & { readonly __brand: unique symbol };"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["const-assertions"],
+    "text": "export const DIFFICULTIES = ['easy', 'medium', 'hard'] as const;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["unions", "typeof"],
+    "text": "type Difficulty = (typeof DIFFICULTIES)[number];"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["generics", "dom"],
+    "text": "const els = document.querySelectorAll<HTMLInputElement>('input[name]');"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["generics", "async"],
+    "text": "async function load<T>(url: string): Promise<T> { return get<T>(url); }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["interfaces"],
+    "text": "interface Props { items: Item[]; onPick?: (item: Item) => void; }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["mapped-types", "template-literal-types"],
+    "text": "type Getters<T> = { [K in keyof T as `get${string & K}`]: () => T[K] };"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics", "keyof"],
+    "text": "declare function pick<T, K extends keyof T>(o: T, ...ks: K[]): Pick<T, K>;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["generics", "casts"],
+    "text": "const rows = raw as unknown as Array<Record<string, string | number>>;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["unions", "generics"],
+    "text": "export type Maybe<T> = T | null | undefined;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["mapped-types", "conditional-types"],
+    "text": "type Deep<T> = T extends object ? { [K in keyof T]: Deep<T[K]> } : T;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics", "interfaces", "classes"],
+    "text": "class Store<T extends { id: string }> implements Repo<T> { size = 0; }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["enums", "unions"],
+    "text": "enum Layer { Base = 'base', Lower = 'lower', Raise = 'raise' }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "easy",
+    "tags": ["type-guards"],
+    "text": "const isString = (v: unknown): v is string => typeof v === 'string';"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["modules", "declarations"],
+    "text": "declare module '*.json' { const value: unknown; export default value; }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["conditional-types", "infer"],
+    "text": "type Unwrap<T> = T extends Promise<infer U> ? Unwrap<U> : T;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["generics", "tuples"],
+    "text": "const pair: readonly [LangId, number] = ['ts', tally.length] as const;"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["generics", "collections"],
+    "text": "const skills: Map<LangId, Set<string>> = new Map([['ts', new Set()]]);"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["unions", "exhaustiveness"],
+    "text": "switch (e.kind) { case 'idiom': return 1; default: return assertNever(e); }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "medium",
+    "tags": ["interfaces", "declaration-merging"],
+    "text": "declare global { interface Window { keydrill?: { version: string } } }"
+  },
+  {
+    "lang": "ts",
+    "kind": "idiom",
+    "difficulty": "hard",
+    "tags": ["generics", "keyof", "casts"],
+    "text": "const pairs = Object.entries(obj) as [keyof T, T[keyof T]][];"
+  },
+
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["interfaces", "generics"],
+    "text": "export interface Entry {\n  id: string;\n  lang: LangId;\n  tags: readonly string[];\n}\n\nexport function byLang(entries: Entry[], lang: LangId): Entry[] {\n  return entries.filter((e) => e.lang === lang);\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["unions", "type-guards"],
+    "text": "export type Shape =\n  | { kind: 'circle'; r: number }\n  | { kind: 'rect'; w: number; h: number };\n\nexport const isCircle = (s: Shape): s is Extract<Shape, { kind: 'circle' }> =>\n  s.kind === 'circle';"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["generics", "collections"],
+    "text": "export function indexBy<T, K extends keyof T>(items: T[], key: K): Map<T[K], T> {\n  const out = new Map<T[K], T>();\n  for (const item of items) {\n    out.set(item[key], item);\n  }\n  return out;\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["interfaces", "const-assertions"],
+    "text": "export const STAGES = ['base', 'shift', 'lower', 'raise'] as const;\n\nexport type Stage = (typeof STAGES)[number];\n\nexport interface Progress {\n  stage: Stage;\n  accuracy: number;\n  medianLatencyMs: number;\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "easy",
+    "tags": ["generics", "async"],
+    "text": "export async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {\n  const res = await fetch(url, init);\n  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);\n  return (await res.json()) as T;\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["unions", "exhaustiveness"],
+    "text": "type Event =\n  | { type: 'keystroke'; char: string; latencyMs: number }\n  | { type: 'backspace' }\n  | { type: 'done'; wpm: number };\n\nexport function reduce(state: State, event: Event): State {\n  switch (event.type) {\n    case 'keystroke':\n      return { ...state, typed: state.typed + event.char };\n    case 'backspace':\n      return { ...state, typed: state.typed.slice(0, -1) };\n    case 'done':\n      return { ...state, wpm: event.wpm, finished: true };\n  }\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["generics", "type-guards"],
+    "text": "export function partition<T, U extends T>(\n  items: readonly T[],\n  guard: (item: T) => item is U,\n): [U[], Exclude<T, U>[]] {\n  const hits: U[] = [];\n  const rest: Exclude<T, U>[] = [];\n  for (const item of items) {\n    if (guard(item)) hits.push(item);\n    else rest.push(item as Exclude<T, U>);\n  }\n  return [hits, rest];\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["interfaces", "generics", "classes"],
+    "text": "export interface Repository<T extends { id: string }> {\n  get(id: string): Promise<T | null>;\n  save(item: T): Promise<void>;\n}\n\nexport class MemoryRepo<T extends { id: string }> implements Repository<T> {\n  private readonly rows = new Map<string, T>();\n\n  async get(id: string): Promise<T | null> {\n    return this.rows.get(id) ?? null;\n  }\n\n  async save(item: T): Promise<void> {\n    this.rows.set(item.id, item);\n  }\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["mapped-types", "keyof"],
+    "text": "export type Nullable<T> = { [K in keyof T]: T[K] | null };\n\nexport function blank<T extends object>(shape: T): Nullable<T> {\n  const out = {} as Nullable<T>;\n  for (const key of Object.keys(shape) as (keyof T)[]) {\n    out[key] = null;\n  }\n  return out;\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "medium",
+    "tags": ["generics", "async", "error-handling"],
+    "text": "export async function tryCatch<T>(\n  fn: () => Promise<T>,\n): Promise<{ ok: true; value: T } | { ok: false; error: Error }> {\n  try {\n    return { ok: true, value: await fn() };\n  } catch (cause) {\n    return { ok: false, error: cause instanceof Error ? cause : new Error(String(cause)) };\n  }\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["mapped-types", "generics", "unions"],
+    "text": "type Result<T, E = Error> =\n  | { ok: true; value: T }\n  | { ok: false; error: E };\n\ntype Getters<T> = {\n  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];\n};\n\nexport function ok<T>(value: T): Result<T> {\n  return { ok: true, value };\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["conditional-types", "infer", "generics"],
+    "text": "type Paths<T> = T extends object\n  ? {\n      [K in keyof T & string]: T[K] extends object ? `${K}.${Paths<T[K]>}` | K : K;\n    }[keyof T & string]\n  : never;\n\nexport function getIn<T extends object>(obj: T, path: Paths<T>): unknown {\n  return path.split('.').reduce<unknown>((acc, key) => (acc as never)?.[key], obj);\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["type-guards", "unions", "generics"],
+    "text": "type Schema<T> = { [K in keyof T]: (v: unknown) => v is T[K] };\n\nexport function validate<T extends object>(\n  raw: Record<string, unknown>,\n  schema: Schema<T>,\n): { value: T; problems: string[] } {\n  const problems: string[] = [];\n  for (const key of Object.keys(schema) as (keyof T & string)[]) {\n    if (!schema[key](raw[key])) problems.push(`bad field: ${key}`);\n  }\n  return { value: raw as T, problems };\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["generics", "closures", "collections"],
+    "text": "export function createStore<S, A extends { type: string }>(\n  reducer: (state: S, action: A) => S,\n  initial: S,\n) {\n  let state = initial;\n  const listeners = new Set<(s: S) => void>();\n\n  return {\n    getState: (): Readonly<S> => state,\n    dispatch(action: A): void {\n      state = reducer(state, action);\n      listeners.forEach((fn) => fn(state));\n    },\n    subscribe(fn: (s: S) => void): () => void {\n      listeners.add(fn);\n      return () => void listeners.delete(fn);\n    },\n  };\n}"
+  },
+  {
+    "lang": "ts",
+    "kind": "snippet",
+    "difficulty": "hard",
+    "tags": ["unions", "template-literal-types", "mapped-types"],
+    "text": "type EventMap = {\n  keystroke: { char: string; correct: boolean };\n  drillDone: { wpm: number };\n};\n\ntype Listeners = {\n  [K in keyof EventMap as `on${Capitalize<K>}`]?: (payload: EventMap[K]) => void;\n};\n\nexport function dispatch<K extends keyof EventMap>(\n  listeners: Listeners,\n  key: K,\n  payload: EventMap[K],\n): void {\n  const name = `on${key[0]!.toUpperCase()}${key.slice(1)}` as keyof Listeners;\n  (listeners[name] as ((p: EventMap[K]) => void) | undefined)?.(payload);\n}"
+  }
+]
