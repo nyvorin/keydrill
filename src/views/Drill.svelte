@@ -1,117 +1,137 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { generateDrillLine, mulberry32 } from "../lib/adaptive/generator";
+  import { pickWeakSkills } from "../lib/adaptive/scheduler";
   import { getBackend } from "../lib/backend";
   import type { SessionMeta } from "../lib/backend/api";
   import MiniMap from "../lib/components/MiniMap.svelte";
   import TypingPane from "../lib/components/TypingPane.svelte";
+  import { SHIKI_LANG, loadCorpus, type CorpusEntry } from "../lib/corpus";
   import type { DrillSummary } from "../lib/engine/metrics";
   import type { KeystrokeLog } from "../lib/engine/typing-reducer";
+  import { LAYOUT } from "../lib/layout/layout-data";
+  import { skillVocabulary } from "../lib/layout/skills";
   import { currentRoute } from "../lib/router";
 
-  // Placeholder content until Task 11 swaps in the adaptive generator.
+  type Lang = CorpusEntry["lang"];
+
+  const LANGS: Lang[] = ["js", "ts", "html", "css", "php", "rust", "go", "java", "kotlin", "sql"];
+
+  /** Last-resort lines: used only if the corpus has no idioms for the chosen language. */
   const FIXED_LINES: Record<number, string> = {
-    1: "the quick brown fox jumps over a lazy dog and it runs",
-    2: "Ada & Bob paid $45 for 7 apples (12% off) at Market!",
-    3: "x = { a: [1], b: (2 + 3) };",
-    4: "sum = 7 + 8 + 9 - 4 * 5 / 6 + 1 + 2 + 3 + 0;",
-    5: "nav home end pageup pagedown left right up down",
-    6: "const xs = items.map((n) => n * 2);",
-    7: "let name = user.map(|u| u.name).unwrap_or_default();",
+    1: "the quick brown fox jumps over a lazy dog today",
+    2: "A1 B2 C3 $ % ^ & * ( ) ! @ # totals were fine",
+    3: "x = { a: [1], b: (2 + 3) }; y = [x] | z;",
+    4: "7 + 8 = 15; 40 / 4 = 10; 91 - 6 = 85; 3 * 3",
+    5: "nav drill: use the arrow keys, Home and End",
+    6: "const xs = items.map((n) => n * 2).filter(Boolean);",
   };
 
-  const route = currentRoute();
-  const requested = Number(route.query.get("stage"));
-  const stage = FIXED_LINES[requested] ? requested : 3;
-  const line = FIXED_LINES[stage];
-
   const backend = getBackend();
+  const route = currentRoute();
+  const stage = Number(route.query.get("stage") ?? "3");
+
+  let seed = Date.now();
   let session: SessionMeta | null = null;
 
-  let runId = $state(0);
+  let line = $state<string>("");
   let summary = $state<DrillSummary | null>(null);
-  let nextExpected = $state<string | null>(null);
+  let nextChar = $state<string | null>(null);
+  let codeLang = $state<Lang>("rust");
 
-  function startNewSession(): void {
-    session = null;
-    void backend.startSession("drill", null).then((meta) => {
-      session = meta;
-    });
+  async function buildLine(): Promise<string> {
+    if (stage >= 6) {
+      const idioms = loadCorpus().idioms(codeLang);
+      if (idioms.length === 0) return FIXED_LINES[6];
+      const rng = mulberry32(seed);
+      return idioms[Math.floor(rng() * idioms.length) % idioms.length].text;
+    }
+    const stats = await backend.getSkillStats();
+    const weak = pickWeakSkills(stats, skillVocabulary(LAYOUT), 6);
+    return generateDrillLine(weak, LAYOUT, mulberry32(seed));
   }
 
-  onMount(() => {
-    startNewSession();
+  async function reload(): Promise<void> {
+    seed += 1;
+    summary = null;
+    nextChar = null;
+    line = await buildLine();
+  }
+
+  onMount(async () => {
+    session = await backend.startSession(
+      stage >= 6 ? "code" : "drill",
+      stage >= 6 ? codeLang : null,
+    );
+    line = await buildLine();
   });
 
   async function handleComplete(s: DrillSummary, logs: KeystrokeLog[]): Promise<void> {
     summary = s;
-    if (session === null) return;
+    if (!session) return;
     await backend.ingestKeystrokes(session.id, logs);
     await backend.endSession(session.id, s, false);
   }
-
-  function handleProgress(key: string | null) {
-    nextExpected = key;
-  }
-
-  function restart() {
-    summary = null;
-    runId += 1;
-    // The previous session is already ended; a re-run is a new session.
-    startNewSession();
-  }
 </script>
 
-<section class="drill">
-  <header>
-    <h1>Drill</h1>
-    <p class="stage-label" data-testid="stage-label">Stage {stage}</p>
-  </header>
+<h1>Drill — stage {stage}</h1>
 
-  {#key runId}
-    <TypingPane text={line} lang="plain" oncomplete={handleComplete} onprogress={handleProgress} />
+{#if stage >= 6}
+  <label class="lang">
+    Language
+    <select data-testid="drill-lang" bind:value={codeLang} onchange={reload}>
+      {#each LANGS as l (l)}
+        <option value={l}>{l}</option>
+      {/each}
+    </select>
+  </label>
+{/if}
+
+<MiniMap nextExpected={nextChar} />
+
+{#if line}
+  {#key line}
+    <TypingPane
+      text={line}
+      lang={stage >= 6 ? SHIKI_LANG[codeLang] : "plain"}
+      strictWhitespace={false}
+      oncomplete={handleComplete}
+      onprogress={(c) => (nextChar = c)}
+    />
   {/key}
+{:else}
+  <p class="loading">Generating a drill…</p>
+{/if}
 
-  <MiniMap {nextExpected} />
-
-  {#if summary}
-    <div class="summary" data-testid="drill-summary">
-      <span data-testid="summary-wpm">{summary.wpm.toFixed(1)} WPM</span>
-      <span data-testid="summary-accuracy">{(summary.accuracy * 100).toFixed(1)}% accuracy</span>
-      <span data-testid="summary-errors">{summary.errors} errors</span>
-      <button type="button" onclick={restart}>Run it again</button>
-    </div>
-  {/if}
-</section>
+{#if summary}
+  <div class="summary" data-testid="drill-summary">
+    <span><strong>{summary.wpm.toFixed(1)}</strong> WPM</span>
+    <span><strong>{(summary.accuracy * 100).toFixed(1)}%</strong> accuracy</span>
+    <span>{summary.errors} errors</span>
+    <button onclick={reload}>Next line</button>
+  </div>
+{/if}
 
 <style>
-  .drill {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 960px;
+  .lang {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
   }
-  .stage-label {
-    color: #8b949e;
-    margin: 4px 0 0;
+  .loading {
+    opacity: 0.6;
   }
   .summary {
     display: flex;
+    gap: 1.5rem;
     align-items: center;
-    gap: 16px;
-    padding: 12px 16px;
+    margin-top: 1.25rem;
+    padding: 0.75rem 1rem;
     border: 1px solid #30363d;
     border-radius: 8px;
-    background: #161b22;
-    font-variant-numeric: tabular-nums;
   }
-  .summary button {
-    margin-left: auto;
-    background: #22d3ee;
-    color: #0d1117;
-    border: 0;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-weight: 600;
-    cursor: pointer;
+  .summary strong {
+    color: #22d3ee;
   }
 </style>
