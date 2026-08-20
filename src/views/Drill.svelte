@@ -7,10 +7,12 @@
   import MiniMap from "../lib/components/MiniMap.svelte";
   import TypingPane from "../lib/components/TypingPane.svelte";
   import { SHIKI_LANG, loadCorpus, type CorpusEntry } from "../lib/corpus";
+  import { STAGES, stageSkills } from "../lib/curriculum/stages";
   import type { DrillSummary } from "../lib/engine/metrics";
   import type { KeystrokeLog } from "../lib/engine/typing-reducer";
   import { LAYOUT } from "../lib/layout/layout-data";
   import { skillVocabulary } from "../lib/layout/skills";
+  import type { LayerId } from "../lib/layout/types";
   import { currentRoute } from "../lib/router";
 
   type Lang = CorpusEntry["lang"];
@@ -27,6 +29,20 @@
     6: "const xs = items.map((n) => n * 2).filter(Boolean);",
   };
 
+  const LAYER_IDS: LayerId[] = ["base", "lower", "raise"];
+
+  /** The named keys a navigation drill may ask for (spec §5, stage 5). */
+  const NAV_KEY_NAMES = new Set([
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "Home",
+    "End",
+    "PageUp",
+    "PageDown",
+  ]);
+
   const backend = getBackend();
   const route = currentRoute();
   const stage = Number(route.query.get("stage") ?? "3");
@@ -39,7 +55,41 @@
   let nextChar = $state<string | null>(null);
   let codeLang = $state<Lang>("rust");
 
+  const isNavStage = STAGES[stage - 1]?.drillKind === "nav";
+
+  let navKeys = $state<string[] | null>(null);
+
+  /** 12 named keys drawn from stage 5's own skills, deterministically shuffled by `seed`. */
+  function buildNavKeys(): string[] {
+    const wanted = new Set(stageSkills(5, LAYOUT));
+    const pool: string[] = [];
+    for (const key of LAYOUT.keys) {
+      for (const layer of LAYER_IDS) {
+        const name = key.output[layer]?.key;
+        if (name === undefined || !NAV_KEY_NAMES.has(name)) continue;
+        if (!wanted.has(`${layer}:${key.id}`)) continue;
+        if (!pool.includes(name)) pool.push(name);
+      }
+    }
+    if (pool.length === 0) return [];
+    const out: string[] = [];
+    while (out.length < 12) out.push(...pool);
+    out.length = 12;
+    const rng = mulberry32(seed);
+    for (let i = out.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      const swap = out[i];
+      out[i] = out[j];
+      out[j] = swap;
+    }
+    return out;
+  }
+
   async function buildLine(): Promise<string> {
+    if (isNavStage) {
+      navKeys = buildNavKeys();
+      return navKeys.join(" ");
+    }
     if (stage >= 6) {
       const idioms = loadCorpus().idioms(codeLang);
       if (idioms.length === 0) return FIXED_LINES[6];
@@ -47,7 +97,10 @@
       return idioms[Math.floor(rng() * idioms.length) % idioms.length].text;
     }
     const stats = await backend.getSkillStats();
-    const weak = pickWeakSkills(stats, skillVocabulary(LAYOUT), 6);
+    const stageIds = new Set(stageSkills(stage, LAYOUT));
+    const all = skillVocabulary(LAYOUT);
+    const vocab = all.filter((s) => stageIds.has(s.id));
+    const weak = pickWeakSkills(stats, vocab.length > 0 ? vocab : all, 6);
     return generateDrillLine(weak, LAYOUT, mulberry32(seed));
   }
 
@@ -95,6 +148,7 @@
       text={line}
       lang={stage >= 6 ? SHIKI_LANG[codeLang] : "plain"}
       strictWhitespace={false}
+      {navKeys}
       oncomplete={handleComplete}
       onprogress={(c) => (nextChar = c)}
     />

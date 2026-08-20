@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vite-plus/test";
-import { prepareTarget } from "./target";
+import { prepareNavTarget, prepareTarget } from "./target";
+import { initTyping, reduceKey } from "./typing-reducer";
 
 const SRC = "if (x) {\n  y();\n}"; // 17 chars: '\n' at 8 and 15, indentation at 9 and 10
 
@@ -43,5 +44,33 @@ describe("prepareTarget", () => {
 
   it("returns an empty array for empty text", () => {
     expect(prepareTarget("", { strictWhitespace: false })).toEqual([]);
+  });
+});
+
+describe("prepareNavTarget", () => {
+  it("turns each key name into one non-skippable TargetChar", () => {
+    expect(prepareNavTarget(["ArrowLeft", "Home"])).toEqual([
+      { ch: "ArrowLeft", index: 0, autoSkip: false },
+      { ch: "Home", index: 1, autoSkip: false },
+    ]);
+  });
+
+  it("drives reduceKey exactly like a text target", () => {
+    const target = prepareNavTarget(["ArrowLeft", "Home"]);
+    const first = reduceKey(initTyping(), target, { key: "ArrowLeft", ts: 1 }, () => null);
+    expect(first.state.pos).toBe(1);
+    expect(first.state.errorAt).toBeNull();
+    expect(first.log?.expected).toBe("ArrowLeft");
+    expect(first.log?.correct).toBe(true);
+
+    const second = reduceKey(first.state, target, { key: "a", ts: 2 }, () => null);
+    expect(second.state.errorAt).toBe(1);
+    expect(second.log?.expected).toBe("Home");
+    expect(second.log?.got).toBe("a");
+    expect(second.log?.correct).toBe(false);
+  });
+
+  it("returns an empty target for no keys", () => {
+    expect(prepareNavTarget([])).toEqual([]);
   });
 });

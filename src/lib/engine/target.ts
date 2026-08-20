@@ -24,3 +24,14 @@ export function prepareTarget(text: string, opts: { strictWhitespace: boolean })
   }
   return out;
 }
+
+/**
+ * Target for a navigation drill: each entry is a KeyboardEvent.key NAME
+ * ('ArrowLeft', 'Home', 'PageUp'…) rather than a printable character.
+ * Nothing is auto-skippable — every named key must actually be pressed.
+ * `expectedKeyFor` passes named keys through unchanged, so the reducer,
+ * the metrics and the skill lookup all work without a special case.
+ */
+export function prepareNavTarget(keys: string[]): TargetChar[] {
+  return keys.map((ch, index) => ({ ch, index, autoSkip: false }));
+}

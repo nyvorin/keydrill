@@ -40,7 +40,7 @@
 </script>
 
 <script lang="ts">
-  import { prepareTarget } from "../engine/target";
+  import { prepareNavTarget, prepareTarget } from "../engine/target";
   import {
     expectedKeyFor,
     initTyping,
@@ -56,12 +56,14 @@
     text,
     lang = "plain",
     strictWhitespace = false,
+    navKeys = null,
     oncomplete,
     onprogress = null,
   }: {
     text: string;
     lang?: string;
     strictWhitespace?: boolean;
+    navKeys?: string[] | null;
     oncomplete: (summary: DrillSummary, logs: KeystrokeLog[]) => void;
     onprogress?: ((nextExpected: string | null) => void) | null;
   } = $props();
@@ -73,15 +75,22 @@
   let logs: KeystrokeLog[] = [];
   let completed = false;
 
-  let target = $derived(prepareTarget(text, { strictWhitespace }));
+  // Nav mode: the target is a list of named keys, and `text`/`lang`/`strictWhitespace` are ignored.
+  let isNav = $derived(navKeys !== null && navKeys.length > 0);
+  let target = $derived(
+    navKeys !== null && navKeys.length > 0
+      ? prepareNavTarget(navKeys)
+      : prepareTarget(text, { strictWhitespace }),
+  );
   let cursorIndex = $derived(nextExpectedIndex(state, target));
   let nextExpected = $derived(
     cursorIndex < target.length ? expectedKeyFor(target[cursorIndex].ch) : null,
   );
 
-  // Reset whenever the drill text (or whitespace policy) changes.
+  // Reset whenever the drill content (or whitespace policy) changes.
   $effect(() => {
     void text;
+    void navKeys;
     void strictWhitespace;
     state = initTyping();
     logs = [];
@@ -89,11 +98,14 @@
   });
 
   // Syntax colors arrive asynchronously; until then every char renders plain.
+  // Nav pills are never syntax-highlighted.
   $effect(() => {
     const src = text;
     const language = lang;
+    const nav = isNav;
     let cancelled = false;
     colors = [];
+    if (nav) return;
     void highlightTokens(src, language).then((rows) => {
       if (!cancelled) colors = colorsFor(rows, src);
     });
@@ -152,13 +164,19 @@
   bind:this={paneEl}
   onkeydown={handleKeydown}
 >
-  {#each target as t, i (i)}
-    {#if t.ch === "\n"}
-      <span class={classFor(i)} style:color={colorFor(i)} data-index={i}>⏎</span><br />
-    {:else}
-      <span class={classFor(i)} style:color={colorFor(i)} data-index={i}>{display(t.ch)}</span>
-    {/if}
-  {/each}
+  {#if isNav}
+    {#each target as t, i (i)}
+      <kbd class="pill {classFor(i)}" data-index={i} data-testid="nav-pill">{t.ch}</kbd>
+    {/each}
+  {:else}
+    {#each target as t, i (i)}
+      {#if t.ch === "\n"}
+        <span class={classFor(i)} style:color={colorFor(i)} data-index={i}>⏎</span><br />
+      {:else}
+        <span class={classFor(i)} style:color={colorFor(i)} data-index={i}>{display(t.ch)}</span>
+      {/if}
+    {/each}
+  {/if}
 </div>
 
 <style>
@@ -194,5 +212,16 @@
   .typing-pane :global(.error) {
     background: rgba(239, 68, 68, 0.55);
     color: #ffffff;
+  }
+  .typing-pane :global(.pill) {
+    display: inline-block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 15px;
+    line-height: 1.4;
+    padding: 4px 10px;
+    margin: 0 6px 6px 0;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #c9d1d9;
   }
 </style>
