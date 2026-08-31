@@ -9,8 +9,22 @@
       "x": 0,
       "y": 0.6,
       "finger": "pinky",
-      "legends": { "base": "Esc", "lower": "~", "raise": "F12" },
-      "output": { "base": { "key": "Escape" }, "lower": { "char": "~" }, "raise": { "key": "F12" } }
+      "legends": {
+        "base": "Esc",
+        "lower": "~",
+        "raise": "F12"
+      },
+      "output": {
+        "base": {
+          "key": "Escape"
+        },
+        "lower": {
+          "char": "~"
+        },
+        "raise": {
+          "key": "F12"
+        }
+      }
     },
     {
       "id": "L01",
@@ -20,11 +34,22 @@
       "x": 1,
       "y": 0.6,
       "finger": "pinky",
-      "legends": { "base": "1", "lower": "!", "raise": "F1" },
+      "legends": {
+        "base": "1",
+        "lower": "!",
+        "raise": "F1"
+      },
       "output": {
-        "base": { "char": "1", "shift": "!" },
-        "lower": { "char": "!" },
-        "raise": { "key": "F1" }
+        "base": {
+          "char": "1",
+          "shift": "!"
+        },
+        "lower": {
+          "char": "!"
+        },
+        "raise": {
+          "key": "F1"
+        }
       }
     },
     {
@@ -35,11 +60,22 @@
       "x": 2,
       "y": 0.35,
       "finger": "ring",
-      "legends": { "base": "2", "lower": "@", "raise": "F2" },
+      "legends": {
+        "base": "2",
+        "lower": "@",
+        "raise": "F2"
+      },
       "output": {
-        "base": { "char": "2", "shift": "@" },
-        "lower": { "char": "@" },
-        "raise": { "key": "F2" }
+        "base": {
+          "char": "2",
+          "shift": "@"
+        },
+        "lower": {
+          "char": "@"
+        },
+        "raise": {
+          "key": "F2"
+        }
       }
     },
     {
@@ -50,11 +86,22 @@
       "x": 3,
       "y": 0.1,
       "finger": "middle",
-      "legends": { "base": "3", "lower": "#", "raise": "F3" },
+      "legends": {
+        "base": "3",
+        "lower": "#",
+        "raise": "F3"
+      },
       "output": {
-        "base": { "char": "3", "shift": "#" },
-        "lower": { "char": "#" },
-        "raise": { "key": "F3" }
+        "base": {
+          "char": "3",
+          "shift": "#"
+        },
+        "lower": {
+          "char": "#"
+        },
+        "raise": {
+          "key": "F3"
+        }
       }
     },
     {
@@ -65,11 +112,22 @@
       "x": 4,
       "y": 0.35,
       "finger": "index",
-      "legends": { "base": "4", "lower": "$", "raise": "F4" },
+      "legends": {
+        "base": "4",
+        "lower": "$",
+        "raise": "F4"
+      },
       "output": {
-        "base": { "char": "4", "shift": "$" },
-        "lower": { "char": "$" },
-        "raise": { "key": "F4" }
+        "base": {
+          "char": "4",
+          "shift": "$"
+        },
+        "lower": {
+          "char": "$"
+        },
+        "raise": {
+          "key": "F4"
+        }
       }
     },
     {
@@ -80,11 +138,22 @@
       "x": 5,
       "y": 0.5,
       "finger": "index",
-      "legends": { "base": "5", "lower": "%", "raise": "F5" },
+      "legends": {
+        "base": "5",
+        "lower": "%",
+        "raise": "F5"
+      },
       "output": {
-        "base": { "char": "5", "shift": "%" },
-        "lower": { "char": "%" },
-        "raise": { "key": "F5" }
+        "base": {
+          "char": "5",
+          "shift": "%"
+        },
+        "lower": {
+          "char": "%"
+        },
+        "raise": {
+          "key": "F5"
+        }
       }
     },
     {
@@ -95,11 +164,21 @@
       "x": 0,
       "y": 1.6,
       "finger": "pinky",
-      "legends": { "base": "Tab", "lower": "`", "raise": "RGB Tog" },
+      "legends": {
+        "base": "Tab",
+        "lower": "`",
+        "raise": "RGB Tog"
+      },
       "output": {
-        "base": { "key": "Tab" },
-        "lower": { "char": "`" },
-        "raise": { "role": "system" }
+        "base": {
+          "key": "Tab"
+        },
+        "lower": {
+          "char": "`"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -110,8 +189,19 @@
       "x": 1,
       "y": 1.6,
       "finger": "pinky",
-      "legends": { "base": "Q", "raise": "!" },
-      "output": { "base": { "char": "q", "shift": "Q" }, "raise": { "char": "!" } }
+      "legends": {
+        "base": "Q",
+        "raise": "!"
+      },
+      "output": {
+        "base": {
+          "char": "q",
+          "shift": "Q"
+        },
+        "raise": {
+          "char": "!"
+        }
+      }
     },
     {
       "id": "L12",
@@ -121,11 +211,22 @@
       "x": 2,
       "y": 1.35,
       "finger": "ring",
-      "legends": { "base": "W", "lower": "↑", "raise": "@" },
+      "legends": {
+        "base": "W",
+        "lower": "\u2191",
+        "raise": "@"
+      },
       "output": {
-        "base": { "char": "w", "shift": "W" },
-        "lower": { "key": "ArrowUp" },
-        "raise": { "char": "@" }
+        "base": {
+          "char": "w",
+          "shift": "W"
+        },
+        "lower": {
+          "key": "ArrowUp"
+        },
+        "raise": {
+          "char": "@"
+        }
       }
     },
     {
@@ -136,8 +237,19 @@
       "x": 3,
       "y": 1.1,
       "finger": "middle",
-      "legends": { "base": "E", "raise": "#" },
-      "output": { "base": { "char": "e", "shift": "E" }, "raise": { "char": "#" } }
+      "legends": {
+        "base": "E",
+        "raise": "#"
+      },
+      "output": {
+        "base": {
+          "char": "e",
+          "shift": "E"
+        },
+        "raise": {
+          "char": "#"
+        }
+      }
     },
     {
       "id": "L14",
@@ -147,11 +259,22 @@
       "x": 4,
       "y": 1.35,
       "finger": "index",
-      "legends": { "base": "R", "lower": "Boot", "raise": "$" },
+      "legends": {
+        "base": "R",
+        "lower": "Boot",
+        "raise": "$"
+      },
       "output": {
-        "base": { "char": "r", "shift": "R" },
-        "lower": { "role": "system" },
-        "raise": { "char": "$" }
+        "base": {
+          "char": "r",
+          "shift": "R"
+        },
+        "lower": {
+          "role": "system"
+        },
+        "raise": {
+          "char": "$"
+        }
       }
     },
     {
@@ -162,8 +285,19 @@
       "x": 5,
       "y": 1.5,
       "finger": "index",
-      "legends": { "base": "T", "raise": "%" },
-      "output": { "base": { "char": "t", "shift": "T" }, "raise": { "char": "%" } }
+      "legends": {
+        "base": "T",
+        "raise": "%"
+      },
+      "output": {
+        "base": {
+          "char": "t",
+          "shift": "T"
+        },
+        "raise": {
+          "char": "%"
+        }
+      }
     },
     {
       "id": "L20",
@@ -173,11 +307,21 @@
       "x": 0,
       "y": 2.6,
       "finger": "pinky",
-      "legends": { "base": "Ctrl", "lower": "Del", "raise": "RGB Mode" },
+      "legends": {
+        "base": "Ctrl",
+        "lower": "Del",
+        "raise": "RGB Mode"
+      },
       "output": {
-        "base": { "role": "modifier" },
-        "lower": { "key": "Delete" },
-        "raise": { "role": "system" }
+        "base": {
+          "role": "modifier"
+        },
+        "lower": {
+          "key": "Delete"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -188,11 +332,22 @@
       "x": 1,
       "y": 2.6,
       "finger": "pinky",
-      "legends": { "base": "A", "lower": "←", "raise": "Prev" },
+      "legends": {
+        "base": "A",
+        "lower": "\u2190",
+        "raise": "Prev"
+      },
       "output": {
-        "base": { "char": "a", "shift": "A" },
-        "lower": { "key": "ArrowLeft" },
-        "raise": { "role": "system" }
+        "base": {
+          "char": "a",
+          "shift": "A"
+        },
+        "lower": {
+          "key": "ArrowLeft"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -203,11 +358,22 @@
       "x": 2,
       "y": 2.35,
       "finger": "ring",
-      "legends": { "base": "S", "lower": "↓", "raise": "Next" },
+      "legends": {
+        "base": "S",
+        "lower": "\u2193",
+        "raise": "Next"
+      },
       "output": {
-        "base": { "char": "s", "shift": "S" },
-        "lower": { "key": "ArrowDown" },
-        "raise": { "role": "system" }
+        "base": {
+          "char": "s",
+          "shift": "S"
+        },
+        "lower": {
+          "key": "ArrowDown"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -218,11 +384,22 @@
       "x": 3,
       "y": 2.1,
       "finger": "middle",
-      "legends": { "base": "D", "lower": "→", "raise": "Vol+" },
+      "legends": {
+        "base": "D",
+        "lower": "\u2192",
+        "raise": "Vol+"
+      },
       "output": {
-        "base": { "char": "d", "shift": "D" },
-        "lower": { "key": "ArrowRight" },
-        "raise": { "role": "system" }
+        "base": {
+          "char": "d",
+          "shift": "D"
+        },
+        "lower": {
+          "key": "ArrowRight"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -233,8 +410,19 @@
       "x": 4,
       "y": 2.35,
       "finger": "index",
-      "legends": { "base": "F", "raise": "PgUp" },
-      "output": { "base": { "char": "f", "shift": "F" }, "raise": { "key": "PageUp" } }
+      "legends": {
+        "base": "F",
+        "raise": "PgUp"
+      },
+      "output": {
+        "base": {
+          "char": "f",
+          "shift": "F"
+        },
+        "raise": {
+          "key": "PageUp"
+        }
+      }
     },
     {
       "id": "L25",
@@ -244,8 +432,19 @@
       "x": 5,
       "y": 2.5,
       "finger": "index",
-      "legends": { "base": "G", "lower": "[" },
-      "output": { "base": { "char": "g", "shift": "G" }, "lower": { "char": "[" } }
+      "legends": {
+        "base": "G",
+        "lower": "["
+      },
+      "output": {
+        "base": {
+          "char": "g",
+          "shift": "G"
+        },
+        "lower": {
+          "char": "["
+        }
+      }
     },
     {
       "id": "L30",
@@ -255,11 +454,21 @@
       "x": 0,
       "y": 3.6,
       "finger": "pinky",
-      "legends": { "base": "Shift", "lower": "RGB Mode 2", "raise": "Mute" },
+      "legends": {
+        "base": "Shift",
+        "lower": "RGB Mode 2",
+        "raise": "Mute"
+      },
       "output": {
-        "base": { "role": "modifier" },
-        "lower": { "role": "system" },
-        "raise": { "role": "system" }
+        "base": {
+          "role": "modifier"
+        },
+        "lower": {
+          "role": "system"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -270,8 +479,19 @@
       "x": 1,
       "y": 3.6,
       "finger": "pinky",
-      "legends": { "base": "Z", "raise": "Stop" },
-      "output": { "base": { "char": "z", "shift": "Z" }, "raise": { "role": "system" } }
+      "legends": {
+        "base": "Z",
+        "raise": "Stop"
+      },
+      "output": {
+        "base": {
+          "char": "z",
+          "shift": "Z"
+        },
+        "raise": {
+          "role": "system"
+        }
+      }
     },
     {
       "id": "L32",
@@ -281,8 +501,19 @@
       "x": 2,
       "y": 3.35,
       "finger": "ring",
-      "legends": { "base": "X", "raise": "Play" },
-      "output": { "base": { "char": "x", "shift": "X" }, "raise": { "role": "system" } }
+      "legends": {
+        "base": "X",
+        "raise": "Play"
+      },
+      "output": {
+        "base": {
+          "char": "x",
+          "shift": "X"
+        },
+        "raise": {
+          "role": "system"
+        }
+      }
     },
     {
       "id": "L33",
@@ -292,8 +523,19 @@
       "x": 3,
       "y": 3.1,
       "finger": "middle",
-      "legends": { "base": "C", "raise": "Vol-" },
-      "output": { "base": { "char": "c", "shift": "C" }, "raise": { "role": "system" } }
+      "legends": {
+        "base": "C",
+        "raise": "Vol-"
+      },
+      "output": {
+        "base": {
+          "char": "c",
+          "shift": "C"
+        },
+        "raise": {
+          "role": "system"
+        }
+      }
     },
     {
       "id": "L34",
@@ -303,8 +545,19 @@
       "x": 4,
       "y": 3.35,
       "finger": "index",
-      "legends": { "base": "V", "raise": "PgDn" },
-      "output": { "base": { "char": "v", "shift": "V" }, "raise": { "key": "PageDown" } }
+      "legends": {
+        "base": "V",
+        "raise": "PgDn"
+      },
+      "output": {
+        "base": {
+          "char": "v",
+          "shift": "V"
+        },
+        "raise": {
+          "key": "PageDown"
+        }
+      }
     },
     {
       "id": "L35",
@@ -314,11 +567,22 @@
       "x": 5,
       "y": 3.5,
       "finger": "index",
-      "legends": { "base": "B", "lower": "{", "raise": "-" },
+      "legends": {
+        "base": "B",
+        "lower": "{",
+        "raise": "-"
+      },
       "output": {
-        "base": { "char": "b", "shift": "B" },
-        "lower": { "char": "{" },
-        "raise": { "char": "-" }
+        "base": {
+          "char": "b",
+          "shift": "B"
+        },
+        "lower": {
+          "char": "{"
+        },
+        "raise": {
+          "char": "-"
+        }
       }
     },
     {
@@ -326,46 +590,78 @@
       "hand": "left",
       "row": 4,
       "col": 0,
-      "x": 3.5,
-      "y": 4.7,
+      "x": 2.7,
+      "y": 4.5,
       "finger": "thumb",
-      "legends": { "base": "Cmd" },
-      "output": { "base": { "role": "modifier" } }
+      "legends": {
+        "base": "Cmd"
+      },
+      "output": {
+        "base": {
+          "role": "modifier"
+        }
+      }
     },
     {
       "id": "LT2",
       "hand": "left",
       "row": 4,
       "col": 1,
-      "x": 4.5,
-      "y": 4.75,
+      "x": 3.85,
+      "y": 4.55,
       "finger": "thumb",
-      "legends": { "base": "Lower" },
-      "output": { "base": { "role": "modifier" } }
+      "legends": {
+        "base": "Lower"
+      },
+      "output": {
+        "base": {
+          "role": "modifier"
+        }
+      }
     },
     {
       "id": "LT3",
       "hand": "left",
       "row": 4,
       "col": 2,
-      "x": 5.55,
-      "y": 4.9,
-      "rot": 15,
+      "x": 5.35,
+      "y": 4.45,
+      "rot": 25,
       "finger": "thumb",
-      "legends": { "base": "Home", "lower": "(" },
-      "output": { "base": { "key": "Home" }, "lower": { "char": "(" } }
+      "legends": {
+        "base": "Home",
+        "lower": "("
+      },
+      "output": {
+        "base": {
+          "key": "Home"
+        },
+        "lower": {
+          "char": "("
+        }
+      }
     },
     {
       "id": "LT4",
       "hand": "left",
       "row": 4,
       "col": 3,
-      "x": 6.55,
-      "y": 5.25,
-      "rot": 30,
+      "x": 5.78,
+      "y": 5.36,
+      "rot": 25,
       "finger": "thumb",
-      "legends": { "base": "Enter", "lower": "Del" },
-      "output": { "base": { "key": "Enter" }, "lower": { "key": "Delete" } }
+      "legends": {
+        "base": "Enter",
+        "lower": "Del"
+      },
+      "output": {
+        "base": {
+          "key": "Enter"
+        },
+        "lower": {
+          "key": "Delete"
+        }
+      }
     },
     {
       "id": "R00",
@@ -375,11 +671,22 @@
       "x": 9,
       "y": 0.5,
       "finger": "index",
-      "legends": { "base": "6", "lower": "^", "raise": "F6" },
+      "legends": {
+        "base": "6",
+        "lower": "^",
+        "raise": "F6"
+      },
       "output": {
-        "base": { "char": "6", "shift": "^" },
-        "lower": { "char": "^" },
-        "raise": { "key": "F6" }
+        "base": {
+          "char": "6",
+          "shift": "^"
+        },
+        "lower": {
+          "char": "^"
+        },
+        "raise": {
+          "key": "F6"
+        }
       }
     },
     {
@@ -390,11 +697,22 @@
       "x": 10,
       "y": 0.35,
       "finger": "index",
-      "legends": { "base": "7", "lower": "&", "raise": "F7" },
+      "legends": {
+        "base": "7",
+        "lower": "&",
+        "raise": "F7"
+      },
       "output": {
-        "base": { "char": "7", "shift": "&" },
-        "lower": { "char": "&" },
-        "raise": { "key": "F7" }
+        "base": {
+          "char": "7",
+          "shift": "&"
+        },
+        "lower": {
+          "char": "&"
+        },
+        "raise": {
+          "key": "F7"
+        }
       }
     },
     {
@@ -405,11 +723,22 @@
       "x": 11,
       "y": 0.1,
       "finger": "middle",
-      "legends": { "base": "8", "lower": "*", "raise": "F8" },
+      "legends": {
+        "base": "8",
+        "lower": "*",
+        "raise": "F8"
+      },
       "output": {
-        "base": { "char": "8", "shift": "*" },
-        "lower": { "char": "*" },
-        "raise": { "key": "F8" }
+        "base": {
+          "char": "8",
+          "shift": "*"
+        },
+        "lower": {
+          "char": "*"
+        },
+        "raise": {
+          "key": "F8"
+        }
       }
     },
     {
@@ -420,11 +749,22 @@
       "x": 12,
       "y": 0.35,
       "finger": "ring",
-      "legends": { "base": "9", "lower": "(", "raise": "F9" },
+      "legends": {
+        "base": "9",
+        "lower": "(",
+        "raise": "F9"
+      },
       "output": {
-        "base": { "char": "9", "shift": "(" },
-        "lower": { "char": "(" },
-        "raise": { "key": "F9" }
+        "base": {
+          "char": "9",
+          "shift": "("
+        },
+        "lower": {
+          "char": "("
+        },
+        "raise": {
+          "key": "F9"
+        }
       }
     },
     {
@@ -435,11 +775,22 @@
       "x": 13,
       "y": 0.6,
       "finger": "pinky",
-      "legends": { "base": "0", "lower": ")", "raise": "F10" },
+      "legends": {
+        "base": "0",
+        "lower": ")",
+        "raise": "F10"
+      },
       "output": {
-        "base": { "char": "0", "shift": ")" },
-        "lower": { "char": ")" },
-        "raise": { "key": "F10" }
+        "base": {
+          "char": "0",
+          "shift": ")"
+        },
+        "lower": {
+          "char": ")"
+        },
+        "raise": {
+          "key": "F10"
+        }
       }
     },
     {
@@ -450,11 +801,21 @@
       "x": 14,
       "y": 0.6,
       "finger": "pinky",
-      "legends": { "base": "Bksp", "lower": "PgUp", "raise": "F11" },
+      "legends": {
+        "base": "Bksp",
+        "lower": "PgUp",
+        "raise": "F11"
+      },
       "output": {
-        "base": { "key": "Backspace" },
-        "lower": { "key": "PageUp" },
-        "raise": { "key": "F11" }
+        "base": {
+          "key": "Backspace"
+        },
+        "lower": {
+          "key": "PageUp"
+        },
+        "raise": {
+          "key": "F11"
+        }
       }
     },
     {
@@ -465,8 +826,19 @@
       "x": 9,
       "y": 1.5,
       "finger": "index",
-      "legends": { "base": "Y", "raise": "^" },
-      "output": { "base": { "char": "y", "shift": "Y" }, "raise": { "char": "^" } }
+      "legends": {
+        "base": "Y",
+        "raise": "^"
+      },
+      "output": {
+        "base": {
+          "char": "y",
+          "shift": "Y"
+        },
+        "raise": {
+          "char": "^"
+        }
+      }
     },
     {
       "id": "R11",
@@ -476,11 +848,22 @@
       "x": 10,
       "y": 1.35,
       "finger": "index",
-      "legends": { "base": "U", "lower": "P7", "raise": "&" },
+      "legends": {
+        "base": "U",
+        "lower": "P7",
+        "raise": "&"
+      },
       "output": {
-        "base": { "char": "u", "shift": "U" },
-        "lower": { "char": "7" },
-        "raise": { "char": "&" }
+        "base": {
+          "char": "u",
+          "shift": "U"
+        },
+        "lower": {
+          "char": "7"
+        },
+        "raise": {
+          "char": "&"
+        }
       }
     },
     {
@@ -491,11 +874,22 @@
       "x": 11,
       "y": 1.1,
       "finger": "middle",
-      "legends": { "base": "I", "lower": "P8", "raise": "*" },
+      "legends": {
+        "base": "I",
+        "lower": "P8",
+        "raise": "*"
+      },
       "output": {
-        "base": { "char": "i", "shift": "I" },
-        "lower": { "char": "8" },
-        "raise": { "char": "*" }
+        "base": {
+          "char": "i",
+          "shift": "I"
+        },
+        "lower": {
+          "char": "8"
+        },
+        "raise": {
+          "char": "*"
+        }
       }
     },
     {
@@ -506,11 +900,22 @@
       "x": 12,
       "y": 1.35,
       "finger": "ring",
-      "legends": { "base": "O", "lower": "P9", "raise": "(" },
+      "legends": {
+        "base": "O",
+        "lower": "P9",
+        "raise": "("
+      },
       "output": {
-        "base": { "char": "o", "shift": "O" },
-        "lower": { "char": "9" },
-        "raise": { "char": "(" }
+        "base": {
+          "char": "o",
+          "shift": "O"
+        },
+        "lower": {
+          "char": "9"
+        },
+        "raise": {
+          "char": "("
+        }
       }
     },
     {
@@ -521,11 +926,22 @@
       "x": 13,
       "y": 1.6,
       "finger": "pinky",
-      "legends": { "base": "P", "lower": "P0", "raise": ")" },
+      "legends": {
+        "base": "P",
+        "lower": "P0",
+        "raise": ")"
+      },
       "output": {
-        "base": { "char": "p", "shift": "P" },
-        "lower": { "char": "0" },
-        "raise": { "char": ")" }
+        "base": {
+          "char": "p",
+          "shift": "P"
+        },
+        "lower": {
+          "char": "0"
+        },
+        "raise": {
+          "char": ")"
+        }
       }
     },
     {
@@ -536,11 +952,21 @@
       "x": 14,
       "y": 1.6,
       "finger": "pinky",
-      "legends": { "base": "Del", "lower": "PgDn", "raise": "Boot" },
+      "legends": {
+        "base": "Del",
+        "lower": "PgDn",
+        "raise": "Boot"
+      },
       "output": {
-        "base": { "key": "Delete" },
-        "lower": { "key": "PageDown" },
-        "raise": { "role": "system" }
+        "base": {
+          "key": "Delete"
+        },
+        "lower": {
+          "key": "PageDown"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -551,11 +977,22 @@
       "x": 9,
       "y": 2.5,
       "finger": "index",
-      "legends": { "base": "H", "lower": "]", "raise": "=" },
+      "legends": {
+        "base": "H",
+        "lower": "]",
+        "raise": "="
+      },
       "output": {
-        "base": { "char": "h", "shift": "H" },
-        "lower": { "char": "]" },
-        "raise": { "char": "=" }
+        "base": {
+          "char": "h",
+          "shift": "H"
+        },
+        "lower": {
+          "char": "]"
+        },
+        "raise": {
+          "char": "="
+        }
       }
     },
     {
@@ -566,11 +1003,22 @@
       "x": 10,
       "y": 2.35,
       "finger": "index",
-      "legends": { "base": "J", "lower": "P4", "raise": "Home" },
+      "legends": {
+        "base": "J",
+        "lower": "P4",
+        "raise": "Home"
+      },
       "output": {
-        "base": { "char": "j", "shift": "J" },
-        "lower": { "char": "4" },
-        "raise": { "key": "Home" }
+        "base": {
+          "char": "j",
+          "shift": "J"
+        },
+        "lower": {
+          "char": "4"
+        },
+        "raise": {
+          "key": "Home"
+        }
       }
     },
     {
@@ -581,11 +1029,22 @@
       "x": 11,
       "y": 2.1,
       "finger": "middle",
-      "legends": { "base": "K", "lower": "P5", "raise": "Hue+" },
+      "legends": {
+        "base": "K",
+        "lower": "P5",
+        "raise": "Hue+"
+      },
       "output": {
-        "base": { "char": "k", "shift": "K" },
-        "lower": { "char": "5" },
-        "raise": { "role": "system" }
+        "base": {
+          "char": "k",
+          "shift": "K"
+        },
+        "lower": {
+          "char": "5"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -596,11 +1055,22 @@
       "x": 12,
       "y": 2.35,
       "finger": "ring",
-      "legends": { "base": "L", "lower": "P6", "raise": "Sat+" },
+      "legends": {
+        "base": "L",
+        "lower": "P6",
+        "raise": "Sat+"
+      },
       "output": {
-        "base": { "char": "l", "shift": "L" },
-        "lower": { "char": "6" },
-        "raise": { "role": "system" }
+        "base": {
+          "char": "l",
+          "shift": "L"
+        },
+        "lower": {
+          "char": "6"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -611,11 +1081,22 @@
       "x": 13,
       "y": 2.6,
       "finger": "pinky",
-      "legends": { "base": ";", "lower": "+", "raise": "Val+" },
+      "legends": {
+        "base": ";",
+        "lower": "+",
+        "raise": "Val+"
+      },
       "output": {
-        "base": { "char": ";", "shift": ":" },
-        "lower": { "char": "+" },
-        "raise": { "role": "system" }
+        "base": {
+          "char": ";",
+          "shift": ":"
+        },
+        "lower": {
+          "char": "+"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -626,11 +1107,22 @@
       "x": 14,
       "y": 2.6,
       "finger": "pinky",
-      "legends": { "base": "'", "lower": "|", "raise": "\\" },
+      "legends": {
+        "base": "'",
+        "lower": "|",
+        "raise": "\\"
+      },
       "output": {
-        "base": { "char": "'", "shift": "\"" },
-        "lower": { "char": "|" },
-        "raise": { "char": "\\" }
+        "base": {
+          "char": "'",
+          "shift": "\""
+        },
+        "lower": {
+          "char": "|"
+        },
+        "raise": {
+          "char": "\\"
+        }
       }
     },
     {
@@ -641,11 +1133,22 @@
       "x": 9,
       "y": 3.5,
       "finger": "index",
-      "legends": { "base": "N", "lower": "}", "raise": "+" },
+      "legends": {
+        "base": "N",
+        "lower": "}",
+        "raise": "+"
+      },
       "output": {
-        "base": { "char": "n", "shift": "N" },
-        "lower": { "char": "}" },
-        "raise": { "char": "+" }
+        "base": {
+          "char": "n",
+          "shift": "N"
+        },
+        "lower": {
+          "char": "}"
+        },
+        "raise": {
+          "char": "+"
+        }
       }
     },
     {
@@ -656,11 +1159,22 @@
       "x": 10,
       "y": 3.35,
       "finger": "index",
-      "legends": { "base": "M", "lower": "P1", "raise": "End" },
+      "legends": {
+        "base": "M",
+        "lower": "P1",
+        "raise": "End"
+      },
       "output": {
-        "base": { "char": "m", "shift": "M" },
-        "lower": { "char": "1" },
-        "raise": { "key": "End" }
+        "base": {
+          "char": "m",
+          "shift": "M"
+        },
+        "lower": {
+          "char": "1"
+        },
+        "raise": {
+          "key": "End"
+        }
       }
     },
     {
@@ -671,11 +1185,22 @@
       "x": 11,
       "y": 3.1,
       "finger": "middle",
-      "legends": { "base": ",", "lower": "P2", "raise": "Hue-" },
+      "legends": {
+        "base": ",",
+        "lower": "P2",
+        "raise": "Hue-"
+      },
       "output": {
-        "base": { "char": ",", "shift": "<" },
-        "lower": { "char": "2" },
-        "raise": { "role": "system" }
+        "base": {
+          "char": ",",
+          "shift": "<"
+        },
+        "lower": {
+          "char": "2"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -686,11 +1211,22 @@
       "x": 12,
       "y": 3.35,
       "finger": "ring",
-      "legends": { "base": ".", "lower": "P3", "raise": "Sat-" },
+      "legends": {
+        "base": ".",
+        "lower": "P3",
+        "raise": "Sat-"
+      },
       "output": {
-        "base": { "char": ".", "shift": ">" },
-        "lower": { "char": "3" },
-        "raise": { "role": "system" }
+        "base": {
+          "char": ".",
+          "shift": ">"
+        },
+        "lower": {
+          "char": "3"
+        },
+        "raise": {
+          "role": "system"
+        }
       }
     },
     {
@@ -701,8 +1237,19 @@
       "x": 13,
       "y": 3.6,
       "finger": "pinky",
-      "legends": { "base": "/", "raise": "Val-" },
-      "output": { "base": { "char": "/", "shift": "?" }, "raise": { "role": "system" } }
+      "legends": {
+        "base": "/",
+        "raise": "Val-"
+      },
+      "output": {
+        "base": {
+          "char": "/",
+          "shift": "?"
+        },
+        "raise": {
+          "role": "system"
+        }
+      }
     },
     {
       "id": "R35",
@@ -712,54 +1259,100 @@
       "x": 14,
       "y": 3.6,
       "finger": "pinky",
-      "legends": { "base": "Shift", "lower": "-" },
-      "output": { "base": { "role": "modifier" }, "lower": { "char": "-" } }
+      "legends": {
+        "base": "Shift",
+        "lower": "-"
+      },
+      "output": {
+        "base": {
+          "role": "modifier"
+        },
+        "lower": {
+          "char": "-"
+        }
+      }
     },
     {
       "id": "RT4",
       "hand": "right",
       "row": 4,
       "col": 0,
-      "x": 8.45,
-      "y": 5.25,
-      "rot": -30,
+      "x": 8.22,
+      "y": 5.36,
+      "rot": -25,
       "finger": "thumb",
-      "legends": { "base": "Space", "lower": ")" },
-      "output": { "base": { "char": " " }, "lower": { "char": ")" } }
+      "legends": {
+        "base": "Space",
+        "lower": "Del"
+      },
+      "output": {
+        "base": {
+          "char": " "
+        },
+        "lower": {
+          "key": "Delete"
+        }
+      }
     },
     {
       "id": "RT3",
       "hand": "right",
       "row": 4,
       "col": 1,
-      "x": 9.45,
-      "y": 4.9,
-      "rot": -15,
+      "x": 8.65,
+      "y": 4.45,
+      "rot": -25,
       "finger": "thumb",
-      "legends": { "base": "End", "lower": "Del" },
-      "output": { "base": { "key": "End" }, "lower": { "key": "Delete" } }
+      "legends": {
+        "base": "End",
+        "lower": ")"
+      },
+      "output": {
+        "base": {
+          "key": "End"
+        },
+        "lower": {
+          "char": ")"
+        }
+      }
     },
     {
       "id": "RT2",
       "hand": "right",
       "row": 4,
       "col": 2,
-      "x": 10.5,
-      "y": 4.75,
+      "x": 10.15,
+      "y": 4.55,
       "finger": "thumb",
-      "legends": { "base": "Raise" },
-      "output": { "base": { "role": "modifier" } }
+      "legends": {
+        "base": "Raise"
+      },
+      "output": {
+        "base": {
+          "role": "modifier"
+        }
+      }
     },
     {
       "id": "RT1",
       "hand": "right",
       "row": 4,
       "col": 3,
-      "x": 11.5,
-      "y": 4.7,
+      "x": 11.3,
+      "y": 4.5,
       "finger": "thumb",
-      "legends": { "base": "Alt", "lower": "P0" },
-      "output": { "base": { "role": "modifier" }, "lower": { "char": "0" } }
+      "legends": {
+        "base": "Opt",
+        "lower": "P0"
+      },
+      "output": {
+        "base": {
+          "role": "modifier"
+        },
+        "lower": {
+          "char": "0"
+        }
+      }
     }
   ]
 }
