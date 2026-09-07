@@ -29,11 +29,11 @@ all live on this machine.
 
 ## Supported keyboards
 
-| Board | Status |
-| ----- | ------ |
+| Board                                                                                                                                    | Status                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Keebio Iris Rev. 8](https://keeb.io/products/iris-rev-8-keyboard-split-ergonomic-keyboard) ([docs](https://docs.keeb.io/iris-keyboard)) | **Verified** — `layout.json` is trued up against the stock [QMK default keymap](https://github.com/qmk/qmk_firmware/blob/master/keyboards/keebio/iris/keymaps/default/keymap.json), and the board identity was confirmed over USB (`0xCB10` / "Iris Rev. 8"). |
-| [Keebio Iris CE / SE](https://keeb.io/products/iris-keyboard-split-ergonomic-keyboard) | Should work as-is — the CE's default keymap is keycode-for-keycode identical to the Rev. 8's. |
-| Anything else | The board is pure data: edit `src/lib/layout/layout.json` (keys, layers, geometry) and the reference map, hints, drills and stats all follow. The in-app wizard verifies your edit key by key. |
+| [Keebio Iris CE / SE](https://keeb.io/products/iris-keyboard-split-ergonomic-keyboard)                                                   | Should work as-is — the CE's default keymap is keycode-for-keycode identical to the Rev. 8's.                                                                                                                                                                 |
+| Anything else                                                                                                                            | The board is pure data: edit `src/lib/layout/layout.json` (keys, layers, geometry) and the reference map, hints, drills and stats all follow. The in-app wizard verifies your edit key by key.                                                                |
 
 If you remap your board in [VIA](https://usevia.app), re-run the layout verification wizard
 (`Settings → Open the layout verification wizard`) — it walks every trainable `(layer, key)`
