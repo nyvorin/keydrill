@@ -2,23 +2,25 @@ import raw from "./layout.json";
 import type { Layout } from "./types";
 
 /**
- * Board data transcribed from the layout-card photo. Open transcription doubts —
- * the Task 19 verification wizard is the authority for correcting any of these:
- *  - L12 `lower` = ArrowUp: the card shows ↑ between ` and Boot; the column it belongs to is inferred.
- *  - L25 `raise`: the card legend is unreadable ('–'), so no raise output is modelled for this key.
- *  - L35 `raise` = '-': the card glyph is ambiguous between a minus sign and a blank.
- *  - RT1 `lower` = '0' duplicates R14's P0; both are modelled, both are separate skills.
- *  - Thumb clusters corrected 2026-08-31 from a photo of the real board (IMG_2069):
- *    each side is a flat pair plus a ~25°-rotated stacked pair at the inner corner —
- *    left: Cmd, Lower flat; Home ABOVE Enter in the stack. Right (mirrored): End ABOVE
- *    Space (the blank keycap) in the stack; Raise, Opt flat. The right stack's `lower`
- *    outputs were swapped to mirror the left card reading — ')' on End (top), Delete on
- *    Space (bottom) — confirm with the wizard.
- *  - '_' has NO modelled route: `-` exists only as `lower:R35` and `raise:L35`, and
- *    `KeyOutput.shift` is base-only, so the underscore (probably Shift+Lower+R35 on the
- *    real firmware) is unreachable. Spec §5 stage 3 lists it and the Task 10 corpus is
- *    full of it (`split_whitespace`, `user_id`), so the MiniMap will hint "no recipe"
- *    until the Task 19 wizard confirms the chord; if it does, model shift variants on
- *    the lower layer so `stageSkills(3)` can drill it.
+ * Board: Keebio Iris CE running the stock QMK default keymap
+ * (qmk_firmware: keyboards/keebio/iris_ce/keymaps/default/keymap.c) — identified
+ * 2026-09-06 from photos of the board + its printed keymap card, which match that
+ * keymap 1:1. The firmware source resolved every earlier transcription doubt:
+ *  - L12 lower = ArrowUp (KC_UP) — confirmed.
+ *  - L25 raise = '_' (KC_UNDS) — the unreadable card glyph; the underscore route
+ *    is Raise+G, so no shifted-lower chord modelling is needed.
+ *  - L35 raise = '-' (KC_MINS) — confirmed.
+ *  - Lower right hand: '-' is on R34 (KC_MINS on the '/' key) and R35 (right
+ *    Shift) is transparent — previously modelled one key off.
+ *  - Right thumb stack lower: ')' on End (KC_RPRN), Delete on Space (KC_DEL) —
+ *    confirmed; RT1 lower '0' (KC_P0) duplicates R14's P0, both real.
+ *  - L00 is QK_GESC (Grave-Escape): tap = Escape, Shift+tap = '~' (modelled as
+ *    base shift); GUI+tap = '`' is NOT modelled (Cmd chords are outside the
+ *    training vocabulary).
+ *  - EE_CLR lives on Lower+Z (L31) and Raise+RShift (R35) — untrainable system
+ *    keys, shown for completeness.
+ *  - Lower-layer transparent keys (QMK KC_TRNS) fall through to the base output;
+ *    they are modelled as no-output since the fall-through routes add nothing.
+ * If the keymap is ever changed in VIA, re-run the in-app verification wizard.
  */
 export const LAYOUT: Layout = raw as unknown as Layout;
