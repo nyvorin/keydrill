@@ -2,10 +2,13 @@ import raw from "./layout.json";
 import type { Layout } from "./types";
 
 /**
- * Board: Keebio Iris CE running the stock QMK default keymap
- * (qmk_firmware: keyboards/keebio/iris_ce/keymaps/default/keymap.c) — identified
- * 2026-09-06 from photos of the board + its printed keymap card, which match that
- * keymap 1:1. The firmware source resolved every earlier transcription doubt:
+ * Board: Keebio Iris Rev. 8 running the stock QMK default keymap — confirmed
+ * electronically 2026-09-07 over USB (idVendor 0xCB10 "Keebio", product
+ * "Iris Rev. 8"). The rev8 shared default keymap
+ * (qmk_firmware: keyboards/keebio/iris/keymaps/default/keymap.json) is
+ * keycode-for-keycode identical to iris_ce/keymaps/default/keymap.c, which the
+ * printed keymap card and board photos match 1:1. The firmware source resolved
+ * every earlier transcription doubt:
  *  - L12 lower = ArrowUp (KC_UP) — confirmed.
  *  - L25 raise = '_' (KC_UNDS) — the unreadable card glyph; the underscore route
  *    is Raise+G, so no shifted-lower chord modelling is needed.
