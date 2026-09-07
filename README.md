@@ -1,4 +1,22 @@
-# keydrill
+<p align="center">
+  <img src="src-tauri/icons/app-icon.svg" width="160" alt="keydrill — a circuit-heart keycap" />
+</p>
+
+<h1 align="center">keydrill</h1>
+
+<p align="center">
+  <em>Learn to type — and code — on your split, column-staggered, three-layer keyboard.</em>
+</p>
+
+<p align="center">
+  <a href="https://keeb.io/products/iris-rev-8-keyboard-split-ergonomic-keyboard">Keebio Iris Rev. 8</a>
+  ·
+  Tauri 2 + Svelte 5
+  ·
+  local-first, offline, yours
+</p>
+
+---
 
 A local-first, offline typing trainer for split, column-staggered, three-layer keyboards
 (Iris-class: 4×6 per hand + 4 thumb keys). It teaches you to _code_ on the board — the
@@ -8,6 +26,18 @@ the hold-layer-then-tap chords until they are automatic.
 Built with Tauri 2 (Rust + SQLite) and Svelte 5 (runes) + TypeScript, managed by the Vite+
 toolchain (`vp`). macOS-first. No network calls, ever: the corpus, the layout and your stats
 all live on this machine.
+
+## Supported keyboards
+
+| Board | Status |
+| ----- | ------ |
+| [Keebio Iris Rev. 8](https://keeb.io/products/iris-rev-8-keyboard-split-ergonomic-keyboard) ([docs](https://docs.keeb.io/iris-keyboard)) | **Verified** — `layout.json` is trued up against the stock [QMK default keymap](https://github.com/qmk/qmk_firmware/blob/master/keyboards/keebio/iris/keymaps/default/keymap.json), and the board identity was confirmed over USB (`0xCB10` / "Iris Rev. 8"). |
+| [Keebio Iris CE / SE](https://keeb.io/products/iris-keyboard-split-ergonomic-keyboard) | Should work as-is — the CE's default keymap is keycode-for-keycode identical to the Rev. 8's. |
+| Anything else | The board is pure data: edit `src/lib/layout/layout.json` (keys, layers, geometry) and the reference map, hints, drills and stats all follow. The in-app wizard verifies your edit key by key. |
+
+If you remap your board in [VIA](https://usevia.app), re-run the layout verification wizard
+(`Settings → Open the layout verification wizard`) — it walks every trainable `(layer, key)`
+pair, records what the firmware actually sends, and reports each mismatch as `expected X got Y`.
 
 ## The three layers
 
@@ -19,15 +49,6 @@ all live on this machine.
 
 A skill is one `(layer, key)` pair — `7` on Base (`base:R01`) and `P7` on Lower (`lower:R11`)
 are different skills even though both send `7`. Shift variants share their base skill.
-
-## Start here: run the wizard first
-
-`layout.json` was transcribed from the keyboard's layout card, so **before you train, run the
-layout verification wizard** at `#/wizard` (also linked from Settings). It walks every
-trainable `(layer, key)` pair, records what your firmware actually sends, and reports every
-mismatch as `expected X got Y` with a "Copy report" button. Fix `src/lib/layout/layout.json`
-from that report — the wizard is the authority on the layout, not the transcription. Re-run it
-after any firmware remap.
 
 ## Quick start
 
